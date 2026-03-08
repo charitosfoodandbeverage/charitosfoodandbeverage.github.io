@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Menu — Charito's Food & Beverage</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Nunito:wght@300;400;600;700;800&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --red:#C8272D;--red-dark:#9B1B1F;--red-light:#E84B50;
+  --cream:#FFF8F0;--white:#FFFFFF;--warm-gray:#F5EDE4;
+  --text-dark:#1A0A0A;--gold:#D4A843;--border:#E8DDD5;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'Nunito',sans-serif;background:var(--cream);color:var(--text-dark);overflow-x:hidden;}
+
+/* NAV */
+nav{position:sticky;top:0;width:100%;z-index:200;background:rgba(200,39,45,0.97);backdrop-filter:blur(12px);display:flex;align-items:center;justify-content:space-between;padding:0 5%;height:68px;box-shadow:0 2px 20px rgba(155,27,31,0.4);}
+.nav-logo{font-family:'Dancing Script',cursive;font-size:1.9rem;color:#fff;text-decoration:none;}
+.nav-links{display:flex;gap:1.6rem;list-style:none;align-items:center;}
+.nav-links a{color:rgba(255,255,255,0.88);text-decoration:none;font-size:0.82rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;transition:color 0.2s;}
+.nav-links a:hover{color:#fff;}
+.nav-right{display:flex;align-items:center;gap:0.8rem;}
+.cart-fab{background:#fff;color:var(--red);border:none;padding:0.48rem 1.1rem;border-radius:50px;font-weight:800;font-size:0.85rem;cursor:pointer;display:flex;align-items:center;gap:0.4rem;font-family:'Nunito',sans-serif;transition:all 0.2s;white-space:nowrap;}
+.cart-fab:hover{transform:translateY(-2px);box-shadow:0 4px 15px rgba(0,0,0,0.2);}
+.cart-count-badge{background:var(--red);color:#fff;width:20px;height:20px;border-radius:50%;font-size:0.68rem;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:8px;background:none;border:none;}
+.hamburger span{display:block;width:24px;height:2px;background:#fff;border-radius:2px;transition:all 0.3s;}
+.hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+.hamburger.open span:nth-child(2){opacity:0;}
+.hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+.mobile-menu{display:none;position:fixed;top:68px;left:0;right:0;z-index:190;background:var(--red-dark);padding:1rem 0;box-shadow:0 8px 30px rgba(0,0,0,0.3);transform:translateY(-10px);opacity:0;transition:all 0.3s;pointer-events:none;}
+.mobile-menu.open{display:block;transform:translateY(0);opacity:1;pointer-events:all;}
+.mobile-menu a{display:block;padding:0.9rem 5%;color:rgba(255,255,255,0.9);text-decoration:none;font-size:0.95rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;border-bottom:1px solid rgba(255,255,255,0.08);transition:background 0.2s;}
+.mobile-menu a:hover{background:rgba(255,255,255,0.1);}
+
+/* HERO BANNER */
+.menu-hero{background:linear-gradient(135deg,var(--red-dark),var(--red));padding:55px 5% 48px;text-align:center;position:relative;overflow:hidden;}
+.menu-hero::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,0.06) 1px,transparent 1px);background-size:30px 30px;}
+.menu-hero h1{font-family:'Dancing Script',cursive;font-size:clamp(2.2rem,7vw,3rem);color:#fff;position:relative;}
+.menu-hero p{color:rgba(255,255,255,0.8);font-size:0.92rem;margin-top:0.4rem;position:relative;}
+
+/* LAYOUT */
+.page-wrapper{display:grid;grid-template-columns:1fr 340px;max-width:1400px;margin:0 auto;align-items:start;}
+
+/* MENU BODY */
+.menu-body{padding:36px 4% 60px;}
+.category-tabs{display:flex;gap:0.7rem;flex-wrap:wrap;margin-bottom:36px;padding-bottom:18px;border-bottom:2px solid rgba(200,39,45,0.1);}
+.tab-btn{padding:0.5rem 1.2rem;border-radius:50px;border:2px solid #DDD;background:#fff;color:#666;font-weight:700;font-size:0.8rem;cursor:pointer;transition:all 0.2s;font-family:'Nunito',sans-serif;letter-spacing:0.04em;white-space:nowrap;}
+.tab-btn.active{border-color:var(--red);background:var(--red);color:#fff;}
+.tab-btn:hover:not(.active){border-color:var(--red);color:var(--red);}
+
+.cat-section{margin-bottom:55px;}
+.cat-section:last-child{margin-bottom:0;}
+.cat-title{font-family:'Playfair Display',serif;font-size:1.6rem;margin-bottom:5px;display:flex;align-items:center;gap:0.5rem;}
+.cat-desc{color:#888;font-size:0.85rem;margin-bottom:22px;}
+
+.items-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:18px;}
+.item-card{background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 3px 15px rgba(0,0,0,0.06);transition:transform 0.3s,box-shadow 0.3s;display:flex;flex-direction:column;}
+.item-card:hover{transform:translateY(-5px);box-shadow:0 10px 35px rgba(200,39,45,0.13);}
+.item-img{height:150px;position:relative;display:flex;align-items:center;justify-content:center;font-size:3.2rem;overflow:hidden;}
+.item-badge{position:absolute;top:9px;left:9px;background:var(--red);color:#fff;font-size:0.6rem;font-weight:800;padding:0.15rem 0.5rem;border-radius:50px;text-transform:uppercase;letter-spacing:0.1em;}
+.item-body{padding:0.9rem 1rem;flex:1;display:flex;flex-direction:column;}
+.item-body h3{font-size:0.9rem;font-weight:800;margin-bottom:0.3rem;line-height:1.3;}
+.item-body p{font-size:0.76rem;color:#888;line-height:1.5;flex:1;margin-bottom:0.7rem;}
+.item-footer{display:flex;align-items:center;justify-content:space-between;gap:0.5rem;}
+.item-price{font-weight:900;font-size:1rem;color:var(--red);}
+.item-right{display:flex;align-items:center;gap:0.4rem;flex-shrink:0;}
+.item-rating{font-size:0.72rem;color:#999;}
+.item-rating .s{color:var(--gold);}
+.add-btn{width:30px;height:30px;border-radius:50%;background:var(--red);border:none;color:#fff;font-size:1.2rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.2s;flex-shrink:0;line-height:1;}
+.add-btn:hover{background:var(--red-dark);transform:scale(1.1);}
+.add-btn.added{background:#1A8B5A;}
+
+/* CART SIDEBAR */
+.cart-sidebar{position:sticky;top:68px;background:#FFFAF6;border-left:1px solid rgba(200,39,45,0.1);height:calc(100svh - 68px);display:flex;flex-direction:column;overflow:hidden;}
+.cart-header{padding:1.4rem 1.4rem 1rem;border-bottom:1px solid rgba(200,39,45,0.1);}
+.cart-header h2{font-family:'Playfair Display',serif;font-size:1.2rem;display:flex;align-items:center;gap:0.5rem;}
+.cart-items{flex:1;overflow-y:auto;padding:0.8rem 1.4rem;}
+.cart-empty{text-align:center;padding:2.5rem 1rem;color:#BBB;}
+.cart-empty-icon{font-size:2.8rem;margin-bottom:0.8rem;}
+.cart-empty p{font-size:0.85rem;line-height:1.6;}
+.cart-item{display:flex;align-items:center;gap:0.75rem;padding:0.75rem 0;border-bottom:1px solid rgba(0,0,0,0.06);}
+.cart-item:last-child{border-bottom:none;}
+.cart-item-icon{width:42px;height:42px;border-radius:10px;background:var(--warm-gray);display:flex;align-items:center;justify-content:center;font-size:1.4rem;flex-shrink:0;}
+.cart-item-info{flex:1;min-width:0;}
+.cart-item-info h4{font-size:0.8rem;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.cart-item-info p{font-size:0.76rem;color:var(--red);font-weight:700;}
+.cart-controls{display:flex;align-items:center;gap:0.3rem;flex-shrink:0;}
+.qty-btn{width:25px;height:25px;border-radius:50%;border:1.5px solid #DDD;background:#fff;color:var(--text-dark);font-size:0.95rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.2s;font-weight:700;}
+.qty-btn:hover{border-color:var(--red);color:var(--red);}
+.qty-num{font-weight:800;font-size:0.88rem;min-width:18px;text-align:center;}
+.cart-footer{padding:1rem 1.4rem 1.4rem;border-top:1px solid rgba(200,39,45,0.1);}
+.cart-line{display:flex;justify-content:space-between;font-size:0.85rem;color:#777;margin-bottom:0.4rem;}
+.cart-total-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.1rem;padding-bottom:0.9rem;border-bottom:1.5px solid rgba(200,39,45,0.15);}
+.cart-total-row span:first-child{font-weight:800;font-size:0.95rem;}
+.cart-total-row span:last-child{font-family:'Playfair Display',serif;font-size:1.35rem;color:var(--red);font-weight:700;}
+.checkout-btn{width:100%;background:var(--red);color:#fff;border:none;padding:0.95rem;border-radius:12px;font-weight:800;font-size:0.9rem;cursor:pointer;font-family:'Nunito',sans-serif;transition:all 0.2s;letter-spacing:0.05em;}
+.checkout-btn:hover:not(:disabled){background:var(--red-dark);}
+.checkout-btn:disabled{background:#CCC;cursor:not-allowed;}
+.clear-btn{display:block;width:100%;margin-top:0.7rem;color:#BBB;font-size:0.76rem;cursor:pointer;transition:color 0.2s;background:none;border:none;font-family:'Nunito',sans-serif;text-align:center;padding:0.3rem;}
+.clear-btn:hover{color:var(--red);}
+
+/* CART DRAWER (mobile) */
+.cart-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.45);z-index:300;}
+.cart-overlay.open{display:block;}
+.cart-drawer{position:fixed;right:-100%;top:0;bottom:0;width:min(340px,95vw);background:#FFFAF6;z-index:301;transition:right 0.35s cubic-bezier(0.4,0,0.2,1);display:flex;flex-direction:column;box-shadow:-8px 0 40px rgba(0,0,0,0.2);}
+.cart-drawer.open{right:0;}
+.drawer-close{position:absolute;top:1rem;right:1rem;background:none;border:none;font-size:1.3rem;cursor:pointer;color:#888;}
+
+/* ORDER MODAL */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:500;display:none;align-items:center;justify-content:center;padding:1rem;}
+.modal-overlay.open{display:flex;}
+.modal{background:#fff;border-radius:24px;padding:2.2rem;max-width:460px;width:100%;text-align:center;animation:popIn 0.3s ease;}
+.modal-icon{font-size:2.8rem;margin-bottom:0.8rem;}
+.modal h2{font-family:'Playfair Display',serif;font-size:1.5rem;margin-bottom:0.5rem;}
+.modal p{color:#777;font-size:0.9rem;margin-bottom:1.2rem;line-height:1.6;}
+.modal-summary{background:#FFF0F0;border-radius:12px;padding:0.9rem 1rem;margin-bottom:1.3rem;text-align:left;font-size:0.82rem;line-height:1.9;max-height:200px;overflow-y:auto;}
+.modal-actions{display:flex;gap:0.8rem;flex-wrap:wrap;}
+.modal-btn{flex:1;min-width:140px;padding:0.85rem;border-radius:12px;font-weight:800;font-size:0.85rem;cursor:pointer;font-family:'Nunito',sans-serif;transition:all 0.2s;text-decoration:none;display:flex;align-items:center;justify-content:center;gap:0.4rem;}
+.modal-btn.primary{background:var(--red);color:#fff;border:2px solid var(--red);}
+.modal-btn.secondary{background:#fff;color:var(--text-dark);border:2px solid #DDD;}
+.modal-btn:hover{transform:translateY(-2px);}
+
+/* TOAST */
+.toast{position:fixed;bottom:80px;left:50%;transform:translateX(-50%) translateY(10px);background:#1A0A0A;color:#fff;padding:0.65rem 1.4rem;border-radius:50px;font-size:0.85rem;font-weight:600;opacity:0;pointer-events:none;transition:all 0.3s;z-index:600;white-space:nowrap;}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+/* STICKY CART TOTAL (mobile) */
+.mobile-cart-bar{display:none;position:fixed;bottom:0;left:0;right:0;z-index:150;background:var(--red);padding:0.9rem 5%;align-items:center;justify-content:space-between;gap:1rem;box-shadow:0 -4px 20px rgba(155,27,31,0.35);}
+.mobile-cart-bar.visible{display:flex;}
+.mobile-cart-info{color:#fff;}
+.mobile-cart-info span{font-size:0.72rem;opacity:0.8;display:block;}
+.mobile-cart-info strong{font-size:1rem;font-weight:900;}
+.mobile-cart-btn{background:#fff;color:var(--red);border:none;padding:0.65rem 1.4rem;border-radius:50px;font-weight:800;font-size:0.85rem;cursor:pointer;font-family:'Nunito',sans-serif;white-space:nowrap;}
+
+@keyframes popIn{from{opacity:0;transform:scale(0.9);}to{opacity:1;transform:scale(1);}}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  .page-wrapper{grid-template-columns:1fr;}
+  .cart-sidebar{display:none;}
+  .nav-links{display:none;}
+  .hamburger{display:flex;}
+  body{padding-bottom:80px;}
+}
+@media(max-width:600px){
+  .menu-body{padding:28px 4% 50px;}
+  .items-grid{grid-template-columns:1fr 1fr;gap:12px;}
+  .item-img{height:120px;font-size:2.5rem;}
+  .item-body{padding:0.75rem 0.85rem;}
+  .item-body h3{font-size:0.82rem;}
+  .item-body p{font-size:0.72rem;}
+  .item-price{font-size:0.9rem;}
+  .category-tabs{gap:0.5rem;}
+  .tab-btn{padding:0.45rem 0.9rem;font-size:0.75rem;}
+  .cat-title{font-size:1.3rem;}
+}
+@media(max-width:380px){
+  .items-grid{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Charito's</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="index.html#about">About</a></li>
+    <li><a href="index.html#party">Party Trays</a></li>
+    <li><a href="careers.html">Careers</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <div class="nav-right">
+    <button class="cart-fab" onclick="openCartDrawer()">
+      🛒 Cart <span class="cart-count-badge" id="cartCountNav">0</span>
+    </button>
+    <button class="hamburger" id="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html" onclick="closeMenu()">Home</a>
+  <a href="index.html#party" onclick="closeMenu()">Party Trays</a>
+  <a href="careers.html" onclick="closeMenu()">Careers</a>
+  <a href="contact.html" onclick="closeMenu()">Contact</a>
+</div>
+
+<div class="menu-hero">
+  <h1>Our Menu</h1>
+  <p>Order ahead — pickup at 234 Talon-Talon Rd, Zamboanga City</p>
+</div>
+
+<div class="page-wrapper">
+  <!-- MENU ITEMS -->
+  <div class="menu-body">
+    <div class="category-tabs">
+      <button class="tab-btn active" onclick="jumpTo('murtabak',this)">🥙 Murtabak & Roti</button>
+      <button class="tab-btn" onclick="jumpTo('burgers',this)">🍔 Burgers</button>
+      <button class="tab-btn" onclick="jumpTo('party',this)">📦 Party Trays</button>
+    </div>
+
+    <div class="cat-section" id="murtabak">
+      <h2 class="cat-title">🥙 Murtabak & Roti</h2>
+      <p class="cat-desc">Crispy, golden roti wraps and flatbreads — a Charito's specialty.</p>
+      <div class="items-grid" id="grid-murtabak"></div>
+    </div>
+
+    <div class="cat-section" id="burgers">
+      <h2 class="cat-title">🍔 Burgers & Sandwiches</h2>
+      <p class="cat-desc">100% beef patties on freshly baked buns. Classic comfort food done right.</p>
+      <div class="items-grid" id="grid-burgers"></div>
+    </div>
+
+    <div class="cat-section" id="party">
+      <h2 class="cat-title">📦 Party Trays</h2>
+      <p class="cat-desc">Perfect for events and gatherings. Contact us to confirm your order.</p>
+      <div class="items-grid" id="grid-party"></div>
+    </div>
+  </div>
+
+  <!-- CART SIDEBAR (desktop) -->
+  <aside class="cart-sidebar">
+    <div class="cart-header">
+      <h2>🛒 Your Order <span id="cartBadge" style="background:var(--red);color:#fff;font-size:0.7rem;padding:0.14rem 0.5rem;border-radius:50px;font-family:'Nunito';font-weight:800">0</span></h2>
+    </div>
+    <div class="cart-items" id="cartItemsDesktop">
+      <div class="cart-empty"><div class="cart-empty-icon">🛒</div><p>Your cart is empty.<br>Add items from the menu!</p></div>
+    </div>
+    <div class="cart-footer" id="cartFooterDesktop">
+      <div class="cart-line"><span>Items</span><span id="cartQtyD">0</span></div>
+      <div class="cart-total-row"><span>Total</span><span>₱<span id="cartTotalD">0</span></span></div>
+      <button class="checkout-btn" onclick="openOrderModal()" id="checkoutBtnD" disabled>Place Order</button>
+      <button class="clear-btn" onclick="clearCart()">Clear cart</button>
+    </div>
+  </aside>
+</div>
+
+<!-- MOBILE STICKY CART BAR -->
+<div class="mobile-cart-bar" id="mobileCartBar">
+  <div class="mobile-cart-info">
+    <span>Your order (<span id="cartQtyM">0</span> items)</span>
+    <strong>₱<span id="cartTotalM">0</span></strong>
+  </div>
+  <button class="mobile-cart-btn" onclick="openCartDrawer()">View Cart 🛒</button>
+</div>
+
+<!-- CART DRAWER (mobile) -->
+<div class="cart-overlay" id="cartOverlay" onclick="closeCartDrawer()"></div>
+<div class="cart-drawer" id="cartDrawer">
+  <button class="drawer-close" onclick="closeCartDrawer()">✕</button>
+  <div class="cart-header" style="padding:1.4rem 1.4rem 1rem;border-bottom:1px solid rgba(200,39,45,0.1);padding-right:3rem;">
+    <h2 style="font-family:'Playfair Display',serif;font-size:1.2rem;display:flex;align-items:center;gap:0.5rem">🛒 Your Order</h2>
+  </div>
+  <div class="cart-items" id="cartItemsMobile" style="flex:1;overflow-y:auto;padding:0.8rem 1.4rem;">
+    <div class="cart-empty"><div class="cart-empty-icon">🛒</div><p>Your cart is empty.<br>Add items from the menu!</p></div>
+  </div>
+  <div class="cart-footer" style="padding:1rem 1.4rem 1.6rem;border-top:1px solid rgba(200,39,45,0.1);">
+    <div class="cart-total-row"><span style="font-weight:800">Total</span><span style="font-family:'Playfair Display',serif;font-size:1.35rem;color:var(--red);font-weight:700">₱<span id="cartTotalDrawer">0</span></span></div>
+    <button class="checkout-btn" onclick="openOrderModal()" id="checkoutBtnM" disabled>Place Order</button>
+    <button class="clear-btn" onclick="clearCart()">Clear cart</button>
+  </div>
+</div>
+
+<!-- ORDER MODAL -->
+<div class="modal-overlay" id="orderModal">
+  <div class="modal">
+    <div class="modal-icon">🎉</div>
+    <h2>Ready to Order?</h2>
+    <p>Message us on Facebook or call <strong>0917-106-3504</strong> to confirm your order and pickup time!</p>
+    <div class="modal-summary" id="modalSummary"></div>
+    <div class="modal-actions">
+      <a href="https://www.facebook.com/charitosfoodandbeverages" target="_blank" rel="noopener" class="modal-btn primary">💬 Message on FB</a>
+      <button class="modal-btn secondary" onclick="closeOrderModal()">✕ Keep Shopping</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const MENU = {
+  murtabak:[
+    {id:1,name:'Supercheese Beef Murtabak',price:85,desc:'Roti wrap with cheesy beef filling. Crispy & golden.',img:'images/murtabakbef.png',emoji:'🥙',badge:'Bestseller',rating:4.9},
+    {id:2,name:'Supercheese Chicken Murtabak',price:85,desc:'Roti wrap with cheesy chicken filling.',img:'images/murtabakchx.png',emoji:'🥙',rating:4.8},
+    {id:3,name:'Tunamelt Murtabak',price:75,desc:'Roti wrap with creamy, cheesy tuna filling.',img:'images/tunamelt.png',emoji:'🫓',rating:4.8},
+    {id:4,name:'Roti Cheese',price:65,desc:'Roti filled with gooey melted cheese.',img:'images/roticheese.png',emoji:'🥐',rating:4.9},
+    {id:5,name:'Roti with Curry Sauce',price:45,desc:'Crispy roti served with aromatic curry sauce.',img:'images/roti-curry.png',emoji:'🫓',rating:4.9},
+    {id:6,name:'Shawarma Paratha',price:95,desc:'Paratha wrap, beef, onion, tomatoes, cabbage, zucchini, cheese & garlic sauce.',img:'images/shawarma.png',emoji:'🌯',rating:4.9},
+    {id:7,name:'Crispy Roti',price:40,desc:'Deep-fried, light, and golden crispy roti.',img:'images/crispyroti.png',emoji:'🥐',rating:4.8},
+    {id:8,name:'Roti Paratha',price:35,desc:'Classic soft and chewy paratha roti.',img:'images/rotiparatha.png',emoji:'🫓',rating:4.7},
+  ],
+  burgers:[
+    {id:9,name:'Regular Burger',price:55,desc:'Classic beef burger on a soft bun.',img:'images/regularburger.png',emoji:'🍔',rating:4.8},
+    {id:10,name:'Classic Cheeseburger',price:65,desc:'Freshly baked buns, 100% beef patty, and cheese.',img:'images/classiccheeseburger.png',emoji:'🍔',rating:4.9},
+    {id:11,name:'Cheeseburger Deluxe Solo',price:85,desc:'Baked buns, beef patty, lettuce, onions, tomatoes, cheese, mayo & ketchup. Solo — no drinks, no fries.',img:'images/cheeseburger-deluxe.png',emoji:'🍔',badge:'★ 5.0',rating:5.0},
+    {id:12,name:'Double Patty Deluxe',price:85,desc:'Two beef patties, lettuce, tomato, cheese, sauce.',img:'images/doublepatty.png',emoji:'🍔',badge:'★ 5.0',rating:5.0},
+    {id:13,name:'Ultimate Cheeseburger Deluxe',price:100,desc:'Double beef patties, baked buns, lettuce, white onions, tomatoes, cheese, mayo & ketchup.',img:'images/ultimate-cheeseburger.png',emoji:'🍔',badge:'New',rating:5.0},
+    {id:14,name:'Classic Chicken Sandwich',price:75,desc:'Crispy chicken fillet, lettuce, tomato on a sesame bun.',img:'images/chickensandwich.png',emoji:'🥪',rating:4.9},
+    {id:15,name:'Chicken Sandwich Deluxe',price:85,desc:'Crispy chicken, lettuce, tomato, onion, cheese & sauce.',img:'images/chickensandwich-deluxe.png',emoji:'🥪',rating:4.9},
+  ],
+  party:[
+    {id:16,name:'Beef Patty Steak (Barkada)',price:790,desc:'Barkada-size tray · 8–10 servings.',img:'images/beefpatty-tray.png',emoji:'🥩',rating:4.9},
+    {id:17,name:'Beef Patty Steak (Family)',price:1250,desc:'Family-size tray · 15–20 servings.',img:'images/beefpatty-tray.png',emoji:'🥩',rating:4.9},
+    {id:18,name:'Classic Beef Steak (Barkada)',price:890,desc:'Classic beef steak, Barkada size.',img:'images/beefsteak-tray.png',emoji:'🥩',rating:4.9},
+    {id:19,name:'Spaghetti Beef Meatballs (Family)',price:1450,desc:'Spaghetti with beef meatballs, Family size.',img:'images/spaghetti-tray.png',emoji:'🍝',rating:4.9},
+    {id:20,name:'Baked Lasagna (Barkada)',price:1150,desc:'Cheesy baked lasagna, Barkada size.',img:'images/lasagna-tray.png',emoji:'🍛',rating:4.9},
+    {id:21,name:'Buttered Prawns (Family)',price:1890,desc:'Buttered prawns, Family size.',img:'images/prawns-tray.png',emoji:'🦐',rating:5.0},
+    {id:22,name:'Fried Chicken (Barkada)',price:650,desc:'Classic fried chicken, Barkada size.',img:'images/friedchicken-tray.png',emoji:'🍗',rating:4.9},
+    {id:23,name:'Sweet & Sour Chicken (Family)',price:1390,desc:'Sweet & sour chicken, Family size.',img:'images/sweetsour-tray.png',emoji:'🍗',rating:4.8},
+  ]
+};
+const BG=[
+  'linear-gradient(135deg,#f9d3d4,#f07070)',
+  'linear-gradient(135deg,#fde8cc,#f5a050)',
+  'linear-gradient(135deg,#d4ede0,#6dbf95)',
+  'linear-gradient(135deg,#e8d5f5,#b07dd8)',
+  'linear-gradient(135deg,#fef0d0,#f5c842)',
+  'linear-gradient(135deg,#d5eaf9,#6aa9d8)',
+  'linear-gradient(135deg,#fde0f5,#d86ab0)',
+  'linear-gradient(135deg,#e0f5e8,#5ab07f)',
+];
+let cart={};
+
+function findItem(id){for(const c of Object.values(MENU)){const f=c.find(i=>i.id===id);if(f)return f;}}
+
+function renderMenus(){
+  ['murtabak','burgers','party'].forEach(cat=>{
+    document.getElementById('grid-'+cat).innerHTML=MENU[cat].map((item,i)=>`
+      <div class="item-card">
+        <div class="item-img" style="background:${BG[i%BG.length]};padding:0;">
+          ${item.badge?`<span class="item-badge">${item.badge}</span>`:''}
+          <img src="${item.img}" alt="${item.name}" style="width:100%;height:100%;object-fit:cover;display:block;"
+            onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div style="display:none;width:100%;height:100%;align-items:center;justify-content:center;font-size:3.2rem;position:absolute;inset:0;">${item.emoji}</div>
+        </div>
+        <div class="item-body">
+          <h3>${item.name}</h3>
+          <p>${item.desc}</p>
+          <div class="item-footer">
+            <span class="item-price">₱${item.price.toLocaleString()}</span>
+            <div class="item-right">
+              <span class="item-rating"><span class="s">★</span>${item.rating}</span>
+              <button class="add-btn" id="addbtn-${item.id}" onclick="addToCart(${item.id})" aria-label="Add ${item.name}">+</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    `).join('');
+  });
+}
+
+function addToCart(id){
+  const item=findItem(id);if(!item)return;
+  cart[id]=(cart[id]||0)+1;
+  updateCartUI();
+  const btn=document.getElementById('addbtn-'+id);
+  btn.classList.add('added');btn.textContent='✓';
+  setTimeout(()=>{btn.classList.remove('added');btn.textContent='+';},1200);
+  showToast(item.name+' added to cart!');
+}
+function removeFromCart(id){
+  if(cart[id]>1)cart[id]--;else delete cart[id];
+  updateCartUI();
+}
+function clearCart(){cart={};updateCartUI();closeCartDrawer();}
+
+function cartItemsHTML(){
+  return Object.entries(cart).map(([id,qty])=>{
+    const item=findItem(+id);
+    return `<div class="cart-item">
+      <div class="cart-item-icon">${item.emoji}</div>
+      <div class="cart-item-info"><h4>${item.name}</h4><p>₱${(item.price*qty).toLocaleString()}</p></div>
+      <div class="cart-controls">
+        <button class="qty-btn" onclick="removeFromCart(${id})">−</button>
+        <span class="qty-num">${qty}</span>
+        <button class="qty-btn" onclick="addToCart(${id})">+</button>
+      </div>
+    </div>`;
+  }).join('');
+}
+function emptyCartHTML(){return `<div class="cart-empty"><div class="cart-empty-icon">🛒</div><p>Your cart is empty.<br>Add items from the menu!</p></div>`;}
+
+function updateCartUI(){
+  const entries=Object.entries(cart);
+  const totalQty=entries.reduce((s,[,q])=>s+q,0);
+  const total=entries.reduce((s,[id,q])=>s+findItem(+id).price*q,0);
+  const html=entries.length?cartItemsHTML():emptyCartHTML();
+
+  document.getElementById('cartCountNav').textContent=totalQty;
+  document.getElementById('cartBadge').textContent=totalQty;
+  document.getElementById('cartItemsDesktop').innerHTML=html;
+  document.getElementById('cartItemsMobile').innerHTML=html;
+  document.getElementById('cartQtyD').textContent=totalQty;
+  document.getElementById('cartTotalD').textContent=total.toLocaleString();
+  document.getElementById('cartTotalM').textContent=total.toLocaleString();
+  document.getElementById('cartTotalDrawer').textContent=total.toLocaleString();
+  document.getElementById('cartQtyM').textContent=totalQty;
+  document.getElementById('checkoutBtnD').disabled=totalQty===0;
+  document.getElementById('checkoutBtnM').disabled=totalQty===0;
+
+  const bar=document.getElementById('mobileCartBar');
+  if(totalQty>0)bar.classList.add('visible');else bar.classList.remove('visible');
+}
+
+function openOrderModal(){
+  const entries=Object.entries(cart);
+  const total=entries.reduce((s,[id,q])=>s+findItem(+id).price*q,0);
+  document.getElementById('modalSummary').innerHTML=
+    entries.map(([id,qty])=>{const i=findItem(+id);return `${i.emoji} ${i.name} ×${qty} — ₱${(i.price*qty).toLocaleString()}`;}).join('<br>')+
+    `<br><strong style="color:var(--red)">Total: ₱${total.toLocaleString()}</strong>`;
+  document.getElementById('orderModal').classList.add('open');
+  closeCartDrawer();
+}
+function closeOrderModal(){document.getElementById('orderModal').classList.remove('open');}
+document.getElementById('orderModal').addEventListener('click',e=>{if(e.target===document.getElementById('orderModal'))closeOrderModal();});
+
+function openCartDrawer(){
+  document.getElementById('cartDrawer').classList.add('open');
+  document.getElementById('cartOverlay').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeCartDrawer(){
+  document.getElementById('cartDrawer').classList.remove('open');
+  document.getElementById('cartOverlay').classList.remove('open');
+  document.body.style.overflow='';
+}
+
+function jumpTo(id,btn){
+  document.getElementById(id).scrollIntoView({behavior:'smooth',block:'start'});
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+}
+function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2200);}
+function toggleMenu(){document.getElementById('hamburger').classList.toggle('open');document.getElementById('mobileMenu').classList.toggle('open');}
+function closeMenu(){document.getElementById('hamburger').classList.remove('open');document.getElementById('mobileMenu').classList.remove('open');}
+
+renderMenus();
+</script>
+</body>
+</html>
