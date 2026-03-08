@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Careers — Charito's Food & Beverage</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Nunito:wght@300;400;600;700;800&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --red:#C8272D;--red-dark:#9B1B1F;--red-light:#E84B50;
+  --cream:#FFF8F0;--white:#FFFFFF;--warm-gray:#F5EDE4;
+  --text-dark:#1A0A0A;--gold:#D4A843;--border:#E8DDD5;
+  --green:#1A8B5A;--green-bg:#E8F8F0;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'Nunito',sans-serif;background:var(--cream);color:var(--text-dark);overflow-x:hidden;}
+
+/* NAV */
+nav{position:sticky;top:0;width:100%;z-index:200;background:rgba(200,39,45,0.97);backdrop-filter:blur(12px);display:flex;align-items:center;justify-content:space-between;padding:0 5%;height:68px;box-shadow:0 2px 20px rgba(155,27,31,0.4);}
+.nav-logo{font-family:'Dancing Script',cursive;font-size:1.9rem;color:#fff;text-decoration:none;}
+.nav-links{display:flex;gap:1.6rem;list-style:none;align-items:center;}
+.nav-links a{color:rgba(255,255,255,0.88);text-decoration:none;font-size:0.82rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;transition:color 0.2s;position:relative;}
+.nav-links a::after{content:'';position:absolute;bottom:-3px;left:0;width:0;height:2px;background:var(--gold);transition:width 0.3s;}
+.nav-links a:hover{color:#fff;}
+.nav-links a:hover::after{width:100%;}
+.nav-cta{background:#fff !important;color:var(--red) !important;padding:0.45rem 1.1rem;border-radius:50px;font-weight:800 !important;}
+.nav-cta::after{display:none !important;}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:8px;background:none;border:none;}
+.hamburger span{display:block;width:24px;height:2px;background:#fff;border-radius:2px;transition:all 0.3s;}
+.hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+.hamburger.open span:nth-child(2){opacity:0;}
+.hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+.mobile-menu{display:none;position:fixed;top:68px;left:0;right:0;z-index:190;background:var(--red-dark);padding:1rem 0;box-shadow:0 8px 30px rgba(0,0,0,0.3);transform:translateY(-10px);opacity:0;transition:all 0.3s;pointer-events:none;}
+.mobile-menu.open{display:block;transform:translateY(0);opacity:1;pointer-events:all;}
+.mobile-menu a{display:block;padding:0.9rem 5%;color:rgba(255,255,255,0.9);text-decoration:none;font-size:0.95rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;border-bottom:1px solid rgba(255,255,255,0.08);transition:background 0.2s;}
+.mobile-menu a:hover{background:rgba(255,255,255,0.1);}
+.mobile-menu a:last-child{border-bottom:none;color:#fff;background:rgba(255,255,255,0.15);margin:0.5rem 5%;border-radius:10px;text-align:center;}
+
+/* HERO */
+.hero{background:linear-gradient(135deg,var(--red-dark),var(--red));padding:70px 5% 65px;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,0.06) 1px,transparent 1px);background-size:32px 32px;}
+.hero-inner{position:relative;max-width:700px;}
+.hero-label{display:inline-block;font-size:0.72rem;font-weight:800;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:0.8rem;}
+.hero h1{font-family:'Dancing Script',cursive;font-size:clamp(2.5rem,7vw,4rem);color:#fff;margin-bottom:0.6rem;line-height:1.1;}
+.hero p{color:rgba(255,255,255,0.82);font-size:clamp(0.9rem,2vw,1.05rem);line-height:1.75;max-width:560px;}
+
+/* PERKS */
+.perks-section{background:#fff;padding:80px 5%;}
+.perks-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:20px;max-width:1100px;margin:0 auto;}
+.perk-card{background:var(--warm-gray);border-radius:18px;padding:1.6rem;transition:transform 0.2s;}
+.perk-card:hover{transform:translateY(-4px);}
+.perk-card-icon{width:48px;height:48px;border-radius:14px;background:var(--red);color:#fff;display:flex;align-items:center;justify-content:center;font-size:1.4rem;margin-bottom:1rem;}
+.perk-card h3{font-size:1rem;font-weight:800;margin-bottom:0.4rem;}
+.perk-card p{font-size:0.85rem;color:#666;line-height:1.6;}
+
+/* OPEN POSITIONS */
+.positions-section{background:var(--cream);padding:80px 5%;}
+.section-label{display:inline-block;font-size:0.72rem;font-weight:800;letter-spacing:0.2em;text-transform:uppercase;color:var(--red);margin-bottom:0.8rem;}
+.section-header{text-align:center;margin-bottom:50px;}
+.section-header h2{font-family:'Playfair Display',serif;font-size:clamp(1.9rem,4vw,2.8rem);line-height:1.15;}
+.section-header h2 em{font-style:italic;color:var(--red);}
+.jobs-list{display:flex;flex-direction:column;gap:16px;max-width:880px;margin:0 auto;}
+.job-card{background:#fff;border:1.5px solid var(--border);border-radius:18px;padding:1.5rem 1.8rem;transition:all 0.25s;cursor:pointer;}
+.job-card:hover{border-color:var(--red);box-shadow:0 6px 25px rgba(200,39,45,0.12);transform:translateY(-2px);}
+.job-card-inner{display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;}
+.job-info h3{font-size:1.05rem;font-weight:800;margin-bottom:0.4rem;}
+.job-meta{display:flex;gap:0.6rem;flex-wrap:wrap;}
+.job-tag{font-size:0.68rem;font-weight:800;padding:0.18rem 0.65rem;border-radius:50px;text-transform:uppercase;letter-spacing:0.08em;}
+.job-tag.def{background:#FFF0F0;color:var(--red);}
+.job-tag.ft{background:var(--green-bg);color:var(--green);}
+.job-tag.pt{background:#FFF3E0;color:#E07B00;}
+.apply-btn{background:var(--red);color:#fff;border:none;padding:0.65rem 1.4rem;border-radius:50px;font-weight:800;font-size:0.82rem;cursor:pointer;transition:all 0.2s;font-family:'Nunito',sans-serif;white-space:nowrap;text-decoration:none;display:inline-block;}
+.apply-btn:hover{background:var(--red-dark);}
+.job-desc{display:none;margin-top:1rem;padding-top:1rem;border-top:1px solid var(--border);font-size:0.88rem;color:#555;line-height:1.7;}
+.job-card.expanded .job-desc{display:block;}
+.job-card.expanded{border-color:var(--red);box-shadow:0 6px 25px rgba(200,39,45,0.12);}
+.job-reqs{margin-top:0.8rem;}
+.job-reqs h4{font-size:0.82rem;font-weight:800;text-transform:uppercase;letter-spacing:0.08em;color:var(--red);margin-bottom:0.4rem;}
+.job-reqs ul{list-style:none;display:flex;flex-direction:column;gap:0.3rem;}
+.job-reqs ul li::before{content:'✓';color:var(--green);font-weight:800;margin-right:0.5rem;}
+.job-reqs ul li{font-size:0.85rem;}
+
+/* APPLICATION FORM */
+.application-section{background:#fff;padding:80px 5%;}
+.app-layout{display:grid;grid-template-columns:1fr 340px;gap:60px;max-width:1100px;margin:0 auto;align-items:start;}
+.form-header h2{font-family:'Playfair Display',serif;font-size:clamp(1.7rem,3vw,2.3rem);margin-bottom:0.5rem;}
+.form-header h2 em{font-style:italic;color:var(--red);}
+.form-header p{color:#777;font-size:0.92rem;line-height:1.6;margin-bottom:2rem;}
+.form-group{margin-bottom:1.3rem;}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+label{display:block;font-size:0.78rem;font-weight:800;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:0.38rem;}
+label .req{color:var(--red);}
+input,textarea,select{width:100%;padding:0.78rem 1rem;border-radius:10px;border:1.5px solid var(--border);background:#fff;font-family:'Nunito',sans-serif;font-size:0.9rem;color:var(--text-dark);transition:border-color 0.2s,box-shadow 0.2s;outline:none;appearance:none;}
+input:focus,textarea:focus,select:focus{border-color:var(--red);box-shadow:0 0 0 3px rgba(200,39,45,0.1);}
+textarea{resize:vertical;min-height:110px;}
+select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23999' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 1rem center;padding-right:2.5rem;cursor:pointer;}
+
+/* FILE UPLOAD */
+.upload-zone{border:2px dashed var(--border);border-radius:14px;padding:2rem 1.5rem;text-align:center;cursor:pointer;transition:all 0.2s;background:var(--warm-gray);position:relative;}
+.upload-zone:hover{border-color:var(--red);background:#FFF5F5;}
+.upload-zone.has-file{border-color:var(--green);background:var(--green-bg);}
+.upload-zone.drag-over{border-color:var(--red);background:#FFF5F5;transform:scale(1.01);}
+.upload-icon{font-size:2.2rem;margin-bottom:0.6rem;}
+.upload-text{font-size:0.85rem;color:#777;line-height:1.6;}
+.upload-text strong{color:var(--red);}
+.upload-text small{color:#BBB;display:block;margin-top:0.3rem;}
+#resumeFile{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%;}
+.file-name-display{margin-top:0.7rem;font-size:0.82rem;font-weight:700;color:var(--green);display:none;}
+.file-name-display.show{display:block;}
+.progress-bar{width:100%;height:4px;background:#DDD;border-radius:4px;margin-top:0.8rem;display:none;}
+.progress-bar.show{display:block;}
+.progress-fill{height:100%;background:var(--green);border-radius:4px;width:0%;transition:width 0.5s ease;}
+
+.submit-btn{width:100%;background:var(--red);color:#fff;border:none;padding:1rem;border-radius:12px;font-weight:800;font-size:0.95rem;cursor:pointer;font-family:'Nunito',sans-serif;letter-spacing:0.06em;text-transform:uppercase;transition:all 0.2s;margin-top:0.3rem;display:flex;align-items:center;justify-content:center;gap:0.5rem;}
+.submit-btn:hover:not(:disabled){background:var(--red-dark);transform:translateY(-2px);box-shadow:0 6px 20px rgba(200,39,45,0.35);}
+.submit-btn:disabled{background:#CCC;cursor:not-allowed;transform:none;box-shadow:none;}
+.spinner{width:18px;height:18px;border:2px solid rgba(255,255,255,0.4);border-top-color:#fff;border-radius:50%;animation:spin 0.7s linear infinite;}
+@keyframes spin{to{transform:rotate(360deg);}}
+
+/* SUCCESS */
+.success-panel{display:none;background:var(--green-bg);border:1.5px solid #6dbf95;border-radius:18px;padding:2.5rem;text-align:center;margin-top:1.5rem;animation:fadeUp 0.4s ease;}
+.success-panel.show{display:block;}
+.success-icon{font-size:3rem;margin-bottom:0.8rem;}
+.success-panel h3{font-family:'Playfair Display',serif;font-size:1.5rem;color:var(--green);margin-bottom:0.5rem;}
+.success-panel p{font-size:0.9rem;color:#444;line-height:1.7;}
+.success-panel a{color:var(--red);font-weight:700;text-decoration:none;}
+
+/* SIDEBAR */
+.app-sidebar{display:flex;flex-direction:column;gap:20px;}
+.sidebar-card{background:var(--warm-gray);border-radius:18px;padding:1.5rem;}
+.sidebar-card h3{font-family:'Playfair Display',serif;font-size:1rem;margin-bottom:1rem;padding-bottom:0.7rem;border-bottom:1px solid var(--border);}
+.sidebar-info-row{display:flex;gap:0.8rem;align-items:flex-start;margin-bottom:0.9rem;}
+.sidebar-info-row:last-child{margin-bottom:0;}
+.si-icon{width:34px;height:34px;border-radius:9px;background:var(--red);color:#fff;display:flex;align-items:center;justify-content:center;font-size:0.9rem;flex-shrink:0;}
+.si-text h4{font-size:0.75rem;font-weight:800;text-transform:uppercase;letter-spacing:0.09em;color:var(--red);margin-bottom:0.15rem;}
+.si-text p{font-size:0.85rem;color:#555;line-height:1.5;}
+.si-text a{color:var(--red);text-decoration:none;font-weight:700;}
+.process-steps{display:flex;flex-direction:column;gap:0;}
+.process-step{display:flex;gap:0.9rem;align-items:flex-start;position:relative;padding-bottom:1.2rem;}
+.process-step:last-child{padding-bottom:0;}
+.step-num{width:30px;height:30px;border-radius:50%;background:var(--red);color:#fff;font-weight:800;font-size:0.82rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;position:relative;z-index:1;}
+.process-step:not(:last-child)::after{content:'';position:absolute;left:14px;top:30px;bottom:0;width:2px;background:rgba(200,39,45,0.2);}
+.step-text h4{font-size:0.85rem;font-weight:800;margin-bottom:0.15rem;}
+.step-text p{font-size:0.78rem;color:#777;line-height:1.5;}
+.fb-cta-card{background:linear-gradient(135deg,var(--red-dark),var(--red));border-radius:18px;padding:1.5rem;color:#fff;}
+.fb-cta-card h3{color:#fff;border-color:rgba(255,255,255,0.2);margin-bottom:0.7rem;}
+.fb-cta-card p{font-size:0.85rem;color:rgba(255,255,255,0.8);line-height:1.6;margin-bottom:1.1rem;}
+.fb-cta-btn{display:block;background:#fff;color:var(--red);text-align:center;padding:0.75rem;border-radius:10px;font-weight:800;font-size:0.85rem;text-decoration:none;transition:all 0.2s;}
+.fb-cta-btn:hover{transform:translateY(-2px);box-shadow:0 4px 15px rgba(0,0,0,0.2);}
+
+/* FOOTER */
+footer{background:var(--red-dark);padding:50px 5% 26px;}
+.footer-bottom-simple{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:0.8rem;padding-top:20px;}
+.footer-bottom-simple p{font-size:0.78rem;color:rgba(255,255,255,0.5);}
+.footer-links{display:flex;gap:1.5rem;flex-wrap:wrap;}
+.footer-links a{color:rgba(255,255,255,0.6);text-decoration:none;font-size:0.82rem;transition:color 0.2s;}
+.footer-links a:hover{color:#fff;}
+.footer-brand-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;flex-wrap:wrap;gap:1rem;}
+.footer-brand-name{font-family:'Dancing Script',cursive;font-size:2rem;color:#fff;}
+.footer-socials{display:flex;gap:0.6rem;}
+.social-btn{width:35px;height:35px;border-radius:50%;background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.22);display:flex;align-items:center;justify-content:center;color:#fff;text-decoration:none;font-size:0.8rem;font-weight:800;transition:all 0.2s;}
+.social-btn:hover{background:rgba(255,255,255,0.28);}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:translateY(0);}}
+
+/* RESPONSIVE */
+@media(max-width:860px){
+  .nav-links{display:none;}
+  .hamburger{display:flex;}
+  .app-layout{grid-template-columns:1fr;gap:36px;}
+  .app-sidebar{order:-1;}
+  .perks-grid{grid-template-columns:1fr 1fr;}
+}
+@media(max-width:600px){
+  .hero{padding:60px 4% 55px;}
+  .perks-section,.positions-section,.application-section{padding:60px 4%;}
+  .perks-grid{grid-template-columns:1fr;}
+  .form-row{grid-template-columns:1fr;}
+  .job-card-inner{flex-direction:column;align-items:flex-start;}
+  .apply-btn{width:100%;text-align:center;}
+  .footer-brand-row{flex-direction:column;align-items:flex-start;}
+  .footer-bottom-simple{flex-direction:column;text-align:center;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Charito's</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="menu.html">Menu</a></li>
+    <li><a href="index.html#party">Party Trays</a></li>
+    <li><a href="index.html#location">Find Us</a></li>
+    <li><a href="contact.html" class="nav-cta">Contact</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></button>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html" onclick="closeMenu()">Home</a>
+  <a href="menu.html" onclick="closeMenu()">Menu</a>
+  <a href="index.html#party" onclick="closeMenu()">Party Trays</a>
+  <a href="index.html#location" onclick="closeMenu()">Find Us</a>
+  <a href="contact.html" onclick="closeMenu()">Contact Us</a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <span class="hero-label">Join the Team</span>
+    <h1>Work at Charito's — Build Something Delicious</h1>
+    <p>We're always looking for passionate, hardworking people who love great food and genuine hospitality. Join our growing team in Zamboanga City and be part of something special.</p>
+  </div>
+</section>
+
+<!-- PERKS -->
+<section class="perks-section">
+  <div class="section-header">
+    <span class="section-label">Why Work With Us</span>
+    <h2 style="font-family:'Playfair Display',serif;font-size:clamp(1.9rem,4vw,2.8rem)">The <em style="font-style:italic;color:var(--red)">Benefits</em> of Joining</h2>
+  </div>
+  <div class="perks-grid">
+    <div class="perk-card"><div class="perk-card-icon">🍽️</div><h3>Free Meals on Shift</h3><p>Enjoy complimentary meals from our kitchen during every work shift.</p></div>
+    <div class="perk-card"><div class="perk-card-icon">📈</div><h3>Career Growth</h3><p>We promote from within. Your hard work and dedication get recognized here.</p></div>
+    <div class="perk-card"><div class="perk-card-icon">🤝</div><h3>Family Culture</h3><p>A warm, respectful, and fun environment where everyone is treated like family.</p></div>
+    <div class="perk-card"><div class="perk-card-icon">⏰</div><h3>Flexible Schedules</h3><p>Part-time and full-time roles available. We work with your availability.</p></div>
+    <div class="perk-card"><div class="perk-card-icon">📍</div><h3>Central Location</h3><p>Conveniently located at 234 Talon-Talon Road, easily accessible in ZC.</p></div>
+    <div class="perk-card"><div class="perk-card-icon">🌟</div><h3>Skill Development</h3><p>Learn food prep, customer service, and operations in a real working kitchen.</p></div>
+  </div>
+</section>
+
+<!-- OPEN POSITIONS -->
+<section class="positions-section" id="positions">
+  <div class="section-header">
+    <span class="section-label">Now Hiring</span>
+    <h2>Open <em>Positions</em></h2>
+    <p style="color:#777;margin-top:0.7rem;font-size:0.95rem;max-width:440px;margin-inline:auto">Click any position to see details, then scroll down to apply.</p>
+  </div>
+  <div class="jobs-list">
+
+    <div class="job-card" id="job-cook" onclick="expandJob('cook')">
+      <div class="job-card-inner">
+        <div class="job-info">
+          <h3>Kitchen Staff / Cook</h3>
+          <div class="job-meta">
+            <span class="job-tag ft">Full-Time</span>
+            <span class="job-tag def">On-Site</span>
+            <span class="job-tag def">Talon-Talon, ZC</span>
+          </div>
+        </div>
+        <button class="apply-btn" onclick="applyFor('cook',event)">Apply Now</button>
+      </div>
+      <div class="job-desc">
+        <p>We're looking for a reliable and skilled kitchen team member to help prepare our signature dishes — Murtabak, Roti, Burgers, and more. No prior formal kitchen experience required; we'll train you!</p>
+        <div class="job-reqs">
+          <h4>What We're Looking For</h4>
+          <ul>
+            <li>Willing to learn and follow food prep procedures</li>
+            <li>Punctual, hardworking, and team player</li>
+            <li>Can work mornings (shift starts 5:30 AM)</li>
+            <li>Food handling or kitchen experience is a plus (not required)</li>
+            <li>Zamboanga City resident preferred</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="job-card" id="job-cashier" onclick="expandJob('cashier')">
+      <div class="job-card-inner">
+        <div class="job-info">
+          <h3>Cashier / Front-of-House Staff</h3>
+          <div class="job-meta">
+            <span class="job-tag ft">Full-Time</span>
+            <span class="job-tag def">On-Site</span>
+            <span class="job-tag def">Talon-Talon, ZC</span>
+          </div>
+        </div>
+        <button class="apply-btn" onclick="applyFor('cashier',event)">Apply Now</button>
+      </div>
+      <div class="job-desc">
+        <p>You'll be the friendly face of Charito's — taking orders, handling transactions, and making sure every customer leaves happy. A smile and a positive attitude are the most important qualifications!</p>
+        <div class="job-reqs">
+          <h4>What We're Looking For</h4>
+          <ul>
+            <li>Friendly and customer-service oriented</li>
+            <li>Basic math and cash handling skills</li>
+            <li>Organized and attentive to detail</li>
+            <li>Can communicate clearly in Filipino and/or English</li>
+            <li>Experience in retail or F&B is a plus</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="job-card" id="job-rider" onclick="expandJob('rider')">
+      <div class="job-card-inner">
+        <div class="job-info">
+          <h3>Delivery Rider</h3>
+          <div class="job-meta">
+            <span class="job-tag pt">Part-Time</span>
+            <span class="job-tag def">Field Work</span>
+            <span class="job-tag def">Zamboanga City</span>
+          </div>
+        </div>
+        <button class="apply-btn" onclick="applyFor('rider',event)">Apply Now</button>
+      </div>
+      <div class="job-desc">
+        <p>Help us deliver fresh, hot food directly to our customers around Zamboanga City. Must have your own motorcycle and a valid driver's license.</p>
+        <div class="job-reqs">
+          <h4>What We're Looking For</h4>
+          <ul>
+            <li>Own motorcycle and valid driver's license</li>
+            <li>Familiar with Zamboanga City roads and barangays</li>
+            <li>Reliable, punctual, and responsible</li>
+            <li>Has a smartphone for route navigation</li>
+            <li>Willing to work flexible hours</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="job-card" id="job-marketing" onclick="expandJob('marketing')">
+      <div class="job-card-inner">
+        <div class="job-info">
+          <h3>Social Media & Marketing Assistant</h3>
+          <div class="job-meta">
+            <span class="job-tag pt">Part-Time</span>
+            <span class="job-tag def">Hybrid</span>
+            <span class="job-tag def">Zamboanga City</span>
+          </div>
+        </div>
+        <button class="apply-btn" onclick="applyFor('marketing',event)">Apply Now</button>
+      </div>
+      <div class="job-desc">
+        <p>Help us grow Charito's online presence! You'll create content, manage our Facebook and Instagram pages, and engage with our customers. Perfect for a creative student or recent graduate.</p>
+        <div class="job-reqs">
+          <h4>What We're Looking For</h4>
+          <ul>
+            <li>Familiar with Facebook, Instagram, and content creation</li>
+            <li>Basic photo/video editing skills (Canva, CapCut, etc.)</li>
+            <li>Good written communication in Filipino and English</li>
+            <li>Creative, proactive, and self-motivated</li>
+            <li>Marketing, Comms, or related course background is a plus</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- APPLICATION FORM -->
+<section class="application-section" id="apply">
+  <div class="app-layout">
+    <div>
+      <div class="form-header">
+        <h2>Send Your <em>Application</em></h2>
+        <p>Fill out the form below and upload your resume (optional). We'll review your application and get back to you within 3–5 business days.</p>
+      </div>
+
+      <form id="appForm" onsubmit="submitApplication(event)">
+        <div class="form-row">
+          <div class="form-group">
+            <label>Full Name <span class="req">*</span></label>
+            <input type="text" id="fieldName" placeholder="Your full name" required>
+          </div>
+          <div class="form-group">
+            <label>Phone Number <span class="req">*</span></label>
+            <input type="tel" id="fieldPhone" placeholder="09XX XXX XXXX" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Email Address <span class="req">*</span></label>
+          <input type="email" id="fieldEmail" placeholder="your@email.com" required>
+        </div>
+        <div class="form-group">
+          <label>Address / Barangay</label>
+          <input type="text" placeholder="Your barangay or neighborhood in ZC">
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Position Applying For <span class="req">*</span></label>
+            <select id="fieldPosition" required>
+              <option value="" disabled selected>Select a position…</option>
+              <option value="cook">Kitchen Staff / Cook</option>
+              <option value="cashier">Cashier / Front-of-House</option>
+              <option value="rider">Delivery Rider</option>
+              <option value="marketing">Social Media & Marketing</option>
+              <option value="other">Open Application</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>When Can You Start?</label>
+            <select>
+              <option value="" disabled selected>Select availability…</option>
+              <option>Immediately</option>
+              <option>Within 1 week</option>
+              <option>2 weeks notice</option>
+              <option>1 month or more</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Employment Type</label>
+            <select>
+              <option value="" disabled selected>Preferred type…</option>
+              <option>Full-Time</option>
+              <option>Part-Time</option>
+              <option>Either is fine</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Age</label>
+            <input type="number" placeholder="Your age" min="16" max="65">
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Relevant Experience</label>
+          <textarea placeholder="Briefly describe any relevant experience — work, school, self-employed, even informal jobs count!" style="min-height:95px"></textarea>
+        </div>
+        <div class="form-group">
+          <label>Why do you want to work at Charito's?</label>
+          <textarea placeholder="Tell us a little about yourself and why you'd be a great fit for the team…" style="min-height:90px"></textarea>
+        </div>
+
+        <!-- FILE UPLOAD -->
+        <div class="form-group">
+          <label>Resume / CV <span style="color:#999;font-weight:600;text-transform:none;letter-spacing:0">(Optional)</span></label>
+          <div class="upload-zone" id="uploadZone">
+            <input type="file" id="resumeFile" accept=".pdf,.doc,.docx,.txt" onchange="handleFile(this)">
+            <div class="upload-icon" id="uploadIcon">📄</div>
+            <p class="upload-text">
+              <strong>Click to browse</strong> or drag & drop your file here
+              <small>PDF, DOC, DOCX accepted · Max 5MB</small>
+            </p>
+          </div>
+          <div class="file-name-display" id="fileNameDisplay"></div>
+          <div class="progress-bar" id="progressBar"><div class="progress-fill" id="progressFill"></div></div>
+        </div>
+
+        <button type="submit" class="submit-btn" id="submitBtn">
+          <span id="btnText">Submit Application</span>
+        </button>
+      </form>
+
+      <div class="success-panel" id="successPanel">
+        <div class="success-icon">🎊</div>
+        <h3>Application Received!</h3>
+        <p>Thank you for applying to Charito's Food & Beverage! We've received your application and will review it shortly. We'll contact you within <strong>3–5 business days</strong> via phone or email.<br><br>
+        In the meantime, you can <a href="https://www.facebook.com/charitosfoodandbeverages" target="_blank">follow us on Facebook</a> to stay updated on our latest news!</p>
+      </div>
+    </div>
+
+    <!-- SIDEBAR -->
+    <aside class="app-sidebar">
+      <div class="sidebar-card">
+        <h3>📍 Where We're Located</h3>
+        <div class="sidebar-info-row"><div class="si-icon">📍</div><div class="si-text"><h4>Address</h4><p>234 Talon-Talon Road,<br>Zamboanga City, 7000</p></div></div>
+        <div class="sidebar-info-row"><div class="si-icon">📞</div><div class="si-text"><h4>HR / Inquiries</h4><p><a href="tel:09171063504">0917-106-3504</a></p></div></div>
+        <div class="sidebar-info-row"><div class="si-icon">✉️</div><div class="si-text"><h4>Email</h4><p><a href="mailto:charitosfoodandbeverages@gmail.com" style="font-size:0.78rem;word-break:break-all">charitosfoodandbeverages@gmail.com</a></p></div></div>
+      </div>
+
+      <div class="sidebar-card">
+        <h3>🗓️ Hiring Process</h3>
+        <div class="process-steps">
+          <div class="process-step"><div class="step-num">1</div><div class="step-text"><h4>Submit Application</h4><p>Fill out the form or send your resume via Facebook.</p></div></div>
+          <div class="process-step"><div class="step-num">2</div><div class="step-text"><h4>We Review</h4><p>We'll look over your application within 3–5 days.</p></div></div>
+          <div class="process-step"><div class="step-num">3</div><div class="step-text"><h4>We Contact You</h4><p>We'll reach out via phone or email to schedule an interview.</p></div></div>
+          <div class="process-step"><div class="step-num">4</div><div class="step-text"><h4>Welcome to the Team!</h4><p>Onboarding and orientation at our Talon-Talon location.</p></div></div>
+        </div>
+      </div>
+
+      <div class="fb-cta-card">
+        <h3 style="color:#fff;border-bottom:1px solid rgba(255,255,255,0.2);padding-bottom:0.7rem;margin-bottom:0.7rem;font-family:'Playfair Display',serif;font-size:1rem">💬 Quick Message</h3>
+        <p>Rather send a message directly? Reach us on Facebook Messenger — fastest way to get a response!</p>
+        <a href="https://www.facebook.com/charitosfoodandbeverages" target="_blank" rel="noopener" class="fb-cta-btn">Message Us on Facebook →</a>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand-row">
+    <span class="footer-brand-name">Charito's</span>
+    <div class="footer-socials">
+      <a href="https://www.facebook.com/charitosfoodandbeverages" class="social-btn" target="_blank" rel="noopener">f</a>
+      <a href="https://instagram.com/ktandt.co" class="social-btn" target="_blank" rel="noopener">ig</a>
+    </div>
+  </div>
+  <div style="height:1px;background:rgba(255,255,255,0.12);margin-bottom:20px"></div>
+  <div class="footer-bottom-simple">
+    <p>© 2025 Charito's Food and Beverage · 234 Talon-Talon Rd, Zamboanga City</p>
+    <div class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="menu.html">Menu</a>
+      <a href="contact.html">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+function toggleMenu(){document.getElementById('hamburger').classList.toggle('open');document.getElementById('mobileMenu').classList.toggle('open');}
+function closeMenu(){document.getElementById('hamburger').classList.remove('open');document.getElementById('mobileMenu').classList.remove('open');}
+
+function expandJob(id){
+  const card=document.getElementById('job-'+id);
+  const isOpen=card.classList.contains('expanded');
+  document.querySelectorAll('.job-card').forEach(c=>c.classList.remove('expanded'));
+  if(!isOpen)card.classList.add('expanded');
+}
+
+function applyFor(position,e){
+  e.stopPropagation();
+  document.getElementById('fieldPosition').value=position;
+  document.getElementById('apply').scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+// Check URL param on load
+window.addEventListener('DOMContentLoaded',()=>{
+  const pos=new URLSearchParams(window.location.search).get('position');
+  if(pos){
+    document.getElementById('fieldPosition').value=pos;
+    const jobCard=document.getElementById('job-'+pos);
+    if(jobCard)jobCard.classList.add('expanded');
+  }
+});
+
+// File upload
+function handleFile(input){
+  const file=input.files[0];
+  if(!file)return;
+  if(file.size>5*1024*1024){alert('File too large. Max 5MB.');input.value='';return;}
+  const zone=document.getElementById('uploadZone');
+  const nameDisplay=document.getElementById('fileNameDisplay');
+  const bar=document.getElementById('progressBar');
+  const fill=document.getElementById('progressFill');
+  zone.classList.add('has-file');
+  document.getElementById('uploadIcon').textContent='✅';
+  nameDisplay.textContent='✓ '+file.name+' ('+Math.round(file.size/1024)+' KB)';
+  nameDisplay.classList.add('show');
+  bar.classList.add('show');
+  let w=0;const t=setInterval(()=>{w+=Math.random()*25;if(w>=100){w=100;clearInterval(t);}fill.style.width=w+'%';},120);
+}
+
+// Drag and drop
+const zone=document.getElementById('uploadZone');
+zone.addEventListener('dragover',e=>{e.preventDefault();zone.classList.add('drag-over');});
+zone.addEventListener('dragleave',()=>zone.classList.remove('drag-over'));
+zone.addEventListener('drop',e=>{
+  e.preventDefault();zone.classList.remove('drag-over');
+  const f=e.dataTransfer.files[0];
+  if(f){
+    const inp=document.getElementById('resumeFile');
+    const dt=new DataTransfer();dt.items.add(f);inp.files=dt.files;handleFile(inp);
+  }
+});
+
+// Form submit
+function submitApplication(e){
+  e.preventDefault();
+  const btn=document.getElementById('submitBtn');
+  const txt=document.getElementById('btnText');
+  btn.disabled=true;
+  txt.innerHTML='<span class="spinner"></span> Submitting…';
+  setTimeout(()=>{
+    document.getElementById('appForm').style.display='none';
+    document.getElementById('successPanel').classList.add('show');
+    window.scrollTo({top:document.getElementById('successPanel').offsetTop-100,behavior:'smooth'});
+  },1800);
+}
+</script>
+</body>
+</html>
