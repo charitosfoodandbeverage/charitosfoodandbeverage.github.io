@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact — Charito's Food & Beverage</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Nunito:wght@300;400;600;700;800&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --red:#C8272D;--red-dark:#9B1B1F;--cream:#FFF8F0;--white:#FFFFFF;
+  --warm-gray:#F5EDE4;--text-dark:#1A0A0A;--gold:#D4A843;--border:#E8DDD5;
+  --green:#1A8B5A;--green-bg:#E8F8F0;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'Nunito',sans-serif;background:var(--cream);color:var(--text-dark);overflow-x:hidden;}
+
+/* NAV */
+nav{position:sticky;top:0;width:100%;z-index:200;background:rgba(200,39,45,0.97);backdrop-filter:blur(12px);display:flex;align-items:center;justify-content:space-between;padding:0 5%;height:68px;box-shadow:0 2px 20px rgba(155,27,31,0.4);}
+.nav-logo{font-family:'Dancing Script',cursive;font-size:1.9rem;color:#fff;text-decoration:none;}
+.nav-links{display:flex;gap:1.6rem;list-style:none;align-items:center;}
+.nav-links a{color:rgba(255,255,255,0.88);text-decoration:none;font-size:0.82rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;transition:color 0.2s;position:relative;}
+.nav-links a::after{content:'';position:absolute;bottom:-3px;left:0;width:0;height:2px;background:var(--gold);transition:width 0.3s;}
+.nav-links a:hover{color:#fff;}
+.nav-links a:hover::after{width:100%;}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:8px;background:none;border:none;}
+.hamburger span{display:block;width:24px;height:2px;background:#fff;border-radius:2px;transition:all 0.3s;}
+.hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+.hamburger.open span:nth-child(2){opacity:0;}
+.hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+.mobile-menu{display:none;position:fixed;top:68px;left:0;right:0;z-index:190;background:var(--red-dark);padding:1rem 0;box-shadow:0 8px 30px rgba(0,0,0,0.3);transform:translateY(-10px);opacity:0;transition:all 0.3s;pointer-events:none;}
+.mobile-menu.open{display:block;transform:translateY(0);opacity:1;pointer-events:all;}
+.mobile-menu a{display:block;padding:0.9rem 5%;color:rgba(255,255,255,0.9);text-decoration:none;font-size:0.95rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;border-bottom:1px solid rgba(255,255,255,0.08);}
+.mobile-menu a:hover{background:rgba(255,255,255,0.1);}
+.mobile-menu a:last-child{border:none;}
+
+/* HERO */
+.page-hero{background:linear-gradient(135deg,var(--red-dark),var(--red));padding:65px 5% 60px;position:relative;overflow:hidden;}
+.page-hero::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,0.06) 1px,transparent 1px);background-size:32px 32px;}
+.page-hero-inner{position:relative;max-width:600px;}
+.hero-label{display:inline-block;font-size:0.72rem;font-weight:800;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:0.8rem;}
+.page-hero h1{font-family:'Dancing Script',cursive;font-size:clamp(2.5rem,7vw,3.8rem);color:#fff;margin-bottom:0.5rem;}
+.page-hero p{color:rgba(255,255,255,0.82);font-size:clamp(0.9rem,2vw,1rem);line-height:1.7;}
+
+/* TABS */
+.tab-bar{background:#fff;border-bottom:2px solid var(--border);display:flex;padding:0 5%;position:sticky;top:68px;z-index:100;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;}
+.tab-bar::-webkit-scrollbar{display:none;}
+.tab-btn{padding:1.1rem 1.3rem;font-weight:700;font-size:0.82rem;letter-spacing:0.08em;text-transform:uppercase;border:none;background:none;cursor:pointer;color:#999;border-bottom:3px solid transparent;font-family:'Nunito',sans-serif;transition:all 0.2s;margin-bottom:-2px;white-space:nowrap;flex-shrink:0;}
+.tab-btn.active{color:var(--red);border-bottom-color:var(--red);}
+.tab-btn:hover:not(.active){color:var(--text-dark);}
+
+/* PAGE BODY */
+.contact-body{max-width:1200px;margin:0 auto;padding:56px 5% 70px;display:grid;grid-template-columns:1fr 340px;gap:55px;align-items:start;}
+
+/* FORMS */
+.form-panel{display:none;}
+.form-panel.active{display:block;}
+.form-title{font-family:'Playfair Display',serif;font-size:clamp(1.6rem,3vw,2.2rem);margin-bottom:0.4rem;}
+.form-title em{font-style:italic;color:var(--red);}
+.form-desc{color:#777;font-size:0.9rem;line-height:1.65;margin-bottom:1.8rem;}
+.form-group{margin-bottom:1.25rem;}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+label{display:block;font-size:0.76rem;font-weight:800;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:0.36rem;}
+label .req{color:var(--red);}
+input,textarea,select{width:100%;padding:0.76rem 1rem;border-radius:10px;border:1.5px solid var(--border);background:#fff;font-family:'Nunito',sans-serif;font-size:0.9rem;color:var(--text-dark);transition:border-color 0.2s,box-shadow 0.2s;outline:none;appearance:none;}
+input:focus,textarea:focus,select:focus{border-color:var(--red);box-shadow:0 0 0 3px rgba(200,39,45,0.1);}
+textarea{resize:vertical;min-height:115px;}
+select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23999' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 1rem center;padding-right:2.5rem;cursor:pointer;}
+.submit-btn{width:100%;background:var(--red);color:#fff;border:none;padding:0.95rem;border-radius:12px;font-weight:800;font-size:0.9rem;cursor:pointer;font-family:'Nunito',sans-serif;letter-spacing:0.05em;text-transform:uppercase;transition:all 0.2s;margin-top:0.2rem;}
+.submit-btn:hover{background:var(--red-dark);transform:translateY(-2px);box-shadow:0 6px 20px rgba(200,39,45,0.35);}
+.success-msg{display:none;background:var(--green-bg);border:1.5px solid #6dbf95;border-radius:16px;padding:2.2rem;text-align:center;margin-top:1.5rem;animation:fadeUp 0.4s ease;}
+.success-msg.show{display:block;}
+.success-msg-icon{font-size:2.8rem;margin-bottom:0.6rem;}
+.success-msg h3{font-family:'Playfair Display',serif;font-size:1.4rem;color:var(--green);margin-bottom:0.4rem;}
+.success-msg p{font-size:0.88rem;color:#444;line-height:1.7;}
+
+/* TRAY ORDER SPECIFICS */
+.tray-picker{display:grid;grid-template-columns:1fr 1fr;gap:0.7rem;margin-top:0.5rem;}
+.tray-option{background:var(--warm-gray);border:1.5px solid var(--border);border-radius:10px;padding:0.7rem 0.9rem;cursor:pointer;transition:all 0.2s;display:flex;align-items:center;gap:0.5rem;}
+.tray-option:hover{border-color:var(--red);}
+.tray-option.selected{border-color:var(--red);background:#FFF0F0;}
+.tray-option input[type="checkbox"]{width:16px;height:16px;accent-color:var(--red);flex-shrink:0;cursor:pointer;}
+.tray-option label{font-size:0.82rem;font-weight:700;cursor:pointer;margin:0;text-transform:none;letter-spacing:0;}
+
+/* SIDEBAR */
+.contact-sidebar{display:flex;flex-direction:column;gap:18px;}
+.sidebar-card{background:#fff;border-radius:18px;padding:1.4rem;box-shadow:0 3px 15px rgba(0,0,0,0.06);}
+.sidebar-card h3{font-family:'Playfair Display',serif;font-size:0.95rem;margin-bottom:1rem;padding-bottom:0.7rem;border-bottom:1px solid var(--border);}
+.info-row{display:flex;gap:0.75rem;align-items:flex-start;margin-bottom:0.9rem;}
+.info-row:last-child{margin-bottom:0;}
+.info-icon{width:34px;height:34px;border-radius:9px;background:#FFF0F0;color:var(--red);display:flex;align-items:center;justify-content:center;font-size:0.88rem;flex-shrink:0;}
+.info-text h4{font-size:0.74rem;font-weight:800;text-transform:uppercase;letter-spacing:0.09em;color:var(--red);margin-bottom:0.15rem;}
+.info-text p{font-size:0.85rem;color:#555;line-height:1.5;}
+.info-text a{color:var(--red);text-decoration:none;font-weight:700;word-break:break-all;}
+.hours-list{display:flex;flex-direction:column;gap:0.45rem;}
+.hours-row{display:flex;justify-content:space-between;font-size:0.83rem;padding:0.3rem 0;border-bottom:1px solid rgba(0,0,0,0.04);}
+.hours-row:last-child{border-bottom:none;}
+.hours-row span:first-child{color:#777;}
+.hours-row span:last-child{font-weight:700;}
+.hours-row.today span{color:var(--red);font-weight:800;}
+.social-link-row{display:flex;align-items:center;gap:0.75rem;padding:0.7rem 0.9rem;border-radius:10px;text-decoration:none;color:var(--text-dark);background:var(--warm-gray);font-size:0.85rem;font-weight:700;transition:all 0.2s;margin-bottom:0.6rem;}
+.social-link-row:last-child{margin-bottom:0;}
+.social-link-row:hover{background:var(--red);color:#fff;}
+.social-link-row span:first-child{font-size:1rem;width:24px;text-align:center;}
+.fb-card{background:linear-gradient(135deg,var(--red-dark),var(--red));border-radius:18px;padding:1.5rem;color:#fff;box-shadow:0 4px 20px rgba(155,27,31,0.3);}
+.fb-card h3{color:#fff;border-color:rgba(255,255,255,0.2);padding-bottom:0.7rem;margin-bottom:0.7rem;font-family:'Playfair Display',serif;font-size:0.95rem;border-bottom:1px solid rgba(255,255,255,0.2);}
+.fb-card p{font-size:0.85rem;color:rgba(255,255,255,0.8);line-height:1.6;margin-bottom:1rem;}
+.fb-link-btn{display:block;background:#fff;color:var(--red);text-align:center;padding:0.75rem;border-radius:10px;font-weight:800;font-size:0.85rem;text-decoration:none;transition:all 0.2s;}
+.fb-link-btn:hover{transform:translateY(-2px);box-shadow:0 4px 15px rgba(0,0,0,0.2);}
+
+/* FOOTER */
+footer{background:var(--red-dark);padding:48px 5% 26px;}
+.footer-brand-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:22px;flex-wrap:wrap;gap:1rem;}
+.footer-brand-name{font-family:'Dancing Script',cursive;font-size:2rem;color:#fff;}
+.footer-socials{display:flex;gap:0.6rem;}
+.social-btn{width:35px;height:35px;border-radius:50%;background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.22);display:flex;align-items:center;justify-content:center;color:#fff;text-decoration:none;font-size:0.8rem;font-weight:800;transition:all 0.2s;}
+.social-btn:hover{background:rgba(255,255,255,0.28);}
+.footer-bottom{border-top:1px solid rgba(255,255,255,0.12);padding-top:20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:0.7rem;}
+.footer-bottom p{font-size:0.78rem;color:rgba(255,255,255,0.5);}
+.footer-links{display:flex;gap:1.4rem;flex-wrap:wrap;}
+.footer-links a{color:rgba(255,255,255,0.6);text-decoration:none;font-size:0.82rem;transition:color 0.2s;}
+.footer-links a:hover{color:#fff;}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
+
+/* RESPONSIVE */
+@media(max-width:860px){
+  .nav-links{display:none;}
+  .hamburger{display:flex;}
+  .contact-body{grid-template-columns:1fr;gap:36px;}
+  .contact-sidebar{order:-1;display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  .fb-card{grid-column:1/-1;}
+}
+@media(max-width:600px){
+  .page-hero{padding:55px 4% 50px;}
+  .contact-body{padding:44px 4% 55px;gap:28px;}
+  .contact-sidebar{display:flex;flex-direction:column;}
+  .form-row{grid-template-columns:1fr;}
+  .tray-picker{grid-template-columns:1fr;}
+  .footer-brand-row{flex-direction:column;align-items:flex-start;}
+  .footer-bottom{flex-direction:column;text-align:center;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Charito's</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="menu.html">Menu</a></li>
+    <li><a href="index.html#party">Party Trays</a></li>
+    <li><a href="careers.html">Careers</a></li>
+    <li><a href="index.html#location">Find Us</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></button>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html" onclick="closeMenu()">Home</a>
+  <a href="menu.html" onclick="closeMenu()">Menu</a>
+  <a href="index.html#party" onclick="closeMenu()">Party Trays</a>
+  <a href="careers.html" onclick="closeMenu()">Careers</a>
+  <a href="index.html#location" onclick="closeMenu()">Find Us</a>
+</div>
+
+<div class="page-hero">
+  <div class="page-hero-inner">
+    <span class="hero-label">Get in Touch</span>
+    <h1>Contact Us</h1>
+    <p>Questions about our menu, want to order party trays, or just want to say hi? We'd love to hear from you!</p>
+  </div>
+</div>
+
+<div class="tab-bar">
+  <button class="tab-btn active" onclick="switchTab('inquiry',this)">📩 General Inquiry</button>
+  <button class="tab-btn" onclick="switchTab('partyorder',this)">📦 Order Party Trays</button>
+</div>
+
+<div class="contact-body">
+  <div>
+    <!-- GENERAL INQUIRY -->
+    <div class="form-panel active" id="panel-inquiry">
+      <h2 class="form-title">Send Us a <em>Message</em></h2>
+      <p class="form-desc">Questions about our menu, hours, or anything else? We'll reply via phone or Facebook Messenger as soon as we can.</p>
+      <form onsubmit="submitForm(event,'inquiry')">
+        <div class="form-row">
+          <div class="form-group"><label>Full Name <span class="req">*</span></label><input type="text" placeholder="Your full name" required></div>
+          <div class="form-group"><label>Phone <span class="req">*</span></label><input type="tel" placeholder="09XX XXX XXXX" required></div>
+        </div>
+        <div class="form-group"><label>Email Address</label><input type="email" placeholder="your@email.com"></div>
+        <div class="form-group">
+          <label>Subject <span class="req">*</span></label>
+          <select required>
+            <option value="" disabled selected>Select a topic…</option>
+            <option>Menu Inquiry</option>
+            <option>Operating Hours</option>
+            <option>Party Tray Order</option>
+            <option>Feedback / Suggestion</option>
+            <option>Partnership / Collaboration</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="form-group"><label>Message <span class="req">*</span></label><textarea placeholder="How can we help you?" required></textarea></div>
+        <button type="submit" class="submit-btn">Send Message</button>
+      </form>
+      <div class="success-msg" id="success-inquiry">
+        <div class="success-msg-icon">✅</div>
+        <h3>Message Sent!</h3>
+        <p>Thank you for reaching out! We'll get back to you shortly via phone or Facebook Messenger.</p>
+      </div>
+    </div>
+
+    <!-- PARTY ORDER -->
+    <div class="form-panel" id="panel-partyorder">
+      <h2 class="form-title">Order <em>Party Trays</em></h2>
+      <p class="form-desc">Planning a birthday, despedida, or reunion? Fill out this form and we'll contact you to confirm your order, pickup time, and payment.</p>
+      <form onsubmit="submitForm(event,'partyorder')">
+        <div class="form-row">
+          <div class="form-group"><label>Full Name <span class="req">*</span></label><input type="text" placeholder="Your full name" required></div>
+          <div class="form-group"><label>Phone <span class="req">*</span></label><input type="tel" placeholder="09XX XXX XXXX" required></div>
+        </div>
+        <div class="form-group"><label>Event Date <span class="req">*</span></label><input type="date" required min=""></div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Pickup Time <span class="req">*</span></label>
+            <select required>
+              <option value="" disabled selected>Select time…</option>
+              <option>5:30 AM – 7:00 AM (Breakfast)</option>
+              <option>10:00 AM – 12:00 PM (Lunch)</option>
+              <option>1:00 PM – 3:00 PM (Afternoon)</option>
+            </select>
+          </div>
+          <div class="form-group"><label>Approx. No. of Guests</label><input type="number" placeholder="e.g. 20" min="1"></div>
+        </div>
+
+        <div class="form-group">
+          <label>Select Tray Items <span class="req">*</span></label>
+          <p style="font-size:0.8rem;color:#888;margin-bottom:0.7rem">Check all that apply — we'll discuss sizes and quantities when we contact you.</p>
+          <div class="tray-picker">
+            <div class="tray-option" onclick="toggleTray(this)"><input type="checkbox" id="t1"><label for="t1">🥩 Beef Patty Steak</label></div>
+            <div class="tray-option" onclick="toggleTray(this)"><input type="checkbox" id="t2"><label for="t2">🥩 Classic Beef Steak</label></div>
+            <div class="tray-option" onclick="toggleTray(this)"><input type="checkbox" id="t3"><label for="t3">🍗 Fried Chicken</label></div>
+            <div class="tray-option" onclick="toggleTray(this)"><input type="checkbox" id="t4"><label for="t4">🍝 Spaghetti Meatballs</label></div>
+            <div class="tray-option" onclick="toggleTray(this)"><input type="checkbox" id="t5"><label for="t5">🦐 Buttered Prawns</label></div>
+            <div class="tray-option" onclick="toggleTray(this)"><input type="checkbox" id="t6"><label for="t6">🍛 Baked Lasagna</label></div>
+            <div class="tray-option" onclick="toggleTray(this)"><input type="checkbox" id="t7"><label for="t7">🍗 Sweet & Sour Chicken</label></div>
+            <div class="tray-option" onclick="toggleTray(this)"><input type="checkbox" id="t8"><label for="t8">🍔 Burger Party Pack</label></div>
+          </div>
+        </div>
+
+        <div class="form-group"><label>Special Requests / Notes</label><textarea placeholder="Allergies, additional items, custom quantities, payment preferences, etc." style="min-height:90px"></textarea></div>
+        <button type="submit" class="submit-btn">Submit Party Order</button>
+      </form>
+      <div class="success-msg" id="success-partyorder">
+        <div class="success-msg-icon">🎉</div>
+        <h3>Order Request Submitted!</h3>
+        <p>We received your party tray request! We'll contact you within 24 hours to confirm your order, discuss sizes, and arrange payment. See you soon!</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SIDEBAR -->
+  <aside class="contact-sidebar">
+    <div class="sidebar-card">
+      <h3>📍 Visit & Contact</h3>
+      <div class="info-row"><div class="info-icon">📍</div><div class="info-text"><h4>Address</h4><p>234 Talon-Talon Road,<br>Zamboanga City, 7000</p></div></div>
+      <div class="info-row"><div class="info-icon">📞</div><div class="info-text"><h4>Phone</h4><p><a href="tel:09171063504">0917-106-3504</a></p></div></div>
+      <div class="info-row"><div class="info-icon">✉️</div><div class="info-text"><h4>Email</h4><p><a href="mailto:charitosfoodandbeverages@gmail.com">charitosfoodandbeverages@gmail.com</a></p></div></div>
+    </div>
+
+    <div class="sidebar-card">
+      <h3>⏰ Business Hours</h3>
+      <div class="hours-list" id="hoursList">
+        <div class="hours-row" data-day="Monday"><span>Monday</span><span>5:30 AM – 4:00 PM</span></div>
+        <div class="hours-row" data-day="Tuesday"><span>Tuesday</span><span>5:30 AM – 4:00 PM</span></div>
+        <div class="hours-row" data-day="Wednesday"><span>Wednesday</span><span>5:30 AM – 4:00 PM</span></div>
+        <div class="hours-row" data-day="Thursday"><span>Thursday</span><span>5:30 AM – 4:00 PM</span></div>
+        <div class="hours-row" data-day="Friday"><span>Friday</span><span>5:30 AM – 4:00 PM</span></div>
+        <div class="hours-row" data-day="Saturday"><span>Saturday</span><span>5:30 AM – 4:00 PM</span></div>
+        <div class="hours-row" data-day="Sunday"><span>Sunday</span><span>5:30 AM onwards</span></div>
+      </div>
+    </div>
+
+    <div class="sidebar-card">
+      <h3>🔗 Follow & Message</h3>
+      <a href="https://www.facebook.com/charitosfoodandbeverages" target="_blank" rel="noopener" class="social-link-row"><span>f</span><div><div style="font-size:0.68rem;opacity:0.7;text-transform:uppercase;letter-spacing:0.06em">Facebook</div>Charito's Food & Beverage</div></a>
+      <a href="https://instagram.com/ktandt.co" target="_blank" rel="noopener" class="social-link-row"><span>📸</span><div><div style="font-size:0.68rem;opacity:0.7;text-transform:uppercase;letter-spacing:0.06em">Instagram</div>@ktandt.co</div></a>
+    </div>
+
+    <div class="fb-card">
+      <h3>💬 Fastest Response</h3>
+      <p>For urgent orders or quick questions, message us directly on Facebook. Most messages are answered within a few hours!</p>
+      <a href="https://www.facebook.com/charitosfoodandbeverages" target="_blank" rel="noopener" class="fb-link-btn">Open Facebook Messenger →</a>
+    </div>
+  </aside>
+</div>
+
+<footer>
+  <div class="footer-brand-row">
+    <span class="footer-brand-name">Charito's</span>
+    <div class="footer-socials">
+      <a href="https://www.facebook.com/charitosfoodandbeverages" class="social-btn" target="_blank" rel="noopener">f</a>
+      <a href="https://instagram.com/ktandt.co" class="social-btn" target="_blank" rel="noopener">ig</a>
+    </div>
+  </div>
+  <div style="height:1px;background:rgba(255,255,255,0.12);margin-bottom:18px"></div>
+  <div class="footer-bottom">
+    <p>© 2025 Charito's Food and Beverage · 234 Talon-Talon Rd, Zamboanga City · 0917-106-3504</p>
+    <div class="footer-links">
+      <a href="index.html">Home</a><a href="menu.html">Menu</a><a href="careers.html">Careers</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+function toggleMenu(){document.getElementById('hamburger').classList.toggle('open');document.getElementById('mobileMenu').classList.toggle('open');}
+function closeMenu(){document.getElementById('hamburger').classList.remove('open');document.getElementById('mobileMenu').classList.remove('open');}
+
+function switchTab(id,btn){
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.form-panel').forEach(p=>p.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('panel-'+id).classList.add('active');
+}
+
+function submitForm(e,type){
+  e.preventDefault();
+  document.getElementById('success-'+type).classList.add('show');
+  e.target.style.display='none';
+}
+
+function toggleTray(div){
+  const cb=div.querySelector('input[type="checkbox"]');
+  cb.checked=!cb.checked;
+  div.classList.toggle('selected',cb.checked);
+}
+
+// Set today highlight
+const days=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+const today=days[new Date().getDay()];
+document.querySelectorAll('.hours-row').forEach(row=>{
+  if(row.dataset.day===today)row.classList.add('today');
+});
+
+// Set min date for event
+const dateInput=document.querySelector('input[type="date"]');
+if(dateInput){const d=new Date();d.setDate(d.getDate()+1);dateInput.min=d.toISOString().split('T')[0];}
+
+// Tab from URL param
+const tab=new URLSearchParams(window.location.search).get('tab');
+if(tab==='party'){
+  document.querySelectorAll('.tab-btn')[1].click();
+}
+</script>
+</body>
+</html>
