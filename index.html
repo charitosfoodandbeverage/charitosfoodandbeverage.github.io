@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Charito's Food & Beverage — Est. 2020</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Nunito:wght@300;400;600;700;800&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --red:#C8272D;--red-dark:#9B1B1F;--red-light:#E84B50;
+  --cream:#FFF8F0;--white:#FFFFFF;--warm-gray:#F5EDE4;
+  --text-dark:#1A0A0A;--gold:#D4A843;--border:#E8DDD5;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'Nunito',sans-serif;background:var(--cream);color:var(--text-dark);overflow-x:hidden;}
+img{max-width:100%;}
+
+/* NAV */
+nav{position:fixed;top:0;width:100%;z-index:200;background:rgba(200,39,45,0.97);backdrop-filter:blur(12px);display:flex;align-items:center;justify-content:space-between;padding:0 5%;height:68px;box-shadow:0 2px 20px rgba(155,27,31,0.4);}
+.nav-logo{font-family:'Dancing Script',cursive;font-size:1.9rem;color:#fff;text-decoration:none;}
+.nav-links{display:flex;gap:1.8rem;list-style:none;align-items:center;}
+.nav-links a{color:rgba(255,255,255,0.88);text-decoration:none;font-size:0.82rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;transition:color 0.2s;position:relative;}
+.nav-links a::after{content:'';position:absolute;bottom:-3px;left:0;width:0;height:2px;background:var(--gold);transition:width 0.3s;}
+.nav-links a:hover{color:#fff;}
+.nav-links a:hover::after{width:100%;}
+.nav-cta{background:#fff !important;color:var(--red) !important;padding:0.45rem 1.1rem;border-radius:50px;font-weight:800 !important;}
+.nav-cta::after{display:none !important;}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:8px;background:none;border:none;}
+.hamburger span{display:block;width:24px;height:2px;background:#fff;border-radius:2px;transition:all 0.3s;}
+.hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+.hamburger.open span:nth-child(2){opacity:0;}
+.hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+.mobile-menu{display:none;position:fixed;top:68px;left:0;right:0;z-index:190;background:var(--red-dark);padding:1rem 0;box-shadow:0 8px 30px rgba(0,0,0,0.3);transform:translateY(-10px);opacity:0;transition:all 0.3s;pointer-events:none;}
+.mobile-menu.open{display:block;transform:translateY(0);opacity:1;pointer-events:all;}
+.mobile-menu a{display:block;padding:0.9rem 5%;color:rgba(255,255,255,0.9);text-decoration:none;font-size:0.95rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;border-bottom:1px solid rgba(255,255,255,0.08);transition:background 0.2s;}
+.mobile-menu a:hover{background:rgba(255,255,255,0.1);}
+.mobile-menu a:last-child{border-bottom:none;color:#fff;background:rgba(255,255,255,0.15);margin:0.5rem 5%;border-radius:10px;text-align:center;}
+
+/* HERO */
+.hero{min-height:100svh;background:linear-gradient(135deg,var(--red-dark) 0%,var(--red) 55%,#E85C60 100%);position:relative;display:flex;align-items:center;overflow:hidden;padding:100px 5% 80px;}
+.hero-bg-pattern{position:absolute;inset:0;background-image:radial-gradient(circle at 20% 80%,rgba(255,255,255,0.05) 0%,transparent 50%),radial-gradient(circle at 80% 20%,rgba(255,255,255,0.07) 0%,transparent 50%);}
+.hero-dots{position:absolute;inset:0;pointer-events:none;background-image:radial-gradient(circle,rgba(255,255,255,0.08) 1px,transparent 1px);background-size:40px 40px;}
+.hero-content{position:relative;z-index:2;max-width:580px;}
+.hero-badge{display:inline-flex;align-items:center;gap:0.5rem;background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.3);padding:0.4rem 1rem;border-radius:50px;color:rgba(255,255,255,0.9);font-size:0.75rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;margin-bottom:1.5rem;animation:fadeUp 0.6s ease both;}
+.hero-badge-dot{width:6px;height:6px;background:var(--gold);border-radius:50%;}
+.hero h1{font-family:'Dancing Script',cursive;font-size:clamp(3rem,9vw,6rem);color:#fff;line-height:1.05;margin-bottom:0.5rem;animation:fadeUp 0.7s 0.1s ease both;}
+.hero-tagline{font-family:'Playfair Display',serif;font-size:clamp(0.95rem,2.5vw,1.2rem);color:rgba(255,255,255,0.78);font-style:italic;margin-bottom:1.2rem;animation:fadeUp 0.7s 0.2s ease both;}
+.hero-desc{color:rgba(255,255,255,0.82);font-size:clamp(0.9rem,2vw,1rem);line-height:1.75;max-width:420px;margin-bottom:2.2rem;animation:fadeUp 0.7s 0.3s ease both;}
+.hero-btns{display:flex;gap:1rem;flex-wrap:wrap;animation:fadeUp 0.7s 0.4s ease both;}
+.btn-primary{background:#fff;color:var(--red);padding:0.85rem 1.8rem;border-radius:50px;font-weight:800;font-size:0.88rem;text-decoration:none;letter-spacing:0.05em;text-transform:uppercase;transition:transform 0.2s,box-shadow 0.2s;box-shadow:0 4px 20px rgba(0,0,0,0.2);}
+.btn-primary:hover{transform:translateY(-3px);box-shadow:0 8px 30px rgba(0,0,0,0.3);}
+.btn-outline{border:2px solid rgba(255,255,255,0.6);color:#fff;padding:0.85rem 1.8rem;border-radius:50px;font-weight:700;font-size:0.88rem;text-decoration:none;letter-spacing:0.05em;text-transform:uppercase;transition:all 0.2s;}
+.btn-outline:hover{background:rgba(255,255,255,0.15);border-color:#fff;}
+.hero-visual{position:absolute;right:0;top:0;bottom:0;width:48%;max-width:680px;display:flex;align-items:center;justify-content:center;overflow:hidden;}
+.hero-food-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:20px;transform:rotate(-3deg);animation:floatIn 0.8s 0.5s ease both;}
+.hero-food-card{background:rgba(255,255,255,0.13);border:1px solid rgba(255,255,255,0.22);border-radius:16px;overflow:hidden;aspect-ratio:1;display:flex;align-items:center;justify-content:center;font-size:3.5rem;}
+.hero-food-card:nth-child(1){transform:translateY(-10px);}
+.hero-food-card:nth-child(3){transform:translateY(10px);}
+.hero-stats{position:absolute;bottom:40px;left:5%;display:flex;gap:2.5rem;animation:fadeUp 0.7s 0.6s ease both;}
+.hero-stat{text-align:center;}
+.hero-stat-num{display:block;font-family:'Playfair Display',serif;font-size:2rem;font-weight:900;color:#fff;line-height:1;}
+.hero-stat-label{font-size:0.7rem;font-weight:700;color:rgba(255,255,255,0.6);text-transform:uppercase;letter-spacing:0.1em;}
+
+/* ABOUT */
+.about{padding:90px 5%;background:#fff;display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:center;}
+.section-label{display:inline-block;font-size:0.72rem;font-weight:800;letter-spacing:0.2em;text-transform:uppercase;color:var(--red);margin-bottom:0.8rem;}
+.about-text h2{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,3.5vw,2.8rem);line-height:1.15;margin-bottom:1.4rem;}
+.about-text h2 em{font-style:italic;color:var(--red);}
+.about-text p{font-size:0.95rem;line-height:1.8;color:#555;margin-bottom:0.9rem;}
+.about-features{display:flex;gap:1rem;margin-top:1.8rem;flex-wrap:wrap;}
+.about-feature{display:flex;align-items:center;gap:0.55rem;font-size:0.85rem;font-weight:700;}
+.about-feature-icon{width:34px;height:34px;border-radius:50%;background:#FFF0F0;color:var(--red);display:flex;align-items:center;justify-content:center;font-size:0.95rem;flex-shrink:0;}
+.about-visual{position:relative;}
+.about-img-wrap{border-radius:24px;overflow:hidden;aspect-ratio:4/5;background:linear-gradient(135deg,var(--red),var(--red-dark));display:flex;align-items:center;justify-content:center;}
+.about-img-placeholder{text-align:center;color:rgba(255,255,255,0.7);font-family:'Dancing Script',cursive;font-size:2.5rem;padding:2rem;}
+.about-badge{position:absolute;bottom:-20px;right:-16px;width:110px;height:110px;background:var(--red);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-direction:column;color:#fff;text-align:center;box-shadow:0 8px 30px rgba(200,39,45,0.4);border:4px solid #fff;}
+.about-badge-num{font-family:'Playfair Display',serif;font-size:1.9rem;font-weight:900;line-height:1;}
+.about-badge-text{font-size:0.58rem;font-weight:800;text-transform:uppercase;letter-spacing:0.08em;}
+
+/* MENU PREVIEW */
+.menu-preview{padding:90px 5%;background:var(--cream);}
+.section-header{text-align:center;margin-bottom:55px;}
+.section-header h2{font-family:'Playfair Display',serif;font-size:clamp(1.9rem,4vw,3rem);line-height:1.15;}
+.section-header h2 em{font-style:italic;color:var(--red);}
+.section-header p{color:#777;margin-top:0.7rem;font-size:0.95rem;max-width:440px;margin-inline:auto;}
+
+/* Featured Dish */
+.featured-dish{max-width:1100px;margin:0 auto 55px;background:#fff;border-radius:28px;overflow:hidden;box-shadow:0 8px 40px rgba(200,39,45,0.12);display:grid;grid-template-columns:1fr 1fr;align-items:center;}
+.featured-img-wrap{position:relative;background:linear-gradient(135deg,#f9d3d4,#f07070);min-height:320px;display:flex;align-items:center;justify-content:center;overflow:hidden;}
+.featured-img-wrap img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0;}
+.featured-fallback{font-size:7rem;position:relative;z-index:1;}
+.featured-body{padding:2.5rem 2.8rem;}
+.featured-tag{display:inline-block;background:#FFF0F0;color:var(--red);font-size:0.7rem;font-weight:800;letter-spacing:0.15em;text-transform:uppercase;padding:0.3rem 0.9rem;border-radius:50px;margin-bottom:1rem;}
+.featured-body h3{font-family:'Playfair Display',serif;font-size:clamp(1.6rem,3vw,2.2rem);line-height:1.2;margin-bottom:0.7rem;}
+.featured-body h3 em{font-style:italic;color:var(--red);}
+.featured-body p{font-size:0.95rem;color:#666;line-height:1.75;margin-bottom:1.4rem;}
+.featured-meta{display:flex;align-items:center;gap:1.2rem;margin-bottom:1.6rem;flex-wrap:wrap;}
+.featured-price{font-family:'Playfair Display',serif;font-size:2rem;font-weight:900;color:var(--red);}
+.featured-note{font-size:0.82rem;color:#999;}
+.featured-stars{color:var(--gold);font-size:0.9rem;}
+
+/* Menu grid */
+.menu-categories{display:flex;gap:0.8rem;justify-content:center;flex-wrap:wrap;margin-bottom:44px;}
+.menu-cat-btn{padding:0.55rem 1.3rem;border-radius:50px;border:2px solid var(--red);background:transparent;color:var(--red);font-weight:700;font-size:0.82rem;cursor:pointer;transition:all 0.2s;font-family:'Nunito',sans-serif;letter-spacing:0.05em;}
+.menu-cat-btn.active,.menu-cat-btn:hover{background:var(--red);color:#fff;}
+.menu-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:22px;max-width:1200px;margin:0 auto;}
+.menu-card{background:#fff;border-radius:20px;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,0.06);transition:transform 0.3s,box-shadow 0.3s;display:flex;flex-direction:column;}
+.menu-card:hover{transform:translateY(-6px);box-shadow:0 12px 40px rgba(200,39,45,0.15);}
+.menu-card-img{height:175px;overflow:hidden;position:relative;display:flex;align-items:center;justify-content:center;font-size:3.5rem;}
+.menu-card-img img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0;}
+.menu-card-badge{position:absolute;top:10px;left:10px;background:var(--red);color:#fff;font-size:0.62rem;font-weight:800;padding:0.18rem 0.55rem;border-radius:50px;text-transform:uppercase;letter-spacing:0.1em;z-index:2;}
+.menu-card-body{padding:1.1rem 1.2rem;flex:1;display:flex;flex-direction:column;}
+.menu-card-body h3{font-family:'Playfair Display',serif;font-size:1rem;margin-bottom:0.3rem;}
+.menu-card-body p{font-size:0.78rem;color:#888;line-height:1.5;flex:1;margin-bottom:0.7rem;}
+.menu-card-footer{display:flex;align-items:center;justify-content:space-between;}
+.menu-card-price{font-weight:900;font-size:1.05rem;color:var(--red);}
+.menu-card-rating{font-size:0.75rem;color:#999;}
+.menu-card-rating .star{color:var(--gold);}
+.menu-view-all{text-align:center;margin-top:44px;}
+.btn-red{background:var(--red);color:#fff;padding:0.9rem 2.3rem;border-radius:50px;font-weight:800;font-size:0.88rem;text-decoration:none;letter-spacing:0.05em;text-transform:uppercase;display:inline-block;transition:all 0.2s;box-shadow:0 4px 20px rgba(200,39,45,0.35);}
+.btn-red:hover{background:var(--red-dark);transform:translateY(-2px);box-shadow:0 8px 30px rgba(200,39,45,0.45);}
+
+/* PARTY TRAYS */
+.party-trays{padding:90px 5%;background:linear-gradient(135deg,var(--red-dark),var(--red));position:relative;overflow:hidden;}
+.party-trays::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,0.06) 1px,transparent 1px);background-size:35px 35px;}
+.party-trays .section-header h2{color:#fff;}
+.party-trays .section-label{color:var(--gold);}
+.party-trays .section-header p{color:rgba(255,255,255,0.72);}
+.trays-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:18px;max-width:1100px;margin:0 auto 44px;position:relative;z-index:1;}
+.tray-card{background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.22);border-radius:18px;padding:1.4rem;backdrop-filter:blur(10px);transition:all 0.3s;}
+.tray-card:hover{background:rgba(255,255,255,0.18);transform:translateY(-4px);}
+.tray-card h3{color:#fff;font-family:'Playfair Display',serif;font-size:1.1rem;margin-bottom:0.9rem;}
+.tray-sizes{display:flex;gap:0.9rem;flex-wrap:wrap;}
+.tray-size{background:rgba(255,255,255,0.15);border-radius:10px;padding:0.55rem 0.9rem;color:#fff;text-align:center;flex:1;min-width:85px;}
+.tray-size-label{font-size:0.68rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;opacity:0.75;}
+.tray-size-price{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:700;color:var(--gold);}
+.party-cta{text-align:center;position:relative;z-index:1;}
+.btn-white{background:#fff;color:var(--red);padding:0.9rem 2.3rem;border-radius:50px;font-weight:800;font-size:0.88rem;text-decoration:none;letter-spacing:0.05em;text-transform:uppercase;display:inline-block;transition:all 0.2s;box-shadow:0 4px 20px rgba(0,0,0,0.2);}
+.btn-white:hover{transform:translateY(-3px);box-shadow:0 8px 30px rgba(0,0,0,0.3);}
+
+/* CAREERS BANNER */
+.careers-banner{padding:90px 5%;background:#fff;}
+.careers-banner-inner{max-width:1000px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;}
+.careers-banner-text h2{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,3vw,2.5rem);line-height:1.2;margin-bottom:1rem;}
+.careers-banner-text h2 em{font-style:italic;color:var(--red);}
+.careers-banner-text p{color:#666;line-height:1.8;margin-bottom:1.8rem;font-size:0.95rem;}
+.careers-perks{display:flex;flex-direction:column;gap:0.9rem;}
+.perk-item{display:flex;align-items:flex-start;gap:0.9rem;padding:0.9rem;border-radius:12px;background:var(--warm-gray);}
+.perk-icon{width:40px;height:40px;border-radius:10px;background:var(--red);color:#fff;display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0;}
+.perk-text h4{font-size:0.88rem;font-weight:800;margin-bottom:0.2rem;}
+.perk-text p{font-size:0.78rem;color:#777;line-height:1.5;}
+
+/* TESTIMONIALS */
+.testimonials{padding:90px 5%;background:var(--warm-gray);}
+.reviews-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:22px;max-width:1000px;margin:0 auto;}
+.review-card{background:#fff;border-radius:20px;padding:1.7rem;box-shadow:0 4px 20px rgba(0,0,0,0.06);position:relative;}
+.review-card::before{content:'"';font-family:'Playfair Display',serif;font-size:5rem;color:var(--red);opacity:0.13;position:absolute;top:-8px;left:18px;line-height:1;}
+.review-stars{color:var(--gold);font-size:0.95rem;margin-bottom:0.7rem;letter-spacing:0.08em;}
+.review-text{font-size:0.92rem;line-height:1.7;color:#555;margin-bottom:1.1rem;}
+.review-author{display:flex;align-items:center;gap:0.75rem;}
+.review-avatar{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,var(--red),var(--red-light));display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:0.95rem;flex-shrink:0;}
+.review-author-info h4{font-size:0.85rem;font-weight:800;}
+.review-author-info p{font-size:0.72rem;color:#999;}
+
+/* LOCATION */
+.location-section{padding:90px 5%;background:#fff;display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:center;}
+.location-info h2{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,3vw,2.4rem);margin-bottom:1.8rem;line-height:1.2;}
+.info-item{display:flex;gap:0.9rem;margin-bottom:1.4rem;align-items:flex-start;}
+.info-icon{width:42px;height:42px;border-radius:12px;background:#FFF0F0;color:var(--red);display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0;}
+.info-text h4{font-size:0.8rem;font-weight:800;text-transform:uppercase;letter-spacing:0.1em;color:var(--red);margin-bottom:0.2rem;}
+.info-text p{font-size:0.92rem;color:#555;line-height:1.6;}
+.info-text a{color:var(--red);text-decoration:none;font-weight:700;}
+.map-embed{border-radius:22px;overflow:hidden;height:360px;box-shadow:0 8px 40px rgba(0,0,0,0.1);}
+.map-embed iframe{width:100%;height:100%;border:0;}
+
+/* FOOTER */
+footer{background:var(--red-dark);padding:55px 5% 28px;}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:50px;margin-bottom:36px;}
+.footer-brand .brand-name{font-family:'Dancing Script',cursive;font-size:2.3rem;color:#fff;display:block;margin-bottom:0.4rem;}
+.footer-brand p{font-size:0.85rem;line-height:1.7;max-width:280px;color:rgba(255,255,255,0.65);}
+.footer-socials{display:flex;gap:0.7rem;margin-top:1.4rem;}
+.social-btn{width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.22);display:flex;align-items:center;justify-content:center;color:#fff;text-decoration:none;font-size:0.82rem;font-weight:800;transition:all 0.2s;}
+.social-btn:hover{background:rgba(255,255,255,0.28);}
+.footer-col h4{color:#fff;font-size:0.8rem;font-weight:800;letter-spacing:0.12em;text-transform:uppercase;margin-bottom:1.1rem;}
+.footer-col ul{list-style:none;}
+.footer-col ul li{margin-bottom:0.65rem;}
+.footer-col ul li a{color:rgba(255,255,255,0.6);text-decoration:none;font-size:0.88rem;transition:color 0.2s;}
+.footer-col ul li a:hover{color:#fff;}
+.footer-bottom{border-top:1px solid rgba(255,255,255,0.15);padding-top:22px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:0.8rem;}
+.footer-bottom p{font-size:0.78rem;color:rgba(255,255,255,0.5);}
+
+/* ANIMATIONS */
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+@keyframes floatIn{from{opacity:0;transform:rotate(-3deg) translateX(30px);}to{opacity:1;transform:rotate(-3deg) translateX(0);}}
+
+/* RESPONSIVE */
+@media(max-width:1024px){.hero-visual{width:44%;}}
+@media(max-width:860px){
+  nav{padding:0 4%;}
+  .nav-links{display:none;}
+  .hamburger{display:flex;}
+  .hero-visual{display:none;}
+  .hero{min-height:100svh;padding:90px 4% 80px;}
+  .hero h1{font-size:clamp(2.8rem,10vw,4rem);}
+  .hero-stats{gap:1.8rem;bottom:30px;}
+  .hero-stat-num{font-size:1.6rem;}
+  .about,.location-section{grid-template-columns:1fr;gap:40px;padding:70px 4%;}
+  .about-badge{bottom:-14px;right:14px;}
+  .careers-banner-inner{grid-template-columns:1fr;gap:36px;}
+  .featured-dish{grid-template-columns:1fr;}
+  .featured-img-wrap{min-height:240px;}
+  .footer-grid{grid-template-columns:1fr 1fr;gap:36px;}
+  .menu-preview,.party-trays,.testimonials,.careers-banner{padding:70px 4%;}
+}
+@media(max-width:600px){
+  .hero{padding:86px 4% 70px;}
+  .hero h1{font-size:clamp(2.5rem,11vw,3.5rem);}
+  .hero-stats{gap:1.4rem;}
+  .hero-stat-num{font-size:1.4rem;}
+  .hero-stat-label{font-size:0.62rem;}
+  .hero-badge{font-size:0.7rem;padding:0.35rem 0.85rem;}
+  .hero-btns{flex-direction:column;align-items:flex-start;}
+  .btn-primary,.btn-outline{width:100%;text-align:center;padding:1rem 1.5rem;}
+  .menu-grid{grid-template-columns:1fr 1fr;gap:14px;}
+  .menu-card-img{height:130px;font-size:2.8rem;}
+  .featured-body{padding:1.6rem 1.4rem;}
+  .featured-body h3{font-size:1.5rem;}
+  .trays-grid{grid-template-columns:1fr;}
+  .reviews-grid{grid-template-columns:1fr;}
+  .footer-grid{grid-template-columns:1fr;gap:28px;}
+  .footer-bottom{flex-direction:column;text-align:center;}
+  .about-features{gap:0.7rem;}
+}
+@media(max-width:400px){.menu-grid{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo">Charito's</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#menu">Menu</a></li>
+    <li><a href="#party">Party Trays</a></li>
+    <li><a href="careers.html">Careers</a></li>
+    <li><a href="#location">Find Us</a></li>
+    <li><a href="contact.html" class="nav-cta">Contact</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Open menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#about" onclick="closeMenu()">About</a>
+  <a href="menu.html" onclick="closeMenu()">Menu</a>
+  <a href="#party" onclick="closeMenu()">Party Trays</a>
+  <a href="careers.html" onclick="closeMenu()">Careers</a>
+  <a href="#location" onclick="closeMenu()">Find Us</a>
+  <a href="contact.html" onclick="closeMenu()">Contact Us</a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg-pattern"></div>
+  <div class="hero-dots"></div>
+  <div class="hero-content">
+    <div class="hero-badge"><div class="hero-badge-dot"></div> Est. 2020 &middot; Zamboanga City</div>
+    <h1>Charito's<br>Food &amp; Bev.</h1>
+    <p class="hero-tagline">Burgers &middot; Murtabak &middot; Roti &middot; Shawarma</p>
+    <p class="hero-desc">Authentic flavors crafted with love. From crispy murtabak to juicy cheeseburgers &mdash; every bite feels like home.</p>
+    <div class="hero-btns">
+      <a href="menu.html" class="btn-primary">View Full Menu</a>
+      <a href="#party" class="btn-outline">Party Trays</a>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="hero-food-grid">
+      <div class="hero-food-card">&#x1F959;</div>
+      <div class="hero-food-card">&#x1F354;</div>
+      <div class="hero-food-card">&#x1FAD3;</div>
+      <div class="hero-food-card">&#x1F32F;</div>
+    </div>
+  </div>
+  <div class="hero-stats">
+    <div class="hero-stat"><span class="hero-stat-num">4.8&#x2605;</span><span class="hero-stat-label">Google Rating</span></div>
+    <div class="hero-stat"><span class="hero-stat-num">832</span><span class="hero-stat-label">FB Followers</span></div>
+    <div class="hero-stat"><span class="hero-stat-num">5yr</span><span class="hero-stat-label">Serving ZC</span></div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="about-text">
+    <span class="section-label">Our Story</span>
+    <h2>Where Every Meal Feels Like <em>Home</em></h2>
+    <p>Founded in 2020, Charito's Food &amp; Beverage was born from a passion for serving honest, flavorful food to the people of Zamboanga City. From our humble beginnings at 234 Talon-Talon Road, we've grown into a beloved local spot.</p>
+    <p>We specialize in Murtabak &mdash; flaky, crispy roti wraps filled with seasoned meats and melted cheese &mdash; alongside juicy 100% beef burgers, hearty silogs, and everything in between.</p>
+    <div class="about-features">
+      <div class="about-feature"><div class="about-feature-icon">&#x1F525;</div> Freshly Made</div>
+      <div class="about-feature"><div class="about-feature-icon">&#x1F969;</div> 100% Beef</div>
+      <div class="about-feature"><div class="about-feature-icon">&#x1F4E6;</div> Party Trays</div>
+      <div class="about-feature"><div class="about-feature-icon">&#x23F0;</div> Early Bird</div>
+    </div>
+  </div>
+  <div class="about-visual">
+    <div class="about-img-wrap">
+      <div class="about-img-placeholder">Charito's<br><span style="font-size:1rem;opacity:0.7">Authentic Filipino Kitchen</span></div>
+    </div>
+    <div class="about-badge">
+      <span class="about-badge-num">4.8</span>
+      <span class="about-badge-text">&#x2605; Google</span>
+    </div>
+  </div>
+</section>
+
+<!-- MENU PREVIEW -->
+<section class="menu-preview" id="menu">
+  <div class="section-header">
+    <span class="section-label">What We Serve</span>
+    <h2>Our <em>Signature</em> Dishes</h2>
+    <p>Handcrafted with the finest ingredients, served fresh every day.</p>
+  </div>
+
+  <!-- FEATURED DISH -->
+  <div class="featured-dish">
+    <div class="featured-img-wrap">
+      <img src="images/cheeseburger-deluxe.png" alt="Cheeseburger Deluxe Solo" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="featured-fallback" style="display:none">&#x1F354;</div>
+    </div>
+    <div class="featured-body">
+      <span class="featured-tag">&#x2B50; Featured Item</span>
+      <h3>Cheeseburger<br><em>Deluxe Solo</em></h3>
+      <p>A freshly baked bun stacked with a 100% beef patty, crisp lettuce, white onions, ripe tomatoes, and melted cheese &mdash; finished with our house mayo and ketchup. Served solo, no drinks, no fries. Just pure burger goodness.</p>
+      <div class="featured-meta">
+        <span class="featured-price">&#x20B1;85</span>
+        <span class="featured-note">Solo &middot; No drinks &middot; No fries</span>
+        <span class="featured-stars">&#x2605;&#x2605;&#x2605;&#x2605;&#x2605; <span style="color:#999;font-size:0.8rem">5.0</span></span>
+      </div>
+      <a href="menu.html" class="btn-red">Order Now</a>
+    </div>
+  </div>
+
+  <!-- MENU HIGHLIGHTS -->
+  <div class="menu-categories">
+    <button class="menu-cat-btn active">All</button>
+    <button class="menu-cat-btn">Murtabak &amp; Roti</button>
+    <button class="menu-cat-btn">Burgers</button>
+    <button class="menu-cat-btn">Party Trays</button>
+  </div>
+  <div class="menu-grid">
+
+    <div class="menu-card">
+      <div class="menu-card-img" style="background:linear-gradient(135deg,#f9d3d4,#f07070)">
+        <img src="images/murtabakbef.png" alt="Supercheese Beef Murtabak" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+        <span style="display:none">&#x1F959;</span>
+        <span class="menu-card-badge">Bestseller</span>
+      </div>
+      <div class="menu-card-body">
+        <h3>Supercheese Beef Murtabak</h3>
+        <p>Crispy roti wrap with cheesy, seasoned beef filling.</p>
+        <div class="menu-card-footer"><span class="menu-card-price">&#x20B1;85</span><span class="menu-card-rating"><span class="star">&#x2605;</span> 4.9</span></div>
+      </div>
+    </div>
+
+    <div class="menu-card">
+      <div class="menu-card-img" style="background:linear-gradient(135deg,#fde8cc,#f5a050)">
+        <img src="images/tunamelt.png" alt="Tunamelt Murtabak" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+        <span style="display:none">&#x1FAD3;</span>
+      </div>
+      <div class="menu-card-body">
+        <h3>Tunamelt Murtabak</h3>
+        <p>Creamy tuna and melted cheese in golden roti.</p>
+        <div class="menu-card-footer"><span class="menu-card-price">&#x20B1;75</span><span class="menu-card-rating"><span class="star">&#x2605;</span> 4.8</span></div>
+      </div>
+    </div>
+
+    <div class="menu-card">
+      <div class="menu-card-img" style="background:linear-gradient(135deg,#e8d5f5,#b07dd8)">
+        <img src="images/shawarma.png" alt="Shawarma Paratha" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+        <span style="display:none">&#x1F32F;</span>
+      </div>
+      <div class="menu-card-body">
+        <h3>Shawarma Paratha</h3>
+        <p>Beef, onion, tomatoes, cabbage, zucchini, cheese &amp; garlic sauce.</p>
+        <div class="menu-card-footer"><span class="menu-card-price">&#x20B1;95</span><span class="menu-card-rating"><span class="star">&#x2605;</span> 4.9</span></div>
+      </div>
+    </div>
+
+    <div class="menu-card">
+      <div class="menu-card-img" style="background:linear-gradient(135deg,#fef0d0,#f5c842)">
+        <img src="images/roticheese.png" alt="Roti Cheese" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+        <span style="display:none">&#x1F950;</span>
+      </div>
+      <div class="menu-card-body">
+        <h3>Roti Cheese</h3>
+        <p>Soft, flaky roti filled with gooey melted cheese.</p>
+        <div class="menu-card-footer"><span class="menu-card-price">&#x20B1;65</span><span class="menu-card-rating"><span class="star">&#x2605;</span> 4.9</span></div>
+      </div>
+    </div>
+
+    <div class="menu-card">
+      <div class="menu-card-img" style="background:linear-gradient(135deg,#d5eaf9,#6aa9d8)">
+        <img src="images/ultimate-cheeseburger.png" alt="Ultimate Cheeseburger Deluxe" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+        <span style="display:none">&#x1F354;</span>
+        <span class="menu-card-badge">New</span>
+      </div>
+      <div class="menu-card-body">
+        <h3>Ultimate Cheeseburger Deluxe</h3>
+        <p>Double patties, baked bun, lettuce, onions, tomatoes, cheese.</p>
+        <div class="menu-card-footer"><span class="menu-card-price">&#x20B1;100</span><span class="menu-card-rating"><span class="star">&#x2605;</span> 5.0</span></div>
+      </div>
+    </div>
+
+    <div class="menu-card">
+      <div class="menu-card-img" style="background:linear-gradient(135deg,#d4ede0,#6dbf95)">
+        <img src="images/roti-curry.png" alt="Roti with Curry Sauce" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+        <span style="display:none">&#x1FAD3;</span>
+      </div>
+      <div class="menu-card-body">
+        <h3>Roti with Curry Sauce</h3>
+        <p>Crispy, chewy paratha roti served with aromatic curry sauce.</p>
+        <div class="menu-card-footer"><span class="menu-card-price">&#x20B1;45</span><span class="menu-card-rating"><span class="star">&#x2605;</span> 4.9</span></div>
+      </div>
+    </div>
+
+  </div>
+  <div class="menu-view-all"><a href="menu.html" class="btn-red">See Full Menu &amp; Order</a></div>
+</section>
+
+<!-- PARTY TRAYS -->
+<section class="party-trays" id="party">
+  <div class="section-header">
+    <span class="section-label">For Your Celebrations</span>
+    <h2>To-Go <em>Party Trays</em></h2>
+    <p>Perfect for barkada hangouts, family gatherings &amp; events. Barkada and Family sizes available.</p>
+  </div>
+  <div class="trays-grid">
+    <div class="tray-card"><h3>&#x1F969; Beef Patty Steak</h3><div class="tray-sizes"><div class="tray-size"><div class="tray-size-label">Barkada</div><div class="tray-size-price">&#x20B1;790</div></div><div class="tray-size"><div class="tray-size-label">Family</div><div class="tray-size-price">&#x20B1;1,250</div></div></div></div>
+    <div class="tray-card"><h3>&#x1F969; Classic Beef Steak</h3><div class="tray-sizes"><div class="tray-size"><div class="tray-size-label">Barkada</div><div class="tray-size-price">&#x20B1;890</div></div><div class="tray-size"><div class="tray-size-label">Family</div><div class="tray-size-price">&#x20B1;1,450</div></div></div></div>
+    <div class="tray-card"><h3>&#x1F357; Fried Chicken</h3><div class="tray-sizes"><div class="tray-size"><div class="tray-size-label">Barkada</div><div class="tray-size-price">&#x20B1;650</div></div><div class="tray-size"><div class="tray-size-label">Family</div><div class="tray-size-price">&#x20B1;950</div></div></div></div>
+    <div class="tray-card"><h3>&#x1F35D; Spaghetti Beef Meatballs</h3><div class="tray-sizes"><div class="tray-size"><div class="tray-size-label">Barkada</div><div class="tray-size-price">&#x20B1;890</div></div><div class="tray-size"><div class="tray-size-label">Family</div><div class="tray-size-price">&#x20B1;1,450</div></div></div></div>
+    <div class="tray-card"><h3>&#x1F990; Buttered Prawns</h3><div class="tray-sizes"><div class="tray-size"><div class="tray-size-label">Barkada</div><div class="tray-size-price">&#x20B1;1,290</div></div><div class="tray-size"><div class="tray-size-label">Family</div><div class="tray-size-price">&#x20B1;1,890</div></div></div></div>
+    <div class="tray-card"><h3>&#x1F35B; Baked Lasagna</h3><div class="tray-sizes"><div class="tray-size"><div class="tray-size-label">Barkada</div><div class="tray-size-price">&#x20B1;1,150</div></div><div class="tray-size"><div class="tray-size-label">Family</div><div class="tray-size-price">&#x20B1;1,690</div></div></div></div>
+  </div>
+  <div class="party-cta"><a href="contact.html" class="btn-white">Order Party Trays</a></div>
+</section>
+
+<!-- CAREERS BANNER -->
+<section class="careers-banner" id="careers">
+  <div class="careers-banner-inner">
+    <div class="careers-banner-text">
+      <span class="section-label">Join Our Team</span>
+      <h2>Be Part of the Charito's <em>Family</em></h2>
+      <p>We're always looking for passionate, hardworking people who love food and great service. Grow with us as we continue to expand across Zamboanga City.</p>
+      <a href="careers.html" class="btn-red">See Open Positions &rarr;</a>
+    </div>
+    <div class="careers-perks">
+      <div class="perk-item">
+        <div class="perk-icon">&#x1F37D;&#xFE0F;</div>
+        <div class="perk-text"><h4>Free Meals on Shift</h4><p>Enjoy complimentary meals during every work shift.</p></div>
+      </div>
+      <div class="perk-item">
+        <div class="perk-icon">&#x1F4C8;</div>
+        <div class="perk-text"><h4>Growth Opportunities</h4><p>We promote from within. Build your career here.</p></div>
+      </div>
+      <div class="perk-item">
+        <div class="perk-icon">&#x1F91D;</div>
+        <div class="perk-text"><h4>Family-Like Culture</h4><p>A warm, supportive work environment that feels like home.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials">
+  <div class="section-header">
+    <span class="section-label">What People Say</span>
+    <h2>Real <em>Reviews</em></h2>
+  </div>
+  <div class="reviews-grid">
+    <div class="review-card">
+      <div class="review-stars">&#x2605;&#x2605;&#x2605;&#x2605;&#x2605;</div>
+      <p class="review-text">This food is delicious, my friends! The Beef Murtabak is something else &mdash; so crispy and flavorful. Will definitely come back!</p>
+      <div class="review-author"><div class="review-avatar">I</div><div class="review-author-info"><h4>Irene Ancheta</h4><p>via Google &middot; 4 years ago</p></div></div>
+    </div>
+    <div class="review-card">
+      <div class="review-stars">&#x2605;&#x2605;&#x2605;&#x2605;&#x2606;</div>
+      <p class="review-text">Affordable and filling! The Tunamelt Murtabak is my go-to. Great service, great atmosphere. Perfect for a quick lunch.</p>
+      <div class="review-author"><div class="review-avatar">C</div><div class="review-author-info"><h4>Chawie 11S26</h4><p>via Google &middot; 2 years ago</p></div></div>
+    </div>
+    <div class="review-card">
+      <div class="review-stars">&#x2605;&#x2605;&#x2605;&#x2605;&#x2605;</div>
+      <p class="review-text">Food: 5, Service: 5, Atmosphere: 5. Recommended dishes: Beef Murtabak, Tunamelt, Ultimate Cheeseburger. Best in Zamboanga!</p>
+      <div class="review-author"><div class="review-avatar">A</div><div class="review-author-info"><h4>Ira Oveun</h4><p>via Google &middot; 2 years ago</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- LOCATION -->
+<section class="location-section" id="location">
+  <div class="location-info">
+    <span class="section-label">Find Us</span>
+    <h2>Visit Us in Zamboanga City</h2>
+    <div class="info-item"><div class="info-icon">&#x1F4CD;</div><div class="info-text"><h4>Address</h4><p>234 Talon-Talon Road,<br>Zamboanga City, 7000</p></div></div>
+    <div class="info-item"><div class="info-icon">&#x1F4DE;</div><div class="info-text"><h4>Phone</h4><p><a href="tel:09171063504">0917-106-3504</a></p></div></div>
+    <div class="info-item"><div class="info-icon">&#x23F0;</div><div class="info-text"><h4>Hours</h4><p>Mon &ndash; Sat: 5:30 AM &ndash; 4:00 PM<br>Sunday: 5:30 AM onwards</p></div></div>
+    <div class="info-item"><div class="info-icon">&#x2709;&#xFE0F;</div><div class="info-text"><h4>Email</h4><p><a href="mailto:charitosfoodandbeverages@gmail.com" style="word-break:break-all">charitosfoodandbeverages@gmail.com</a></p></div></div>
+  </div>
+  <div class="map-embed">
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3951.5!2d122.0632!3d6.9214!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNsKwNTUnMTcuMCJOIDEyMsKwMDMnNDcuNSJF!5e0!3m2!1sen!2sph!4v1" allowfullscreen loading="lazy"></iframe>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="brand-name">Charito's</span>
+      <p>Serving authentic, homemade Filipino food since 2020. Burgers, Murtabak, Roti, Shawarma &amp; more &mdash; crafted with love in Zamboanga City.</p>
+      <div class="footer-socials">
+        <a href="https://www.facebook.com/charitosfoodandbeverages" class="social-btn" target="_blank" rel="noopener">f</a>
+        <a href="https://instagram.com/ktandt.co" class="social-btn" target="_blank" rel="noopener">ig</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="#about">About Us</a></li>
+        <li><a href="menu.html">Full Menu</a></li>
+        <li><a href="#party">Party Trays</a></li>
+        <li><a href="careers.html">Careers</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Menu</h4>
+      <ul>
+        <li><a href="menu.html">Murtabak &amp; Roti</a></li>
+        <li><a href="menu.html">Burgers</a></li>
+        <li><a href="menu.html">Shawarma</a></li>
+        <li><a href="#party">Party Trays</a></li>
+        <li><a href="menu.html">Silog Meals</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; 2025 Charito's Food and Beverage. All rights reserved.</p>
+    <p>234 Talon-Talon Rd, Zamboanga City &middot; 0917-106-3504</p>
+  </div>
+</footer>
+
+<script>
+function toggleMenu() {
+  document.getElementById('hamburger').classList.toggle('open');
+  document.getElementById('mobileMenu').classList.toggle('open');
+}
+function closeMenu() {
+  document.getElementById('hamburger').classList.remove('open');
+  document.getElementById('mobileMenu').classList.remove('open');
+}
+document.querySelectorAll('.menu-cat-btn').forEach(function(btn) {
+  btn.addEventListener('click', function() {
+    document.querySelectorAll('.menu-cat-btn').forEach(function(b) {
+      b.classList.remove('active');
+    });
+    btn.classList.add('active');
+  });
+});
+</script>
+</body>
+</html>
