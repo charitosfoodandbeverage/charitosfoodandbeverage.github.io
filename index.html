@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Charito's Food & Beverage — Est. 2020</title>
+<link rel="icon" type="image/jpeg" href="images/charitos-logo.jpg">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Nunito:wght@300;400;600;700;800&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
 <style>
 :root{
@@ -89,8 +90,8 @@ nav{position:fixed;top:0;width:100%;z-index:200;background:rgba(200,39,45,0.97);
 
 /* Featured Dish */
 .featured-dish{max-width:1100px;margin:0 auto 55px;background:#fff;border-radius:28px;overflow:hidden;box-shadow:0 8px 40px rgba(200,39,45,0.12);display:grid;grid-template-columns:1fr 1fr;align-items:center;}
-.featured-img-wrap{position:relative;background:linear-gradient(135deg,#f9d3d4,#f07070);min-height:320px;display:flex;align-items:center;justify-content:center;overflow:hidden;}
-.featured-img-wrap img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0;}
+.featured-img-wrap{position:relative;background:#FFF8F0;min-height:320px;display:flex;align-items:center;justify-content:center;overflow:hidden;}
+.featured-img-wrap img{width:100%;height:100%;object-fit:contain;position:absolute;inset:0;padding:12px;}
 .featured-fallback{font-size:7rem;position:relative;z-index:1;}
 .featured-body{padding:2.5rem 2.8rem;}
 .featured-tag{display:inline-block;background:#FFF0F0;color:var(--red);font-size:0.7rem;font-weight:800;letter-spacing:0.15em;text-transform:uppercase;padding:0.3rem 0.9rem;border-radius:50px;margin-bottom:1rem;}
@@ -109,8 +110,8 @@ nav{position:fixed;top:0;width:100%;z-index:200;background:rgba(200,39,45,0.97);
 .menu-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:22px;max-width:1200px;margin:0 auto;}
 .menu-card{background:#fff;border-radius:20px;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,0.06);transition:transform 0.3s,box-shadow 0.3s;display:flex;flex-direction:column;}
 .menu-card:hover{transform:translateY(-6px);box-shadow:0 12px 40px rgba(200,39,45,0.15);}
-.menu-card-img{height:175px;overflow:hidden;position:relative;display:flex;align-items:center;justify-content:center;font-size:3.5rem;}
-.menu-card-img img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0;}
+.menu-card-img{aspect-ratio:1/1;overflow:hidden;position:relative;display:flex;align-items:center;justify-content:center;font-size:3.5rem;background:#FFF8F0;margin:10px 10px 0;border-radius:12px;}
+.menu-card-img img{width:100%;height:100%;object-fit:contain;position:absolute;inset:0;padding:8px;}
 .menu-card-badge{position:absolute;top:10px;left:10px;background:var(--red);color:#fff;font-size:0.62rem;font-weight:800;padding:0.18rem 0.55rem;border-radius:50px;text-transform:uppercase;letter-spacing:0.1em;z-index:2;}
 .menu-card-body{padding:1.1rem 1.2rem;flex:1;display:flex;flex-direction:column;}
 .menu-card-body h3{font-family:'Playfair Display',serif;font-size:1rem;margin-bottom:0.3rem;}
@@ -228,7 +229,7 @@ footer{background:var(--red-dark);padding:55px 5% 28px;}
   .hero-btns{flex-direction:column;align-items:flex-start;}
   .btn-primary,.btn-outline{width:100%;text-align:center;padding:1rem 1.5rem;}
   .menu-grid{grid-template-columns:1fr 1fr;gap:14px;}
-  .menu-card-img{height:130px;font-size:2.8rem;}
+  .menu-card-img{font-size:2.8rem;}
   .featured-body{padding:1.6rem 1.4rem;}
   .featured-body h3{font-size:1.5rem;}
   .trays-grid{grid-template-columns:1fr;}
@@ -249,6 +250,7 @@ footer{background:var(--red-dark);padding:55px 5% 28px;}
     <li><a href="#about">About</a></li>
     <li><a href="#menu">Menu</a></li>
     <li><a href="#party">Party Trays</a></li>
+    <li><a href="reviews.html">Reviews</a></li>
     <li><a href="careers.html">Careers</a></li>
     <li><a href="#location">Find Us</a></li>
     <li><a href="contact.html" class="nav-cta">Contact</a></li>
@@ -263,6 +265,7 @@ footer{background:var(--red-dark);padding:55px 5% 28px;}
   <a href="#about" onclick="closeMenu()">About</a>
   <a href="menu.html" onclick="closeMenu()">Menu</a>
   <a href="#party" onclick="closeMenu()">Party Trays</a>
+  <a href="reviews.html" onclick="closeMenu()">Reviews</a>
   <a href="careers.html" onclick="closeMenu()">Careers</a>
   <a href="#location" onclick="closeMenu()">Find Us</a>
   <a href="contact.html" onclick="closeMenu()">Contact Us</a>
@@ -313,7 +316,8 @@ footer{background:var(--red-dark);padding:55px 5% 28px;}
   </div>
   <div class="about-visual">
     <div class="about-img-wrap">
-      <div class="about-img-placeholder">Charito's<br><span style="font-size:1rem;opacity:0.7">Authentic Filipino Kitchen</span></div>
+      <img src="images/charitos-logo.jpg" alt="Charito's Food & Beverage" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="about-img-placeholder" style="display:none">Charito's<br><span style="font-size:1rem;opacity:0.7">Authentic Filipino Kitchen</span></div>
     </div>
     <div class="about-badge">
       <span class="about-badge-num">4.8</span>
@@ -365,7 +369,7 @@ footer{background:var(--red-dark);padding:55px 5% 28px;}
       <div class="menu-card-body">
         <h3>Supercheese Beef Murtabak</h3>
         <p>Crispy roti wrap with cheesy, seasoned beef filling.</p>
-        <div class="menu-card-footer"><span class="menu-card-price">&#x20B1;85</span><span class="menu-card-rating"><span class="star">&#x2605;</span> 4.9</span></div>
+        <div class="menu-card-footer"><span class="menu-card-price">&#x20B1;89</span><span class="menu-card-rating"><span class="star">&#x2605;</span> 4.9</span></div>
       </div>
     </div>
 
@@ -376,7 +380,7 @@ footer{background:var(--red-dark);padding:55px 5% 28px;}
       <div class="menu-card-body">
         <h3>Tunamelt Murtabak</h3>
         <p>Creamy tuna and melted cheese in golden roti.</p>
-        <div class="menu-card-footer"><span class="menu-card-price">&#x20B1;75</span><span class="menu-card-rating"><span class="star">&#x2605;</span> 4.8</span></div>
+        <div class="menu-card-footer"><span class="menu-card-price">&#x20B1;79</span><span class="menu-card-rating"><span class="star">&#x2605;</span> 4.8</span></div>
       </div>
     </div>
 
@@ -387,7 +391,7 @@ footer{background:var(--red-dark);padding:55px 5% 28px;}
       <div class="menu-card-body">
         <h3>Shawarma Paratha</h3>
         <p>Beef, onion, tomatoes, cabbage, zucchini, cheese &amp; garlic sauce.</p>
-        <div class="menu-card-footer"><span class="menu-card-price">&#x20B1;95</span><span class="menu-card-rating"><span class="star">&#x2605;</span> 4.9</span></div>
+        <div class="menu-card-footer"><span class="menu-card-price">&#x20B1;99</span><span class="menu-card-rating"><span class="star">&#x2605;</span> 4.9</span></div>
       </div>
     </div>
 
@@ -398,19 +402,19 @@ footer{background:var(--red-dark);padding:55px 5% 28px;}
       <div class="menu-card-body">
         <h3>Roti Cheese</h3>
         <p>Soft, flaky roti filled with gooey melted cheese.</p>
-        <div class="menu-card-footer"><span class="menu-card-price">&#x20B1;65</span><span class="menu-card-rating"><span class="star">&#x2605;</span> 4.9</span></div>
+        <div class="menu-card-footer"><span class="menu-card-price">&#x20B1;69</span><span class="menu-card-rating"><span class="star">&#x2605;</span> 4.9</span></div>
       </div>
     </div>
 
     <div class="menu-card">
       <div class="menu-card-img">
-        <img src="images/burger-double-patty-deluxe.jpg" alt="Double Patty Cheeseburger Deluxe">
+        <img src="images/burger-double-patty-deluxe.jpg" alt="Double Patty Deluxe">
         <span class="menu-card-badge">New</span>
       </div>
       <div class="menu-card-body">
-        <h3>Ultimate Cheeseburger Deluxe</h3>
-        <p>Double patties, baked bun, lettuce, onions, tomatoes, cheese.</p>
-        <div class="menu-card-footer"><span class="menu-card-price">&#x20B1;100</span><span class="menu-card-rating"><span class="star">&#x2605;</span> 5.0</span></div>
+        <h3>Double Patty Deluxe</h3>
+        <p>Two beef patties, baked bun, lettuce, onions, tomatoes, cheese.</p>
+        <div class="menu-card-footer"><span class="menu-card-price">&#x20B1;85</span><span class="menu-card-rating"><span class="star">&#x2605;</span> 5.0</span></div>
       </div>
     </div>
 
@@ -421,7 +425,7 @@ footer{background:var(--red-dark);padding:55px 5% 28px;}
       <div class="menu-card-body">
         <h3>Supercheese Chicken Murtabak</h3>
         <p>Crispy roti wrap with cheesy, seasoned chicken filling.</p>
-        <div class="menu-card-footer"><span class="menu-card-price">&#x20B1;85</span><span class="menu-card-rating"><span class="star">&#x2605;</span> 4.9</span></div>
+        <div class="menu-card-footer"><span class="menu-card-price">&#x20B1;89</span><span class="menu-card-rating"><span class="star">&#x2605;</span> 4.9</span></div>
       </div>
     </div>
 
@@ -438,9 +442,9 @@ footer{background:var(--red-dark);padding:55px 5% 28px;}
   </div>
   <div class="trays-grid">
     <div class="tray-card">
-      <div class="tray-card-img"><img src="images/tray1.jpg" alt="Chicken Burger Ala King Tray"></div>
+      <div class="tray-card-img"><img src="images/tray8.jpg" alt="Chicken Fillet Ala King Tray"></div>
       <div class="tray-card-body">
-        <h3>&#x1F357; Chicken Burger Ala King</h3>
+        <h3>&#x1F357; Chicken Fillet Ala King</h3>
         <div class="tray-sizes">
           <div class="tray-size"><div class="tray-size-label">Barkada</div><div class="tray-size-price">&#x20B1;650</div></div>
           <div class="tray-size"><div class="tray-size-label">Family</div><div class="tray-size-price">&#x20B1;950</div></div>
