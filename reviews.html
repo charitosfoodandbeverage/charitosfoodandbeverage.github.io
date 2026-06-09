@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reviews — Charito's Food & Beverage</title>
+<link rel="icon" type="image/jpeg" href="images/charitos-logo.jpg">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Nunito:wght@300;400;600;700;800&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --red:#C8272D;--red-dark:#9B1B1F;--red-light:#E84B50;
+  --cream:#FFF8F0;--warm-gray:#F5EDE4;--white:#FFFFFF;
+  --text-dark:#1A0A0A;--gold:#D4A843;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'Nunito',sans-serif;background:var(--cream);color:var(--text-dark);overflow-x:hidden;}
+
+/* NAV */
+nav{position:fixed;top:0;width:100%;z-index:200;background:rgba(200,39,45,0.97);backdrop-filter:blur(12px);display:flex;align-items:center;justify-content:space-between;padding:0 5%;height:68px;box-shadow:0 2px 20px rgba(155,27,31,0.4);}
+.nav-logo{font-family:'Dancing Script',cursive;font-size:1.9rem;color:#fff;text-decoration:none;}
+.nav-links{display:flex;gap:1.8rem;list-style:none;align-items:center;}
+.nav-links a{color:rgba(255,255,255,0.88);text-decoration:none;font-size:0.82rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;transition:color 0.2s;position:relative;}
+.nav-links a::after{content:'';position:absolute;bottom:-3px;left:0;width:0;height:2px;background:var(--gold);transition:width 0.3s;}
+.nav-links a:hover{color:#fff;}
+.nav-links a:hover::after{width:100%;}
+.nav-cta{background:#fff !important;color:var(--red) !important;padding:0.45rem 1.1rem;border-radius:50px;font-weight:800 !important;}
+.nav-cta::after{display:none !important;}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:8px;background:none;border:none;}
+.hamburger span{display:block;width:24px;height:2px;background:#fff;border-radius:2px;transition:all 0.3s;}
+.hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+.hamburger.open span:nth-child(2){opacity:0;}
+.hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+.mobile-menu{display:none;position:fixed;top:68px;left:0;right:0;z-index:190;background:var(--red-dark);padding:1rem 0;box-shadow:0 8px 30px rgba(0,0,0,0.3);transform:translateY(-10px);opacity:0;transition:all 0.3s;pointer-events:none;}
+.mobile-menu.open{display:block;transform:translateY(0);opacity:1;pointer-events:all;}
+.mobile-menu a{display:block;padding:0.9rem 5%;color:rgba(255,255,255,0.9);text-decoration:none;font-size:0.95rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;border-bottom:1px solid rgba(255,255,255,0.08);transition:background 0.2s;}
+.mobile-menu a:hover{background:rgba(255,255,255,0.1);}
+.mobile-menu a:last-child{border-bottom:none;color:#fff;background:rgba(255,255,255,0.15);margin:0.5rem 5%;border-radius:10px;text-align:center;}
+
+/* HERO */
+.hero{background:linear-gradient(135deg,var(--red-dark) 0%,var(--red) 60%,#E85C60 100%);padding:130px 5% 70px;text-align:center;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,0.06) 1px,transparent 1px);background-size:32px 32px;}
+.hero-inner{position:relative;z-index:1;}
+.hero-label{display:inline-block;background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.3);padding:0.35rem 1rem;border-radius:50px;color:rgba(255,255,255,0.9);font-size:0.72rem;font-weight:800;letter-spacing:0.15em;text-transform:uppercase;margin-bottom:1.2rem;}
+.hero h1{font-family:'Dancing Script',cursive;font-size:clamp(2.8rem,8vw,5rem);color:#fff;line-height:1.05;margin-bottom:0.6rem;}
+.hero-sub{font-family:'Playfair Display',serif;font-style:italic;color:rgba(255,255,255,0.78);font-size:clamp(0.95rem,2vw,1.15rem);}
+
+/* SUMMARY STRIP */
+.summary-strip{background:#fff;padding:28px 5%;border-bottom:2px solid var(--warm-gray);}
+.summary-inner{max-width:900px;margin:0 auto;display:flex;align-items:center;justify-content:center;gap:3.5rem;flex-wrap:wrap;}
+.summary-stat{text-align:center;}
+.summary-stat-num{font-family:'Playfair Display',serif;font-size:2.2rem;font-weight:900;color:var(--red);line-height:1;display:block;}
+.summary-stat-label{font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:#999;margin-top:0.2rem;display:block;}
+.summary-divider{width:1px;height:44px;background:var(--warm-gray);}
+.overall-stars{display:flex;align-items:center;gap:0.3rem;justify-content:center;margin-top:0.4rem;}
+.overall-stars span{color:var(--gold);font-size:1.2rem;}
+.overall-stars .empty{color:#DDD;}
+
+/* FILTER BAR */
+.filter-bar{padding:26px 5% 0;max-width:1200px;margin:0 auto;}
+.filter-inner{display:flex;gap:0.7rem;flex-wrap:wrap;padding-bottom:22px;border-bottom:2px solid rgba(200,39,45,0.08);}
+.filter-btn{padding:0.48rem 1.1rem;border-radius:50px;border:2px solid #DDD;background:#fff;color:#777;font-weight:700;font-size:0.78rem;cursor:pointer;transition:all 0.2s;font-family:'Nunito',sans-serif;letter-spacing:0.04em;}
+.filter-btn.active,.filter-btn:hover{border-color:var(--red);background:var(--red);color:#fff;}
+
+/* REVIEWS MASONRY */
+.reviews-section{padding:32px 5% 80px;max-width:1200px;margin:0 auto;}
+.reviews-grid{columns:3;column-gap:22px;}
+.review-card{break-inside:avoid;background:#fff;border-radius:20px;padding:1.6rem 1.5rem 1.4rem;margin-bottom:22px;box-shadow:0 4px 22px rgba(0,0,0,0.06);position:relative;transition:transform 0.3s,box-shadow 0.3s;display:inline-block;width:100%;}
+.review-card:hover{transform:translateY(-4px);box-shadow:0 10px 40px rgba(200,39,45,0.13);}
+.review-card::before{content:'\201C';font-family:'Playfair Display',serif;font-size:5.5rem;color:var(--red);opacity:0.1;position:absolute;top:-12px;left:14px;line-height:1;pointer-events:none;}
+
+/* FEATURED */
+.review-card.featured{background:linear-gradient(135deg,var(--red-dark),var(--red));color:#fff;}
+.review-card.featured::before{color:#fff;opacity:0.15;}
+.review-card.featured .review-text{color:rgba(255,255,255,0.9);}
+.review-card.featured .review-item-tag{background:rgba(255,255,255,0.2);color:#fff;}
+.review-card.featured .review-author-name{color:#fff;}
+.review-card.featured .review-meta{color:rgba(255,255,255,0.6);}
+.review-card.featured .star-filled{color:var(--gold);}
+.review-card.featured .star-empty{color:rgba(255,255,255,0.3);}
+.review-card.featured .source-badge{background:rgba(255,255,255,0.2);border-color:rgba(255,255,255,0.3);color:#fff;}
+
+.review-item-tag{display:inline-block;background:#FFF0F0;color:var(--red);font-size:0.65rem;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;padding:0.22rem 0.65rem;border-radius:50px;margin-bottom:0.9rem;}
+.review-stars{display:flex;gap:2px;margin-bottom:0.75rem;}
+.star-filled{color:var(--gold);font-size:0.88rem;}
+.star-empty{color:#DDD;font-size:0.88rem;}
+.review-text{font-size:0.9rem;line-height:1.75;color:#555;margin-bottom:1.1rem;}
+.review-author{display:flex;align-items:center;gap:0.75rem;}
+.review-avatar{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:0.9rem;color:#fff;flex-shrink:0;letter-spacing:-0.02em;}
+.review-author-name{font-size:0.85rem;font-weight:800;display:block;line-height:1.2;}
+.review-meta{font-size:0.7rem;color:#AAA;display:flex;align-items:center;gap:0.35rem;margin-top:0.18rem;flex-wrap:wrap;}
+.review-meta-dot{width:3px;height:3px;border-radius:50%;background:#CCC;display:inline-block;}
+.source-badge{display:inline-flex;align-items:center;gap:0.3rem;background:#F8F9FA;border:1px solid #E0E0E0;padding:0.18rem 0.5rem;border-radius:50px;font-size:0.62rem;font-weight:800;color:#555;margin-left:auto;flex-shrink:0;}
+.source-badge.google{color:#4285F4;}
+.source-badge.direct{color:var(--red);}
+
+/* CTA BAND */
+.cta-band{background:linear-gradient(135deg,var(--red-dark),var(--red));padding:70px 5%;text-align:center;position:relative;overflow:hidden;}
+.cta-band::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,0.05) 1px,transparent 1px);background-size:30px 30px;}
+.cta-band-inner{position:relative;z-index:1;}
+.cta-band h2{font-family:'Dancing Script',cursive;font-size:clamp(2rem,5vw,3rem);color:#fff;margin-bottom:0.5rem;}
+.cta-band p{color:rgba(255,255,255,0.78);font-size:0.95rem;margin-bottom:1.8rem;}
+.cta-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;}
+.btn-white{background:#fff;color:var(--red);padding:0.85rem 2rem;border-radius:50px;font-weight:800;font-size:0.88rem;text-decoration:none;letter-spacing:0.05em;text-transform:uppercase;display:inline-block;transition:all 0.2s;box-shadow:0 4px 20px rgba(0,0,0,0.2);}
+.btn-white:hover{transform:translateY(-3px);box-shadow:0 8px 30px rgba(0,0,0,0.3);}
+.btn-ghost{border:2px solid rgba(255,255,255,0.6);color:#fff;padding:0.85rem 2rem;border-radius:50px;font-weight:700;font-size:0.88rem;text-decoration:none;letter-spacing:0.05em;text-transform:uppercase;display:inline-block;transition:all 0.2s;}
+.btn-ghost:hover{background:rgba(255,255,255,0.15);border-color:#fff;}
+
+/* FOOTER */
+footer{background:var(--red-dark);padding:40px 5% 24px;}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:0.8rem;color:rgba(255,255,255,0.5);font-size:0.78rem;}
+.footer-logo{font-family:'Dancing Script',cursive;font-size:1.8rem;color:#fff;}
+
+/* ANIMATIONS */
+@keyframes fadeUp{from{opacity:0;transform:translateY(18px);}to{opacity:1;transform:translateY(0);}}
+
+/* RESPONSIVE */
+@media(max-width:1024px){.reviews-grid{columns:2;}}
+@media(max-width:860px){
+  .nav-links{display:none;}
+  .hamburger{display:flex;}
+  .summary-divider{display:none;}
+  .summary-inner{gap:1.8rem;}
+}
+@media(max-width:600px){
+  .reviews-grid{columns:1;}
+  .hero{padding:110px 4% 55px;}
+  .filter-bar{padding:22px 4% 0;}
+  .reviews-section{padding:28px 4% 60px;}
+  .cta-btns{flex-direction:column;align-items:center;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo">Charito's</a>
+  <ul class="nav-links">
+    <li><a href="index.html#about">About</a></li>
+    <li><a href="menu.html">Menu</a></li>
+    <li><a href="index.html#party">Party Trays</a></li>
+    <li><a href="reviews.html">Reviews</a></li>
+    <li><a href="careers.html">Careers</a></li>
+    <li><a href="index.html#location">Find Us</a></li>
+    <li><a href="contact.html" class="nav-cta">Contact</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></button>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html" onclick="closeMenu()">Home</a>
+  <a href="menu.html" onclick="closeMenu()">Menu</a>
+  <a href="index.html#party" onclick="closeMenu()">Party Trays</a>
+  <a href="careers.html" onclick="closeMenu()">Careers</a>
+  <a href="index.html#location" onclick="closeMenu()">Find Us</a>
+  <a href="contact.html" onclick="closeMenu()">Contact Us</a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-label">⭐ Customer Love</div>
+    <h1>What Our Customers Say</h1>
+    <p class="hero-sub">Real stories from the people of Zamboanga City &amp; beyond</p>
+  </div>
+</section>
+
+<!-- SUMMARY STRIP -->
+<div class="summary-strip">
+  <div class="summary-inner">
+    <div class="summary-stat">
+      <span class="summary-stat-num">4.8</span>
+      <div class="overall-stars">
+        <span>★</span><span>★</span><span>★</span><span>★</span><span class="empty">★</span>
+      </div>
+      <span class="summary-stat-label">Google Rating</span>
+    </div>
+    <div class="summary-divider"></div>
+    <div class="summary-stat">
+      <span class="summary-stat-num">6</span>
+      <span class="summary-stat-label">Featured Reviews</span>
+    </div>
+    <div class="summary-divider"></div>
+    <div class="summary-stat">
+      <span class="summary-stat-num">2020</span>
+      <span class="summary-stat-label">Est. Serving Zamboanga</span>
+    </div>
+    <div class="summary-divider"></div>
+    <div class="summary-stat">
+      <span class="summary-stat-num">832</span>
+      <span class="summary-stat-label">FB Followers</span>
+    </div>
+  </div>
+</div>
+
+<!-- FILTER BAR -->
+<div class="filter-bar">
+  <div class="filter-inner">
+    <button class="filter-btn active" onclick="filterReviews('all',this)">All Reviews</button>
+    <button class="filter-btn" onclick="filterReviews('murtabak',this)">🥙 Murtabak &amp; Roti</button>
+    <button class="filter-btn" onclick="filterReviews('burger',this)">🍔 Burgers</button>
+    <button class="filter-btn" onclick="filterReviews('general',this)">✨ General</button>
+    <button class="filter-btn" onclick="filterReviews('5star',this)">⭐ 5 Stars Only</button>
+  </div>
+</div>
+
+<!-- REVIEWS -->
+<div class="reviews-section">
+  <div class="reviews-grid" id="reviewsGrid">
+
+    <!-- Irene Ancheta — Google — Beef Murtabak — Featured -->
+    <div class="review-card featured" data-tag="murtabak" data-stars="5">
+      <span class="review-item-tag">🥙 Beef Murtabak</span>
+      <div class="review-stars">
+        <span class="star-filled">★</span><span class="star-filled">★</span><span class="star-filled">★</span><span class="star-filled">★</span><span class="star-filled">★</span>
+      </div>
+      <p class="review-text">This food is delicious, my friends! The Beef Murtabak is something else — so crispy and flavorful. Will definitely come back!</p>
+      <div class="review-author">
+        <div class="review-avatar" style="background:linear-gradient(135deg,#E84B50,#C8272D);">IA</div>
+        <div>
+          <span class="review-author-name">Irene Ancheta</span>
+          <div class="review-meta">
+            <span>via Google</span><span class="review-meta-dot"></span><span>4 years ago</span>
+          </div>
+        </div>
+        <span class="source-badge google">G</span>
+      </div>
+    </div>
+
+    <!-- nanay_gie.zc — Direct — Supercheese Beef -->
+    <div class="review-card" data-tag="murtabak" data-stars="5">
+      <span class="review-item-tag">🥙 Supercheese Beef Murtabak</span>
+      <div class="review-stars">
+        <span class="star-filled">★</span><span class="star-filled">★</span><span class="star-filled">★</span><span class="star-filled">★</span><span class="star-filled">★</span>
+      </div>
+      <p class="review-text">Supercheese Beef Murtabak is my kid's favorite. Whenever they do good in school, I reward them with their favorite! It's become our little tradition every card exam season.</p>
+      <div class="review-author">
+        <div class="review-avatar" style="background:linear-gradient(135deg,#f5a050,#E65100);">ng</div>
+        <div>
+          <span class="review-author-name">nanay_gie.zc</span>
+          <div class="review-meta">
+            <span>Menu Review</span><span class="review-meta-dot"></span><span>Regular Customer</span>
+          </div>
+        </div>
+        <span class="source-badge direct">✦</span>
+      </div>
+    </div>
+
+    <!-- atemar_izabel — Direct — Supercheese Chicken -->
+    <div class="review-card" data-tag="murtabak" data-stars="5">
+      <span class="review-item-tag">🥙 Supercheese Chicken Murtabak</span>
+      <div class="review-stars">
+        <span class="star-filled">★</span><span class="star-filled">★</span><span class="star-filled">★</span><span class="star-filled">★</span><span class="star-filled">★</span>
+      </div>
+      <p class="review-text">This tastes like home. I remember ordering precooked chicken murtabak so I could pack them with me bound to Manila. Nothing hits different than unwrapping one on the bus and suddenly feeling like you never left Zamboanga.</p>
+      <div class="review-author">
+        <div class="review-avatar" style="background:linear-gradient(135deg,#6aa9d8,#1565C0);">am</div>
+        <div>
+          <span class="review-author-name">atemar_izabel</span>
+          <div class="review-meta">
+            <span>Menu Review</span><span class="review-meta-dot"></span><span>Loyal Customer</span>
+          </div>
+        </div>
+        <span class="source-badge direct">✦</span>
+      </div>
+    </div>
+
+    <!-- Chawie 11S26 — Google — Tunamelt — 4 stars -->
+    <div class="review-card" data-tag="murtabak" data-stars="4">
+      <span class="review-item-tag">🫓 Tunamelt Murtabak</span>
+      <div class="review-stars">
+        <span class="star-filled">★</span><span class="star-filled">★</span><span class="star-filled">★</span><span class="star-filled">★</span><span class="star-empty">★</span>
+      </div>
+      <p class="review-text">Affordable and filling! The Tunamelt Murtabak is my go-to. Great service, great atmosphere. Perfect for a quick lunch before afternoon classes.</p>
+      <div class="review-author">
+        <div class="review-avatar" style="background:linear-gradient(135deg,#b07dd8,#6a1f9e);">CW</div>
+        <div>
+          <span class="review-author-name">Chawie 11S26</span>
+          <div class="review-meta">
+            <span>via Google</span><span class="review-meta-dot"></span><span>2 years ago</span>
+          </div>
+        </div>
+        <span class="source-badge google">G</span>
+      </div>
+    </div>
+
+    <!-- kuya_renz.talon — Direct — Cheeseburger Deluxe — Featured -->
+    <div class="review-card featured" data-tag="burger" data-stars="5">
+      <span class="review-item-tag">🍔 Cheeseburger Deluxe</span>
+      <div class="review-stars">
+        <span class="star-filled">★</span><span class="star-filled">★</span><span class="star-filled">★</span><span class="star-filled">★</span><span class="star-filled">★</span>
+      </div>
+      <p class="review-text">Cheeseburger Deluxe is the first item on their menu when Charito's first launched. I was one of the lucky few who got to experience the homemade patties. It was extravagantly tasty — tastes like my mom's hugs.</p>
+      <div class="review-author">
+        <div class="review-avatar" style="background:linear-gradient(135deg,#f5c842,#E65100);">kr</div>
+        <div>
+          <span class="review-author-name">kuya_renz.talon</span>
+          <div class="review-meta">
+            <span>Menu Review</span><span class="review-meta-dot"></span><span>Day-1 Customer</span>
+          </div>
+        </div>
+        <span class="source-badge">✦</span>
+      </div>
+    </div>
+
+    <!-- Ira Oveun — Google — General -->
+    <div class="review-card" data-tag="general" data-stars="5">
+      <span class="review-item-tag">✨ Overall Experience</span>
+      <div class="review-stars">
+        <span class="star-filled">★</span><span class="star-filled">★</span><span class="star-filled">★</span><span class="star-filled">★</span><span class="star-filled">★</span>
+      </div>
+      <p class="review-text">Food: 5, Service: 5, Atmosphere: 5. Recommended dishes: Beef Murtabak, Tunamelt, Ultimate Cheeseburger. Best in Zamboanga! Every item I've tried has been consistently good — that's rare.</p>
+      <div class="review-author">
+        <div class="review-avatar" style="background:linear-gradient(135deg,#6dbf95,#1B5E20);">IO</div>
+        <div>
+          <span class="review-author-name">Ira Oveun</span>
+          <div class="review-meta">
+            <span>via Google</span><span class="review-meta-dot"></span><span>2 years ago</span>
+          </div>
+        </div>
+        <span class="source-badge google">G</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- CTA BAND -->
+<section class="cta-band">
+  <div class="cta-band-inner">
+    <h2>Had a great experience?</h2>
+    <p>Leave us a Google review or send us a message — we'd love to hear from you!</p>
+    <div class="cta-btns">
+      <a href="https://g.page/r/review" target="_blank" rel="noopener" class="btn-white">⭐ Leave a Google Review</a>
+      <a href="https://www.facebook.com/charitosfoodandbeverages" target="_blank" rel="noopener" class="btn-ghost">💬 Message on Facebook</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-bottom">
+    <span class="footer-logo">Charito's</span>
+    <p>&copy; 2025 Charito's Food and Beverage. All rights reserved.</p>
+    <p>234 Talon-Talon Rd, Zamboanga City &middot; 0917-106-3504</p>
+  </div>
+</footer>
+
+<script>
+function toggleMenu(){
+  document.getElementById('hamburger').classList.toggle('open');
+  document.getElementById('mobileMenu').classList.toggle('open');
+}
+function closeMenu(){
+  document.getElementById('hamburger').classList.remove('open');
+  document.getElementById('mobileMenu').classList.remove('open');
+}
+function filterReviews(tag, btn){
+  document.querySelectorAll('.filter-btn').forEach(function(b){b.classList.remove('active');});
+  btn.classList.add('active');
+  document.querySelectorAll('.review-card').forEach(function(card){
+    var show = false;
+    if(tag === 'all') show = true;
+    else if(tag === '5star') show = card.dataset.stars === '5';
+    else show = card.dataset.tag === tag;
+    card.style.display = show ? '' : 'none';
+  });
+}
+</script>
+</body>
+</html>
