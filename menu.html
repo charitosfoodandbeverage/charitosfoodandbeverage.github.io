@@ -75,6 +75,14 @@ nav{position:sticky;top:0;width:100%;z-index:200;background:rgba(200,39,45,0.97)
 .add-btn:hover{background:var(--red-dark);transform:scale(1.1);}
 .add-btn.added{background:#1A8B5A;}
 
+/* VARIANT DROPDOWN */
+.variant-select{width:100%;font-family:'Nunito',sans-serif;font-size:0.78rem;font-weight:700;color:var(--text-dark);background:#F5EDE4;border:1.5px solid #E8DDD5;border-radius:8px;padding:0.38rem 0.6rem;margin-bottom:0.6rem;cursor:pointer;outline:none;transition:border-color 0.2s;}
+.variant-select:focus{border-color:var(--red);}
+
+/* VARIANT SELECT */
+.variant-select{width:100%;font-family:'Nunito',sans-serif;font-size:0.78rem;font-weight:700;padding:0.45rem 0.6rem;border:2px solid #EEE;border-radius:10px;color:var(--text-dark);background:#FAFAFA;cursor:pointer;outline:none;margin-bottom:0.7rem;transition:border-color 0.2s;}
+.variant-select:focus{border-color:var(--red);}
+
 /* REVIEW BUBBLE */
 .item-card{position:relative;}
 .review-bubble{
@@ -383,30 +391,18 @@ const MENU = {
     {id:18, name:'Chicken Piangang (Salo-salo)',      price:1350, desc:'18–20 pax sharing tray of Chicken Piangang.',                                     img:'images/chicken-piangang-salosalo.jpg',emoji:'🍗', badge:'18-20 pax', rating:4.9},
   ],
   party:[
-    {id:19, name:'Beef Patty Steak (Barkada)',           price:790,  desc:'Barkada-size tray · 8–10 servings.',                    img:'images/tray-beef-patty-steak.jpg',         emoji:'🥩', rating:4.9},
-    {id:20, name:'Beef Patty Steak (Family)',            price:1250, desc:'Family-size tray · 15–20 servings.',                    img:'images/tray-beef-patty-steak.jpg',         emoji:'🥩', rating:4.9},
-    {id:21, name:'Classic Beef Steak (Barkada)',         price:890,  desc:'Barkada-size tray · 8–10 servings.',                    img:'images/tray-classic-beef-steak.jpg',       emoji:'🥩', rating:4.9},
-    {id:22, name:'Classic Beef Steak (Family)',          price:1450, desc:'Family-size tray · 15–20 servings.',                    img:'images/tray-classic-beef-steak.jpg',       emoji:'🥩', rating:4.9},
-    {id:23, name:'Beef Broccoli Steak (Barkada)',        price:920,  desc:'Barkada-size tray · 8–10 servings.',                    img:'images/tray-beef-broccoli-steak.jpg',      emoji:'🥩', rating:4.9},
-    {id:24, name:'Beef Broccoli Steak (Family)',         price:1550, desc:'Family-size tray · 15–20 servings.',                    img:'images/tray-beef-broccoli-steak.jpg',      emoji:'🥩', rating:4.9},
-    {id:25, name:'Fried Chicken (Barkada)',              price:650,  desc:'Barkada-size tray · 8–10 servings.',                    img:'images/tray-fried-chicken.jpg',            emoji:'🍗', rating:4.9},
-    {id:26, name:'Fried Chicken (Family)',               price:950,  desc:'Family-size tray · 15–20 servings.',                    img:'images/tray-fried-chicken.jpg',            emoji:'🍗', rating:4.9},
-    {id:27, name:'Chicken Teriyaki (Barkada)',           price:790,  desc:'Barkada-size tray · 8–10 servings.',                    img:'images/tray-chicken-teriyaki.jpg',         emoji:'🍗', rating:4.9},
-    {id:28, name:'Chicken Teriyaki (Family)',            price:1250, desc:'Family-size tray · 15–20 servings.',                    img:'images/tray-chicken-teriyaki.jpg',         emoji:'🍗', rating:4.9},
-    {id:29, name:'Sweet & Sour Chicken (Barkada)',       price:850,  desc:'Barkada-size tray · 8–10 servings.',                    img:'images/tray-sweet-sour-chicken.jpg',       emoji:'🍗', rating:4.8},
-    {id:30, name:'Sweet & Sour Chicken (Family)',        price:1390, desc:'Family-size tray · 15–20 servings.',                    img:'images/tray-sweet-sour-chicken.jpg',       emoji:'🍗', rating:4.8},
-    {id:31, name:'Spaghetti Beef Meatballs (Barkada)',   price:890,  desc:'Barkada-size tray · 8–10 servings.',                    img:'images/tray-spaghetti-beef-meatballs.jpg', emoji:'🍝', rating:4.9},
-    {id:32, name:'Spaghetti Beef Meatballs (Family)',    price:1450, desc:'Family-size tray · 15–20 servings.',                    img:'images/tray-spaghetti-beef-meatballs.jpg', emoji:'🍝', rating:4.9},
-    {id:33, name:'Special Carbonara (Barkada)',          price:990,  desc:'Chicken ham & beef bacon carbonara, Barkada size.',     img:'images/tray-special-carbonara.jpg',        emoji:'🍝', rating:4.9},
-    {id:34, name:'Special Carbonara (Family)',           price:1650, desc:'Chicken ham & beef bacon carbonara, Family size.',      img:'images/tray-special-carbonara.jpg',        emoji:'🍝', rating:4.9},
-    {id:35, name:'Baked Macaroni (Barkada)',             price:890,  desc:'Barkada-size tray · 8–10 servings.',                    img:'images/tray-baked-macaroni.jpg',           emoji:'🍛', rating:4.9},
-    {id:36, name:'Baked Macaroni (Family)',              price:1450, desc:'Family-size tray · 15–20 servings.',                    img:'images/tray-baked-macaroni.jpg',           emoji:'🍛', rating:4.9},
-    {id:37, name:'Baked Lasagna (Barkada)',              price:1150, desc:'Barkada-size tray · 8–10 servings.',                    img:'images/tray-baked-lasagna.jpg',            emoji:'🍛', rating:4.9},
-    {id:38, name:'Baked Lasagna (Family)',               price:1690, desc:'Family-size tray · 15–20 servings.',                    img:'images/tray-baked-lasagna.jpg',            emoji:'🍛', rating:4.9},
-    {id:39, name:'Buttered Prawns (Barkada)',            price:1290, desc:'Barkada-size tray · 8–10 servings.',                    img:'images/tray-buttered-prawns.jpg',          emoji:'🦐', rating:5.0},
-    {id:40, name:'Buttered Prawns (Family)',             price:1890, desc:'Family-size tray · 15–20 servings.',                    img:'images/tray-buttered-prawns.jpg',          emoji:'🦐', rating:5.0},
-    {id:41, name:'Chicken Fillet Ala King (Barkada)',   price:650,  desc:'Barkada-size tray · 8–10 servings.',                    img:'images/tray-chicken-fillet-ala-king.jpg',  emoji:'🍔', rating:4.9},
-    {id:42, name:'Chicken Fillet Ala King (Family)',    price:950,  desc:'Family-size tray · 15–20 servings.',                    img:'images/tray-chicken-fillet-ala-king.jpg',  emoji:'🍔', rating:4.9},
+    {id:19, name:'Beef Patty Steak',        desc:'Tender beef patty steak in savory sauce.',               img:'images/tray-beef-patty-steak.jpg',         emoji:'🥩', rating:4.9, variants:[{label:'Barkada (8–10 pax)',price:790},{label:'Family (15–20 pax)',price:1250}]},
+    {id:20, name:'Classic Beef Steak',      desc:'Classic sliced beef steak with rich brown sauce.',       img:'images/tray-classic-beef-steak.jpg',        emoji:'🥩', rating:4.9, variants:[{label:'Barkada (8–10 pax)',price:890},{label:'Family (15–20 pax)',price:1450}]},
+    {id:21, name:'Beef Broccoli Steak',     desc:'Beef and broccoli in savory oyster sauce.',              img:'images/tray-beef-broccoli-steak.jpg',       emoji:'🥩', rating:4.9, variants:[{label:'Barkada (8–10 pax)',price:920},{label:'Family (15–20 pax)',price:1550}]},
+    {id:22, name:'Fried Chicken',           desc:'Golden crispy fried chicken, party-size.',               img:'images/tray-fried-chicken.jpg',             emoji:'🍗', rating:4.9, variants:[{label:'Barkada (8–10 pax)',price:650},{label:'Family (15–20 pax)',price:950}]},
+    {id:23, name:'Chicken Teriyaki',        desc:'Glazed chicken teriyaki with steamed rice.',             img:'images/tray-chicken-teriyaki.jpg',          emoji:'🍗', rating:4.9, variants:[{label:'Barkada (8–10 pax)',price:790},{label:'Family (15–20 pax)',price:1250}]},
+    {id:24, name:'Sweet & Sour Chicken',    desc:'Crispy chicken in sweet and tangy sauce.',               img:'images/tray-sweet-sour-chicken.jpg',        emoji:'🍗', rating:4.8, variants:[{label:'Barkada (8–10 pax)',price:850},{label:'Family (15–20 pax)',price:1390}]},
+    {id:25, name:'Spaghetti Beef Meatballs',desc:'Tomato-based spaghetti with homemade beef meatballs.',   img:'images/tray-spaghetti-beef-meatballs.jpg',  emoji:'🍝', rating:4.9, variants:[{label:'Barkada (8–10 pax)',price:890},{label:'Family (15–20 pax)',price:1450}]},
+    {id:26, name:'Special Carbonara',       desc:'Creamy carbonara with chicken ham & beef bacon.',        img:'images/tray-special-carbonara.jpg',         emoji:'🍝', rating:4.9, variants:[{label:'Barkada (8–10 pax)',price:990},{label:'Family (15–20 pax)',price:1650}]},
+    {id:27, name:'Baked Macaroni',          desc:'Cheesy baked macaroni with meaty tomato sauce.',         img:'images/tray-baked-macaroni.jpg',            emoji:'🍛', rating:4.9, variants:[{label:'Barkada (8–10 pax)',price:890},{label:'Family (15–20 pax)',price:1450}]},
+    {id:28, name:'Baked Lasagna',           desc:'Layers of pasta, meat sauce, and melted cheese.',        img:'images/tray-baked-lasagna.jpg',             emoji:'🍛', rating:4.9, variants:[{label:'Barkada (8–10 pax)',price:1150},{label:'Family (15–20 pax)',price:1690}]},
+    {id:29, name:'Buttered Prawns',         desc:'Juicy prawns sautéed in rich garlic butter sauce.',      img:'images/tray-buttered-prawns.jpg',           emoji:'🦐', rating:5.0, variants:[{label:'Barkada (8–10 pax)',price:1290},{label:'Family (15–20 pax)',price:1890}]},
+    {id:30, name:'Chicken Fillet Ala King', desc:'Creamy chicken fillet in mushroom ala king sauce.',      img:'images/tray-chicken-fillet-ala-king.jpg',   emoji:'🍔', rating:4.9, variants:[{label:'Barkada (8–10 pax)',price:650},{label:'Family (15–20 pax)',price:950}]},
   ]
 };
 
@@ -420,123 +416,186 @@ const BG=[
   'linear-gradient(135deg,#fde0f5,#d86ab0)',
   'linear-gradient(135deg,#e0f5e8,#5ab07f)',
 ];
-let cart={};
+let cart = {};
+// cart keys: "id" for regular items, "id:vi" for tray variants (vi = variant index)
 
-function findItem(id){for(const c of Object.values(MENU)){const f=c.find(i=>i.id===id);if(f)return f;}}
+function findItem(id) {
+  for (var c of Object.values(MENU)) {
+    var f = c.find(function(i){ return i.id === id; });
+    if (f) return f;
+  }
+}
 
-function renderMenus(){
-  ['murtabak','burgers','viands','party'].forEach(cat=>{
-    document.getElementById('grid-'+cat).innerHTML=MENU[cat].map((item,i)=>`
-      <div class="item-card">
-        ${item.review?`
-        <div class="review-bubble">
-          <div class="review-bubble-text">${item.review.text}</div>
-          <div class="review-bubble-author">${item.review.author}</div>
-        </div>`:''}
-        <div class="item-img">
-          ${item.badge?`<span class="item-badge">${item.badge}</span>`:''}
-          <img src="${item.img}" alt="${item.name}">
-        </div>
-        <div class="item-body">
-          <h3>${item.name}</h3>
-          <p>${item.desc}</p>
-          <div class="item-footer">
-            <span class="item-price">₱${item.price.toLocaleString()}</span>
-            <div class="item-right">
-              <span class="item-rating"><span class="s">★</span>${item.rating}</span>
-              <button class="add-btn" id="addbtn-${item.id}" onclick="addToCart(${item.id})" aria-label="Add ${item.name}">+</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    `).join('');
+function getPrice(item, vi) {
+  if (item.variants) return item.variants[vi].price;
+  return item.price;
+}
+function getName(item, vi) {
+  if (item.variants) return item.name + ' — ' + item.variants[vi].label;
+  return item.name;
+}
+function cartKey(id, vi) {
+  return vi !== undefined ? id + ':' + vi : '' + id;
+}
+function parseKey(key) {
+  var parts = key.split(':');
+  return { id: +parts[0], vi: parts[1] !== undefined ? +parts[1] : undefined };
+}
+
+function renderMenus() {
+  ['murtabak','burgers','viands'].forEach(function(cat) {
+    document.getElementById('grid-'+cat).innerHTML = MENU[cat].map(function(item, i) {
+      return '<div class="item-card">'
+        + (item.review ? '<div class="review-bubble"><div class="review-bubble-text">'+item.review.text+'</div><div class="review-bubble-author">'+item.review.author+'</div></div>' : '')
+        + '<div class="item-img">'
+        + (item.badge ? '<span class="item-badge">'+item.badge+'</span>' : '')
+        + '<img src="'+item.img+'" alt="'+item.name+'">'
+        + '</div>'
+        + '<div class="item-body">'
+        + '<h3>'+item.name+'</h3>'
+        + '<p>'+item.desc+'</p>'
+        + '<div class="item-footer">'
+        + '<span class="item-price">₱'+item.price.toLocaleString()+'</span>'
+        + '<div class="item-right">'
+        + '<span class="item-rating"><span class="s">★</span>'+item.rating+'</span>'
+        + '<button class="add-btn" id="addbtn-'+item.id+'" onclick="addToCart('+item.id+',undefined,this)" aria-label="Add '+item.name+'">+</button>'
+        + '</div></div></div></div>';
+    }).join('');
   });
-}
 
-function addToCart(id){
-  const item=findItem(id);if(!item)return;
-  cart[id]=(cart[id]||0)+1;
-  updateCartUI();
-  const btn=document.getElementById('addbtn-'+id);
-  btn.classList.add('added');btn.textContent='✓';
-  setTimeout(()=>{btn.classList.remove('added');btn.textContent='+';},1200);
-  showToast(item.name+' added to cart!');
-}
-function removeFromCart(id){
-  if(cart[id]>1)cart[id]--;else delete cart[id];
-  updateCartUI();
-}
-function clearCart(){cart={};updateCartUI();closeCartDrawer();}
-
-function cartItemsHTML(){
-  return Object.entries(cart).map(([id,qty])=>{
-    const item=findItem(+id);
-    return `<div class="cart-item">
-      <div class="cart-item-icon">${item.emoji}</div>
-      <div class="cart-item-info"><h4>${item.name}</h4><p>₱${(item.price*qty).toLocaleString()}</p></div>
-      <div class="cart-controls">
-        <button class="qty-btn" onclick="removeFromCart(${id})">−</button>
-        <span class="qty-num">${qty}</span>
-        <button class="qty-btn" onclick="addToCart(${id})">+</button>
-      </div>
-    </div>`;
+  // Party: variant cards
+  document.getElementById('grid-party').innerHTML = MENU.party.map(function(item, i) {
+    var opts = item.variants.map(function(v, vi) {
+      return '<option value="'+vi+'">'+v.label+' — ₱'+v.price.toLocaleString()+'</option>';
+    }).join('');
+    return '<div class="item-card">'
+      + '<div class="item-img">'
+      + '<img src="'+item.img+'" alt="'+item.name+'">'
+      + '</div>'
+      + '<div class="item-body">'
+      + '<h3>'+item.name+'</h3>'
+      + '<p>'+item.desc+'</p>'
+      + '<select class="variant-select" id="variant-'+item.id+'" onchange="onVariantChange('+item.id+')">'
+      + opts
+      + '</select>'
+      + '<div class="item-footer">'
+      + '<span class="item-price" id="vprice-'+item.id+'">₱'+item.variants[0].price.toLocaleString()+'</span>'
+      + '<div class="item-right">'
+      + '<span class="item-rating"><span class="s">★</span>'+item.rating+'</span>'
+      + '<button class="add-btn" id="addbtn-'+item.id+'" onclick="addTrayToCart('+item.id+',this)" aria-label="Add '+item.name+'">+</button>'
+      + '</div></div></div></div>';
   }).join('');
 }
-function emptyCartHTML(){return `<div class="cart-empty"><div class="cart-empty-icon">🛒</div><p>Your cart is empty.<br>Add items from the menu!</p></div>`;}
 
-function updateCartUI(){
-  const entries=Object.entries(cart);
-  const totalQty=entries.reduce((s,[,q])=>s+q,0);
-  const total=entries.reduce((s,[id,q])=>s+findItem(+id).price*q,0);
-  const html=entries.length?cartItemsHTML():emptyCartHTML();
-
-  document.getElementById('cartCountNav').textContent=totalQty;
-  document.getElementById('cartBadge').textContent=totalQty;
-  document.getElementById('cartItemsDesktop').innerHTML=html;
-  document.getElementById('cartItemsMobile').innerHTML=html;
-  document.getElementById('cartQtyD').textContent=totalQty;
-  document.getElementById('cartTotalD').textContent=total.toLocaleString();
-  document.getElementById('cartTotalM').textContent=total.toLocaleString();
-  document.getElementById('cartTotalDrawer').textContent=total.toLocaleString();
-  document.getElementById('cartQtyM').textContent=totalQty;
-  document.getElementById('checkoutBtnD').disabled=totalQty===0;
-  document.getElementById('checkoutBtnM').disabled=totalQty===0;
-
-  const bar=document.getElementById('mobileCartBar');
-  if(totalQty>0)bar.classList.add('visible');else bar.classList.remove('visible');
+function onVariantChange(id) {
+  var sel = document.getElementById('variant-'+id);
+  var item = findItem(id);
+  var vi = +sel.value;
+  document.getElementById('vprice-'+id).textContent = '₱' + item.variants[vi].price.toLocaleString();
 }
 
-function openOrderModal(){
-  const entries=Object.entries(cart);
-  const total=entries.reduce((s,[id,q])=>s+findItem(+id).price*q,0);
-  document.getElementById('modalSummary').innerHTML=
-    entries.map(([id,qty])=>{const i=findItem(+id);return `${i.emoji} ${i.name} ×${qty} — ₱${(i.price*qty).toLocaleString()}`;}).join('<br>')+
-    `<br><strong style="color:var(--red)">Total: ₱${total.toLocaleString()}</strong>`;
+function addToCart(id, vi, btn) {
+  var item = findItem(id); if (!item) return;
+  var key = cartKey(id, vi);
+  cart[key] = (cart[key] || 0) + 1;
+  updateCartUI();
+  if (btn) { btn.classList.add('added'); btn.textContent = '✓'; setTimeout(function(){ btn.classList.remove('added'); btn.textContent = '+'; }, 1200); }
+  showToast(getName(item, vi) + ' added!');
+}
+
+function addTrayToCart(id, btn) {
+  var sel = document.getElementById('variant-'+id);
+  var vi = +sel.value;
+  addToCart(id, vi, btn);
+}
+
+function removeFromCart(key) {
+  if (cart[key] > 1) cart[key]--; else delete cart[key];
+  updateCartUI();
+}
+function clearCart(){ cart = {}; updateCartUI(); closeCartDrawer(); }
+
+function cartItemsHTML() {
+  return Object.entries(cart).map(function(entry) {
+    var key = entry[0]; var qty = entry[1];
+    var p = parseKey(key);
+    var item = findItem(p.id);
+    var price = getPrice(item, p.vi);
+    var name = getName(item, p.vi);
+    return '<div class="cart-item">'
+      + '<div class="cart-item-icon">'+item.emoji+'</div>'
+      + '<div class="cart-item-info"><h4>'+name+'</h4><p>₱'+(price*qty).toLocaleString()+'</p></div>'
+      + '<div class="cart-controls">'
+      + '<button class="qty-btn" onclick="removeFromCart(\''+key+'\')">−</button>'
+      + '<span class="qty-num">'+qty+'</span>'
+      + '<button class="qty-btn" onclick="addToCart('+p.id+','+(p.vi !== undefined ? p.vi : 'undefined')+')">+</button>'
+      + '</div></div>';
+  }).join('');
+}
+function emptyCartHTML(){ return '<div class="cart-empty"><div class="cart-empty-icon">🛒</div><p>Your cart is empty.<br>Add items from the menu!</p></div>'; }
+
+function updateCartUI() {
+  var entries = Object.entries(cart);
+  var totalQty = entries.reduce(function(s,e){ return s + e[1]; }, 0);
+  var total = entries.reduce(function(s,e){
+    var p = parseKey(e[0]); var item = findItem(p.id);
+    return s + getPrice(item, p.vi) * e[1];
+  }, 0);
+  var html = entries.length ? cartItemsHTML() : emptyCartHTML();
+
+  document.getElementById('cartCountNav').textContent = totalQty;
+  document.getElementById('cartBadge').textContent = totalQty;
+  document.getElementById('cartItemsDesktop').innerHTML = html;
+  document.getElementById('cartItemsMobile').innerHTML = html;
+  document.getElementById('cartQtyD').textContent = totalQty;
+  document.getElementById('cartTotalD').textContent = total.toLocaleString();
+  document.getElementById('cartTotalM').textContent = total.toLocaleString();
+  document.getElementById('cartTotalDrawer').textContent = total.toLocaleString();
+  document.getElementById('cartQtyM').textContent = totalQty;
+  document.getElementById('checkoutBtnD').disabled = totalQty === 0;
+  document.getElementById('checkoutBtnM').disabled = totalQty === 0;
+
+  var bar = document.getElementById('mobileCartBar');
+  if (totalQty > 0) bar.classList.add('visible'); else bar.classList.remove('visible');
+}
+
+function openOrderModal() {
+  var entries = Object.entries(cart);
+  var total = entries.reduce(function(s,e){
+    var p = parseKey(e[0]); var item = findItem(p.id);
+    return s + getPrice(item, p.vi) * e[1];
+  }, 0);
+  document.getElementById('modalSummary').innerHTML =
+    entries.map(function(e){
+      var p = parseKey(e[0]); var item = findItem(p.id); var qty = e[1];
+      return item.emoji + ' ' + getName(item, p.vi) + ' ×' + qty + ' — ₱' + (getPrice(item, p.vi)*qty).toLocaleString();
+    }).join('<br>') +
+    '<br><strong style="color:var(--red)">Total: ₱' + total.toLocaleString() + '</strong>';
   document.getElementById('orderModal').classList.add('open');
   closeCartDrawer();
 }
-function closeOrderModal(){document.getElementById('orderModal').classList.remove('open');}
-document.getElementById('orderModal').addEventListener('click',e=>{if(e.target===document.getElementById('orderModal'))closeOrderModal();});
+function closeOrderModal(){ document.getElementById('orderModal').classList.remove('open'); }
+document.getElementById('orderModal').addEventListener('click', function(e){ if (e.target === document.getElementById('orderModal')) closeOrderModal(); });
 
 function openCartDrawer(){
   document.getElementById('cartDrawer').classList.add('open');
   document.getElementById('cartOverlay').classList.add('open');
-  document.body.style.overflow='hidden';
+  document.body.style.overflow = 'hidden';
 }
 function closeCartDrawer(){
   document.getElementById('cartDrawer').classList.remove('open');
   document.getElementById('cartOverlay').classList.remove('open');
-  document.body.style.overflow='';
+  document.body.style.overflow = '';
 }
 
-function jumpTo(id,btn){
-  document.getElementById(id).scrollIntoView({behavior:'smooth',block:'start'});
-  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+function jumpTo(id, btn){
+  document.getElementById(id).scrollIntoView({behavior:'smooth', block:'start'});
+  document.querySelectorAll('.tab-btn').forEach(function(b){ b.classList.remove('active'); });
   btn.classList.add('active');
 }
-function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2200);}
-function toggleMenu(){document.getElementById('hamburger').classList.toggle('open');document.getElementById('mobileMenu').classList.toggle('open');}
-function closeMenu(){document.getElementById('hamburger').classList.remove('open');document.getElementById('mobileMenu').classList.remove('open');}
+function showToast(msg){ var t = document.getElementById('toast'); t.textContent = msg; t.classList.add('show'); setTimeout(function(){ t.classList.remove('show'); }, 2200); }
+function toggleMenu(){ document.getElementById('hamburger').classList.toggle('open'); document.getElementById('mobileMenu').classList.toggle('open'); }
+function closeMenu(){ document.getElementById('hamburger').classList.remove('open'); document.getElementById('mobileMenu').classList.remove('open'); }
 
 renderMenus();
 </script>
