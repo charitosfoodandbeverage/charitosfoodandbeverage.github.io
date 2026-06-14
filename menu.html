@@ -58,7 +58,7 @@ nav{position:sticky;top:0;width:100%;z-index:200;background:rgba(200,39,45,0.97)
 .cat-desc{color:#888;font-size:0.85rem;margin-bottom:22px;}
 
 .items-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:18px;}
-.item-card{background:#fff;border-radius:18px;box-shadow:0 3px 15px rgba(0,0,0,0.06);transition:transform 0.3s,box-shadow 0.3s;display:flex;flex-direction:column;}
+.item-card{background:#fff;border-radius:18px;box-shadow:0 3px 15px rgba(0,0,0,0.06);transition:transform 0.3s,box-shadow 0.3s;display:flex;flex-direction:column;position:relative;}
 .item-card:hover{transform:translateY(-5px);box-shadow:0 10px 35px rgba(200,39,45,0.13);}
 .item-img{width:calc(100% - 20px);margin:10px auto 0;aspect-ratio:1/1;border-radius:12px;overflow:hidden;background:#FFF0F0;position:relative;flex-shrink:0;}
 .item-img img{width:100%;height:100%;object-fit:contain;display:block;position:absolute;inset:0;}
@@ -75,16 +75,11 @@ nav{position:sticky;top:0;width:100%;z-index:200;background:rgba(200,39,45,0.97)
 .add-btn:hover{background:var(--red-dark);transform:scale(1.1);}
 .add-btn.added{background:#1A8B5A;}
 
-/* VARIANT DROPDOWN */
-.variant-select{width:100%;font-family:'Nunito',sans-serif;font-size:0.78rem;font-weight:700;color:var(--text-dark);background:#F5EDE4;border:1.5px solid #E8DDD5;border-radius:8px;padding:0.38rem 0.6rem;margin-bottom:0.6rem;cursor:pointer;outline:none;transition:border-color 0.2s;}
-.variant-select:focus{border-color:var(--red);}
-
 /* VARIANT SELECT */
 .variant-select{width:100%;font-family:'Nunito',sans-serif;font-size:0.78rem;font-weight:700;padding:0.45rem 0.6rem;border:2px solid #EEE;border-radius:10px;color:var(--text-dark);background:#FAFAFA;cursor:pointer;outline:none;margin-bottom:0.7rem;transition:border-color 0.2s;}
 .variant-select:focus{border-color:var(--red);}
 
 /* REVIEW BUBBLE */
-.item-card{position:relative;}
 .review-bubble{
   display:none;
   position:absolute;
@@ -364,60 +359,45 @@ nav{position:sticky;top:0;width:100%;z-index:200;background:rgba(200,39,45,0.97)
 <script>
 const MENU = {
   murtabak:[
-    {id:1, name:'Supercheese Beef Murtabak',    price:89, desc:'Roti wrap with cheesy beef filling. Crispy & golden.',                                   img:'images/murtabak-supercheese-beef.jpg',    emoji:'🥙', badge:'Bestseller', rating:4.9,
+    {id:1, name:'Beef Murtabak', desc:"Crispy roti wrap with seasoned beef filling. Choose Supercheese for extra melted cheese, or Regular for the classic version.", img:'images/murtabak-supercheese-beef.jpg', emoji:'🥙', badge:'Bestseller', rating:4.9,
+     variants:[{label:'Supercheese',price:89},{label:'Regular',price:79}],
      review:{text:"Supercheese Beef Murtabak is my kid's favorite. Whenever they do good in school, I reward them with their favorite!", author:'Nanay Gie'}},
-    {id:2, name:'Supercheese Chicken Murtabak', price:89, desc:'Roti wrap with cheesy chicken filling.',                                                  img:'images/murtabak-supercheese-chicken.jpg', emoji:'🥙',                   rating:4.8,
+    {id:2, name:'Chicken Murtabak', desc:"Crispy roti wrap with seasoned chicken filling. Choose Supercheese for extra melted cheese, or Regular for the classic version.", img:'images/murtabak-supercheese-chicken.jpg', emoji:'🥙', rating:4.8,
+     variants:[{label:'Supercheese',price:89},{label:'Regular',price:79}],
      review:{text:"This tastes like home. I remember ordering precooked chicken murtabak so I could pack them with me bound to Manila.", author:'Ate Mariz'}},
-    {id:3, name:'Regular Beef Murtabak',        price:79, desc:'Roti wrap with seasoned beef filling.',                                                   img:'images/murtabak-regular-beef.jpg',        emoji:'🥙',                   rating:4.8},
-    {id:4, name:'Regular Chicken Murtabak',     price:79, desc:'Roti wrap with seasoned chicken filling.',                                                img:'images/murtabak-regular-chicken.jpg',     emoji:'🥙',                   rating:4.8},
-    {id:5, name:'Tunamelt Murtabak',            price:79, desc:'Roti wrap with creamy, cheesy tuna filling.',                                            img:'images/murtabak-tunamelt.jpg',            emoji:'🫓',                   rating:4.8},
-    {id:6, name:'Roti Cheese',                  price:69, desc:'Roti filled with gooey melted cheese.',                                                  img:'images/roti-cheese.jpg',                  emoji:'🥐',                   rating:4.9},
-    {id:7, name:'Roti with Curry Sauce',        price:69, desc:'Crispy roti served with aromatic curry sauce.',                                          img:'images/roti-cheese.jpg',                  emoji:'🫓',                   rating:4.9},
-    {id:8, name:'Shawarma Paratha',             price:99, desc:'Paratha wrap, beef, onion, tomatoes, cabbage, zucchini, cheese & garlic sauce.',         img:'images/shawarma-paratha.jpg',             emoji:'🌯',                   rating:4.9},
+    {id:3, name:'Tunamelt Murtabak', price:79, desc:'Roti wrap with creamy, cheesy tuna filling.', img:'images/murtabak-tunamelt.jpg', emoji:'🫓', rating:4.8},
+    {id:4, name:'Roti Cheese', price:69, desc:'Roti filled with gooey melted cheese.', img:'images/roti-cheese.jpg', emoji:'🥐', rating:4.9},
+    {id:5, name:'Roti with Curry Sauce', price:69, desc:'Crispy roti served with aromatic curry sauce.', img:'images/roti-plain.jpg', emoji:'🫓', rating:4.9},
   ],
   burgers:[
-    {id:9,  name:'Regular Burger',                   price:55,  desc:'Classic 100% beef patty on a soft bun. Simple, satisfying, and delicious.',        img:'images/burger-regular.jpg',               emoji:'🍔',                 rating:4.8},
-    {id:10, name:'Classic Cheeseburger',             price:65,  desc:'Freshly baked sesame bun, 100% beef patty, and melted cheese.',                    img:'images/burger-classic-cheeseburger.jpg',  emoji:'🍔',                 rating:4.9},
-    {id:11, name:'Cheeseburger Deluxe',              price:85,  desc:'Baked bun, beef patty, lettuce, onions, tomatoes, cheese, mayo & ketchup.',        img:'images/burger-cheeseburger-deluxe.jpg',   emoji:'🍔', badge:'★ 5.0', rating:5.0,
+    {id:6,  name:'Regular Burger',           price:55, desc:'Classic 100% beef patty on a soft bun. Simple, satisfying, and delicious.', img:'images/burger-regular.jpg',              emoji:'🍔', rating:4.8},
+    {id:7,  name:'Classic Cheeseburger',     price:65, desc:'Freshly baked sesame bun, 100% beef patty, and melted cheese.',            img:'images/burger-classic-cheeseburger.jpg', emoji:'🍔', rating:4.9},
+    {id:8,  name:'Cheeseburger Deluxe',      price:85, desc:'Baked bun, beef patty, lettuce, onions, tomatoes, cheese, mayo & ketchup.', img:'images/burger-cheeseburger-deluxe.jpg',  emoji:'🍔', badge:'★ 5.0', rating:5.0,
      review:{text:"Cheeseburger Deluxe is the first item on their menu when Charito's first launched. I was one of the lucky few who got to experience the homemade patties. It was extravagantly tasty — tastes like my mom's hugs.", author:'Kuya Renz'}},
-    {id:12, name:'Double Patty Deluxe',              price:85,  desc:'Two beef patties stacked with lettuce, tomato, onion, cheese & sauce.',            img:'images/burger-double-patty-deluxe.jpg',   emoji:'🍔', badge:'★ 5.0', rating:5.0},
-    {id:13, name:'Classic Chicken Sandwich',         price:75,  desc:'Crispy chicken fillet, lettuce, tomato & sauce on a sesame bun.',                  img:'images/burger-chicken.jpg',               emoji:'🍔',                 rating:4.9},
-    {id:14, name:'Chicken Sandwich Deluxe',          price:85,  desc:'Crispy chicken fillet, lettuce, tomato, onion, cheese & special sauce.',           img:'images/burger-chicken-sandwich-deluxe.jpg',emoji:'🍔',                 rating:4.9},
+    {id:9,  name:'Double Patty Deluxe',      price:85, desc:'Two beef patties stacked with lettuce, tomato, onion, cheese & sauce.',     img:'images/burger-double-patty-deluxe.jpg', emoji:'🍔', badge:'★ 5.0', rating:5.0},
+    {id:10, name:'Classic Chicken Sandwich', price:75, desc:'Crispy chicken fillet, lettuce, tomato & sauce on a sesame bun.',           img:'images/burger-chicken.jpg',              emoji:'🍔', rating:4.9},
+    {id:11, name:'Chicken Sandwich Deluxe',  price:85, desc:'Crispy chicken fillet, lettuce, tomato, onion, cheese & special sauce.',    img:'images/burger-chicken-sandwich-deluxe.jpg', emoji:'🍔', rating:4.9},
   ],
   viands:[
-    {id:15, name:'Shawarma Rice (Solo)',              price:59,   desc:'Seasoned beef over fragrant yellow rice, topped with onions, tomatoes, cucumber & garlic sauce.', img:'images/shawarma-rice-solo.jpg',      emoji:'🍚', rating:4.9},
-    {id:16, name:'Shawarma Rice (Salo-salo)',         price:990,  desc:'Large sharing platter of shawarma rice. Perfect for group gatherings.',           img:'images/shawarma-rice-salosalo.jpg',  emoji:'🍚', badge:'Salo-salo', rating:4.9},
-    {id:17, name:'Chicken Piangang (Solo)',           price:79,   desc:'Tender chicken slow-cooked in toasted coconut & spices. +₱20 for Unli Rice.',    img:'images/chicken-piangang-solo.jpg',   emoji:'🍗', rating:4.9},
-    {id:18, name:'Chicken Piangang (Salo-salo)',      price:1350, desc:'18–20 pax sharing tray of Chicken Piangang.',                                     img:'images/chicken-piangang-salosalo.jpg',emoji:'🍗', badge:'18-20 pax', rating:4.9},
+    {id:12, name:'Chicken Piangang (Solo)',      price:79,   desc:'Tender chicken slow-cooked in toasted coconut & spices. +₱20 for Unli Rice.', img:'images/chicken-piangang-solo.jpg',    emoji:'🍗', rating:4.9},
+    {id:13, name:'Chicken Piangang (Salo-salo)', price:1350, desc:'18–20 pax sharing tray of Chicken Piangang.',                                  img:'images/chicken-piangang-salosalo.jpg', emoji:'🍗', badge:'18-20 pax', rating:4.9},
   ],
   party:[
-    {id:19, name:'Beef Patty Steak',        desc:'Tender beef patty steak in savory sauce.',               img:'images/tray-beef-patty-steak.jpg',         emoji:'🥩', rating:4.9, variants:[{label:'Barkada (8–10 pax)',price:790},{label:'Family (15–20 pax)',price:1250}]},
-    {id:20, name:'Classic Beef Steak',      desc:'Classic sliced beef steak with rich brown sauce.',       img:'images/tray-classic-beef-steak.jpg',        emoji:'🥩', rating:4.9, variants:[{label:'Barkada (8–10 pax)',price:890},{label:'Family (15–20 pax)',price:1450}]},
-    {id:21, name:'Beef Broccoli Steak',     desc:'Beef and broccoli in savory oyster sauce.',              img:'images/tray-beef-broccoli-steak.jpg',       emoji:'🥩', rating:4.9, variants:[{label:'Barkada (8–10 pax)',price:920},{label:'Family (15–20 pax)',price:1550}]},
-    {id:22, name:'Fried Chicken',           desc:'Golden crispy fried chicken, party-size.',               img:'images/tray-fried-chicken.jpg',             emoji:'🍗', rating:4.9, variants:[{label:'Barkada (8–10 pax)',price:650},{label:'Family (15–20 pax)',price:950}]},
-    {id:23, name:'Chicken Teriyaki',        desc:'Glazed chicken teriyaki with steamed rice.',             img:'images/tray-chicken-teriyaki.jpg',          emoji:'🍗', rating:4.9, variants:[{label:'Barkada (8–10 pax)',price:790},{label:'Family (15–20 pax)',price:1250}]},
-    {id:24, name:'Sweet & Sour Chicken',    desc:'Crispy chicken in sweet and tangy sauce.',               img:'images/tray-sweet-sour-chicken.jpg',        emoji:'🍗', rating:4.8, variants:[{label:'Barkada (8–10 pax)',price:850},{label:'Family (15–20 pax)',price:1390}]},
-    {id:25, name:'Spaghetti Beef Meatballs',desc:'Tomato-based spaghetti with homemade beef meatballs.',   img:'images/tray-spaghetti-beef-meatballs.jpg',  emoji:'🍝', rating:4.9, variants:[{label:'Barkada (8–10 pax)',price:890},{label:'Family (15–20 pax)',price:1450}]},
-    {id:26, name:'Special Carbonara',       desc:'Creamy carbonara with chicken ham & beef bacon.',        img:'images/tray-special-carbonara.jpg',         emoji:'🍝', rating:4.9, variants:[{label:'Barkada (8–10 pax)',price:990},{label:'Family (15–20 pax)',price:1650}]},
-    {id:27, name:'Baked Macaroni',          desc:'Cheesy baked macaroni with meaty tomato sauce.',         img:'images/tray-baked-macaroni.jpg',            emoji:'🍛', rating:4.9, variants:[{label:'Barkada (8–10 pax)',price:890},{label:'Family (15–20 pax)',price:1450}]},
-    {id:28, name:'Baked Lasagna',           desc:'Layers of pasta, meat sauce, and melted cheese.',        img:'images/tray-baked-lasagna.jpg',             emoji:'🍛', rating:4.9, variants:[{label:'Barkada (8–10 pax)',price:1150},{label:'Family (15–20 pax)',price:1690}]},
-    {id:29, name:'Buttered Prawns',         desc:'Juicy prawns sautéed in rich garlic butter sauce.',      img:'images/tray-buttered-prawns.jpg',           emoji:'🦐', rating:5.0, variants:[{label:'Barkada (8–10 pax)',price:1290},{label:'Family (15–20 pax)',price:1890}]},
-    {id:30, name:'Chicken Fillet Ala King', desc:'Creamy chicken fillet in mushroom ala king sauce.',      img:'images/tray-chicken-fillet-ala-king.jpg',   emoji:'🍔', rating:4.9, variants:[{label:'Barkada (8–10 pax)',price:650},{label:'Family (15–20 pax)',price:950}]},
+    {id:14, name:'Classic Beef Steak',   desc:'Classic sliced beef steak with rich brown sauce.',                img:'images/tray-classic-beef-steak.jpg', emoji:'🥩', rating:4.9, variants:[{label:'Barkada (8–10 pax)',price:890},{label:'Family (15–20 pax)',price:1450}]},
+    {id:15, name:'Beef Broccoli Steak',  desc:'Beef and broccoli in savory oyster sauce.',                       img:'images/tray-beef-broccoli.jpg',      emoji:'🥩', rating:4.9, variants:[{label:'Barkada (8–10 pax)',price:920},{label:'Family (15–20 pax)',price:1550}]},
+    {id:16, name:'Beef Kulma',           desc:'Tausug-style beef curry simmered in coconut milk & spices.',      img:'images/tray-beef-kulma.jpg',         emoji:'🍛', rating:4.9, variants:[{label:'Barkada (8–10 pax)',price:890},{label:'Family (15–20 pax)',price:1450}]},
+    {id:17, name:'Chicken Teriyaki',     desc:'Glazed chicken teriyaki with steamed rice.',                      img:'images/tray-chicken-teriyaki.jpg',   emoji:'🍗', rating:4.9, variants:[{label:'Barkada (8–10 pax)',price:790},{label:'Family (15–20 pax)',price:1250}]},
+    {id:18, name:'Sweet & Sour Chicken', desc:'Crispy chicken in sweet and tangy sauce.',                        img:'images/tray-sweet-sour-chicken.jpg', emoji:'🍗', rating:4.8, variants:[{label:'Barkada (8–10 pax)',price:850},{label:'Family (15–20 pax)',price:1390}]},
+    {id:19, name:'Buttered Chicken',     desc:'Crispy chicken pieces tossed in rich garlic butter sauce.',       img:'images/tray-buttered-chicken.jpg',   emoji:'🍗', rating:4.9, variants:[{label:'Barkada (8–10 pax)',price:790},{label:'Family (15–20 pax)',price:1250}]},
+    {id:20, name:'Classic Spaghetti',    desc:'Filipino-style spaghetti with savory beef sauce.',                img:'images/tray-classic-spaghetti.jpg',  emoji:'🍝', rating:4.9, variants:[{label:'Barkada (8–10 pax)',price:890},{label:'Family (15–20 pax)',price:1450}]},
+    {id:21, name:'Special Carbonara',    desc:'Creamy carbonara with chicken ham & beef bacon.',                 img:'images/tray-special-carbonara.jpg',  emoji:'🍝', rating:4.9, variants:[{label:'Barkada (8–10 pax)',price:990},{label:'Family (15–20 pax)',price:1650}]},
+    {id:22, name:'Baked Macaroni',       desc:'Cheesy baked macaroni with meaty tomato sauce.',                  img:'images/tray-baked-macaroni.jpg',     emoji:'🍛', rating:4.9, variants:[{label:'Barkada (8–10 pax)',price:890},{label:'Family (15–20 pax)',price:1450}]},
+    {id:23, name:'Baked Lasagna',        desc:'Layers of pasta, meat sauce, and melted cheese.',                 img:'images/tray-baked-lasagna.jpg',      emoji:'🍛', rating:4.9, variants:[{label:'Barkada (8–10 pax)',price:1150},{label:'Family (15–20 pax)',price:1690}]},
   ]
 };
 
-const BG=[
-  'linear-gradient(135deg,#f9d3d4,#f07070)',
-  'linear-gradient(135deg,#fde8cc,#f5a050)',
-  'linear-gradient(135deg,#d4ede0,#6dbf95)',
-  'linear-gradient(135deg,#e8d5f5,#b07dd8)',
-  'linear-gradient(135deg,#fef0d0,#f5c842)',
-  'linear-gradient(135deg,#d5eaf9,#6aa9d8)',
-  'linear-gradient(135deg,#fde0f5,#d86ab0)',
-  'linear-gradient(135deg,#e0f5e8,#5ab07f)',
-];
 let cart = {};
-// cart keys: "id" for regular items, "id:vi" for tray variants (vi = variant index)
+// cart keys: "id" for regular items, "id:vi" for items with variants (vi = variant index)
 
 function findItem(id) {
   for (var c of Object.values(MENU)) {
@@ -442,49 +422,47 @@ function parseKey(key) {
   return { id: +parts[0], vi: parts[1] !== undefined ? +parts[1] : undefined };
 }
 
-function renderMenus() {
-  ['murtabak','burgers','viands'].forEach(function(cat) {
-    document.getElementById('grid-'+cat).innerHTML = MENU[cat].map(function(item, i) {
-      return '<div class="item-card">'
-        + (item.review ? '<div class="review-bubble"><div class="review-bubble-text">'+item.review.text+'</div><div class="review-bubble-author">'+item.review.author+'</div></div>' : '')
-        + '<div class="item-img">'
-        + (item.badge ? '<span class="item-badge">'+item.badge+'</span>' : '')
-        + '<img src="'+item.img+'" alt="'+item.name+'">'
-        + '</div>'
-        + '<div class="item-body">'
-        + '<h3>'+item.name+'</h3>'
-        + '<p>'+item.desc+'</p>'
-        + '<div class="item-footer">'
-        + '<span class="item-price">₱'+item.price.toLocaleString()+'</span>'
-        + '<div class="item-right">'
-        + '<span class="item-rating"><span class="s">★</span>'+item.rating+'</span>'
-        + '<button class="add-btn" id="addbtn-'+item.id+'" onclick="addToCart('+item.id+',undefined,this)" aria-label="Add '+item.name+'">+</button>'
-        + '</div></div></div></div>';
-    }).join('');
-  });
+function renderItemCard(item) {
+  var hasVariants = !!item.variants;
 
-  // Party: variant cards
-  document.getElementById('grid-party').innerHTML = MENU.party.map(function(item, i) {
+  var priceHTML = hasVariants
+    ? '<span class="item-price" id="vprice-'+item.id+'">₱'+item.variants[0].price.toLocaleString()+'</span>'
+    : '<span class="item-price">₱'+item.price.toLocaleString()+'</span>';
+
+  var selectHTML = '';
+  if (hasVariants) {
     var opts = item.variants.map(function(v, vi) {
       return '<option value="'+vi+'">'+v.label+' — ₱'+v.price.toLocaleString()+'</option>';
     }).join('');
-    return '<div class="item-card">'
-      + '<div class="item-img">'
-      + '<img src="'+item.img+'" alt="'+item.name+'">'
-      + '</div>'
-      + '<div class="item-body">'
-      + '<h3>'+item.name+'</h3>'
-      + '<p>'+item.desc+'</p>'
-      + '<select class="variant-select" id="variant-'+item.id+'" onchange="onVariantChange('+item.id+')">'
-      + opts
-      + '</select>'
-      + '<div class="item-footer">'
-      + '<span class="item-price" id="vprice-'+item.id+'">₱'+item.variants[0].price.toLocaleString()+'</span>'
-      + '<div class="item-right">'
-      + '<span class="item-rating"><span class="s">★</span>'+item.rating+'</span>'
-      + '<button class="add-btn" id="addbtn-'+item.id+'" onclick="addTrayToCart('+item.id+',this)" aria-label="Add '+item.name+'">+</button>'
-      + '</div></div></div></div>';
-  }).join('');
+    selectHTML = '<select class="variant-select" id="variant-'+item.id+'" onchange="onVariantChange('+item.id+')">'+opts+'</select>';
+  }
+
+  var addBtnOnclick = hasVariants
+    ? 'addVariantToCart('+item.id+',this)'
+    : 'addToCart('+item.id+',undefined,this)';
+
+  return '<div class="item-card">'
+    + (item.review ? '<div class="review-bubble"><div class="review-bubble-text">'+item.review.text+'</div><div class="review-bubble-author">'+item.review.author+'</div></div>' : '')
+    + '<div class="item-img">'
+    + (item.badge ? '<span class="item-badge">'+item.badge+'</span>' : '')
+    + '<img src="'+item.img+'" alt="'+item.name+'">'
+    + '</div>'
+    + '<div class="item-body">'
+    + '<h3>'+item.name+'</h3>'
+    + '<p>'+item.desc+'</p>'
+    + selectHTML
+    + '<div class="item-footer">'
+    + priceHTML
+    + '<div class="item-right">'
+    + '<span class="item-rating"><span class="s">★</span>'+item.rating+'</span>'
+    + '<button class="add-btn" id="addbtn-'+item.id+'" onclick="'+addBtnOnclick+'" aria-label="Add '+item.name+'">+</button>'
+    + '</div></div></div></div>';
+}
+
+function renderMenus() {
+  ['murtabak','burgers','viands','party'].forEach(function(cat) {
+    document.getElementById('grid-'+cat).innerHTML = MENU[cat].map(renderItemCard).join('');
+  });
 }
 
 function onVariantChange(id) {
@@ -503,7 +481,7 @@ function addToCart(id, vi, btn) {
   showToast(getName(item, vi) + ' added!');
 }
 
-function addTrayToCart(id, btn) {
+function addVariantToCart(id, btn) {
   var sel = document.getElementById('variant-'+id);
   var vi = +sel.value;
   addToCart(id, vi, btn);
