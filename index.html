@@ -107,7 +107,7 @@ nav{position:fixed;top:0;width:100%;z-index:200;background:rgba(200,39,45,0.97);
 .menu-categories{display:flex;gap:0.8rem;justify-content:center;flex-wrap:wrap;margin-bottom:44px;}
 .menu-cat-btn{padding:0.55rem 1.3rem;border-radius:50px;border:2px solid var(--red);background:transparent;color:var(--red);font-weight:700;font-size:0.82rem;cursor:pointer;transition:all 0.2s;font-family:'Nunito',sans-serif;letter-spacing:0.05em;}
 .menu-cat-btn.active,.menu-cat-btn:hover{background:var(--red);color:#fff;}
-.menu-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:22px;max-width:1200px;margin:0 auto;}
+.menu-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:22px;max-width:900px;margin:0 auto;}
 .menu-card{background:#fff;border-radius:20px;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,0.06);transition:transform 0.3s,box-shadow 0.3s;display:flex;flex-direction:column;}
 .menu-card:hover{transform:translateY(-6px);box-shadow:0 12px 40px rgba(200,39,45,0.15);}
 .menu-card-img{aspect-ratio:1/1;overflow:hidden;position:relative;display:flex;align-items:center;justify-content:center;font-size:3.5rem;background:#FFF8F0;margin:10px 10px 0;border-radius:12px;}
@@ -340,7 +340,7 @@ footer{background:var(--red-dark);padding:55px 5% 28px;}
       <img src="images/burger-cheeseburger-deluxe.jpg" alt="Cheeseburger Deluxe Solo">
     </div>
     <div class="featured-body">
-      <span class="featured-tag">&#x2B50; Featured Item</span>
+      <span class="featured-tag">&#x1F49B; Kids' Choice</span>
       <h3>Cheeseburger<br><em>Deluxe Solo</em></h3>
       <p>A freshly baked bun stacked with a 100% beef patty, crisp lettuce, white onions, ripe tomatoes, and melted cheese &mdash; finished with our house mayo and ketchup. Served solo, no drinks, no fries. Just pure burger goodness.</p>
       <div class="featured-meta">
@@ -355,9 +355,9 @@ footer{background:var(--red-dark);padding:55px 5% 28px;}
   <!-- MENU HIGHLIGHTS -->
   <div class="menu-categories">
     <button class="menu-cat-btn active">All</button>
-    <button class="menu-cat-btn">Murtabak &amp; Roti</button>
-    <button class="menu-cat-btn">Burgers</button>
-    <button class="menu-cat-btn">Party Trays</button>
+    <button class="menu-cat-btn">Bestseller</button>
+    <button class="menu-cat-btn">Kids' Choice</button>
+    <button class="menu-cat-btn">Party Favorite</button>
   </div>
   <div class="menu-grid">
 
@@ -375,57 +375,25 @@ footer{background:var(--red-dark);padding:55px 5% 28px;}
 
     <div class="menu-card">
       <div class="menu-card-img">
-        <img src="images/murtabak-tunamelt.jpg" alt="Tunamelt Murtabak">
+        <img src="images/burger-cheeseburger-deluxe.jpg" alt="Cheeseburger Deluxe">
+        <span class="menu-card-badge">Kids' Choice</span>
       </div>
       <div class="menu-card-body">
-        <h3>Tunamelt Murtabak</h3>
-        <p>Creamy tuna and melted cheese in golden roti.</p>
-        <div class="menu-card-footer"><span class="menu-card-price">&#x20B1;79</span><span class="menu-card-rating"><span class="star">&#x2605;</span> 4.8</span></div>
-      </div>
-    </div>
-
-    <div class="menu-card">
-      <div class="menu-card-img">
-        <img src="images/shawarma-paratha.jpg" alt="Shawarma Paratha">
-      </div>
-      <div class="menu-card-body">
-        <h3>Shawarma Paratha</h3>
-        <p>Beef, onion, tomatoes, cabbage, zucchini, cheese &amp; garlic sauce.</p>
-        <div class="menu-card-footer"><span class="menu-card-price">&#x20B1;99</span><span class="menu-card-rating"><span class="star">&#x2605;</span> 4.9</span></div>
-      </div>
-    </div>
-
-    <div class="menu-card">
-      <div class="menu-card-img">
-        <img src="images/roti-cheese.jpg" alt="Roti Cheese">
-      </div>
-      <div class="menu-card-body">
-        <h3>Roti Cheese</h3>
-        <p>Soft, flaky roti filled with gooey melted cheese.</p>
-        <div class="menu-card-footer"><span class="menu-card-price">&#x20B1;69</span><span class="menu-card-rating"><span class="star">&#x2605;</span> 4.9</span></div>
-      </div>
-    </div>
-
-    <div class="menu-card">
-      <div class="menu-card-img">
-        <img src="images/burger-double-patty-deluxe.jpg" alt="Double Patty Deluxe">
-        <span class="menu-card-badge">New</span>
-      </div>
-      <div class="menu-card-body">
-        <h3>Double Patty Deluxe</h3>
-        <p>Two beef patties, baked bun, lettuce, onions, tomatoes, cheese.</p>
+        <h3>Cheeseburger Deluxe</h3>
+        <p>Baked bun, beef patty, lettuce, onions, tomatoes, cheese, mayo &amp; ketchup.</p>
         <div class="menu-card-footer"><span class="menu-card-price">&#x20B1;85</span><span class="menu-card-rating"><span class="star">&#x2605;</span> 5.0</span></div>
       </div>
     </div>
 
     <div class="menu-card">
       <div class="menu-card-img">
-        <img src="images/murtabak-supercheese-chicken.jpg" alt="Supercheese Chicken Murtabak">
+        <img src="images/tray-chicken-teriyaki.jpg" alt="Chicken Teriyaki Tray">
+        <span class="menu-card-badge">Party Favorite</span>
       </div>
       <div class="menu-card-body">
-        <h3>Supercheese Chicken Murtabak</h3>
-        <p>Crispy roti wrap with cheesy, seasoned chicken filling.</p>
-        <div class="menu-card-footer"><span class="menu-card-price">&#x20B1;89</span><span class="menu-card-rating"><span class="star">&#x2605;</span> 4.9</span></div>
+        <h3>Chicken Teriyaki</h3>
+        <p>Glazed chicken teriyaki tray with steamed rice &mdash; perfect for sharing.</p>
+        <div class="menu-card-footer"><span class="menu-card-price">From &#x20B1;790</span><span class="menu-card-rating"><span class="star">&#x2605;</span> 4.9</span></div>
       </div>
     </div>
 
