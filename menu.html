@@ -268,7 +268,6 @@ nav{position:sticky;top:0;width:100%;z-index:200;background:rgba(200,39,45,0.97)
     <div class="category-tabs">
       <button class="tab-btn active" onclick="jumpTo('murtabak',this)">🥙 Murtabak & Roti</button>
       <button class="tab-btn" onclick="jumpTo('burgers',this)">🍔 Burgers</button>
-      <button class="tab-btn" onclick="jumpTo('viands',this)">🍚 Viands</button>
       <button class="tab-btn" onclick="jumpTo('party',this)">📦 Party Trays</button>
     </div>
 
@@ -282,12 +281,6 @@ nav{position:sticky;top:0;width:100%;z-index:200;background:rgba(200,39,45,0.97)
       <h2 class="cat-title">🍔 Burgers & Sandwiches</h2>
       <p class="cat-desc">100% beef patties on freshly baked buns. Classic comfort food done right.</p>
       <div class="items-grid" id="grid-burgers"></div>
-    </div>
-
-    <div class="cat-section" id="viands">
-      <h2 class="cat-title">🍚 Viands & Rice Meals</h2>
-      <p class="cat-desc">Solo meals and salo-salo sharing plates — perfect for any time of day.</p>
-      <div class="items-grid" id="grid-viands"></div>
     </div>
 
     <div class="cat-section" id="party">
@@ -370,17 +363,12 @@ const MENU = {
     {id:5, name:'Roti with Curry Sauce', price:69, desc:'Crispy roti served with aromatic curry sauce.', img:'images/roti-plain.jpg', emoji:'🫓', rating:4.9},
   ],
   burgers:[
-    {id:6,  name:'Regular Burger',           price:55, desc:'Classic 100% beef patty on a soft bun. Simple, satisfying, and delicious.', img:'images/burger-regular.jpg',              emoji:'🍔', rating:4.8},
-    {id:7,  name:'Classic Cheeseburger',     price:65, desc:'Freshly baked sesame bun, 100% beef patty, and melted cheese.',            img:'images/burger-classic-cheeseburger.jpg', emoji:'🍔', rating:4.9},
-    {id:8,  name:'Cheeseburger Deluxe',      price:85, desc:'Baked bun, beef patty, lettuce, onions, tomatoes, cheese, mayo & ketchup.', img:'images/burger-cheeseburger-deluxe.jpg',  emoji:'🍔', badge:'★ 5.0', rating:5.0,
+    {id:6,  name:'Regular Burger',           price:55, desc:'100% beef patty with melted cheese and our signature sauce on a soft bun.', img:'images/burger-regular.png',              emoji:'🍔', rating:4.8},
+    {id:7,  name:'Classic Cheeseburger',     price:65, desc:'Freshly baked bun, 100% beef patty, melted cheese, and signature sauce.',  img:'images/burger-classic-cheeseburger.png', emoji:'🍔', rating:4.9},
+    {id:8,  name:'Cheeseburger Deluxe',      price:85, desc:'Baked bun, beef patty, melted cheese, crisp coleslaw, and signature sauce.', img:'images/burger-cheeseburger-deluxe.png',  emoji:'🍔', badge:'★ 5.0', rating:5.0,
      review:{text:"Cheeseburger Deluxe is the first item on their menu when Charito's first launched. I was one of the lucky few who got to experience the homemade patties. It was extravagantly tasty — tastes like my mom's hugs.", author:'Kuya Renz'}},
-    {id:9,  name:'Double Patty Deluxe',      price:85, desc:'Two beef patties stacked with lettuce, tomato, onion, cheese & sauce.',     img:'images/burger-double-patty-deluxe.jpg', emoji:'🍔', badge:'★ 5.0', rating:5.0},
-    {id:10, name:'Classic Chicken Sandwich', price:75, desc:'Crispy chicken fillet, lettuce, tomato & sauce on a sesame bun.',           img:'images/burger-chicken.jpg',              emoji:'🍔', rating:4.9},
-    {id:11, name:'Chicken Sandwich Deluxe',  price:85, desc:'Crispy chicken fillet, lettuce, tomato, onion, cheese & special sauce.',    img:'images/burger-chicken-sandwich-deluxe.jpg', emoji:'🍔', rating:4.9},
-  ],
-  viands:[
-    {id:12, name:'Chicken Piangang (Solo)',      price:79,   desc:'Tender chicken slow-cooked in toasted coconut & spices. +₱20 for Unli Rice.', img:'images/chicken-piangang-solo.jpg',    emoji:'🍗', rating:4.9},
-    {id:13, name:'Chicken Piangang (Salo-salo)', price:1350, desc:'18–20 pax sharing tray of Chicken Piangang.',                                  img:'images/chicken-piangang-salosalo.jpg', emoji:'🍗', badge:'18-20 pax', rating:4.9},
+    {id:10, name:'Classic Chicken Sandwich', price:75, desc:'Crispy chicken patty with melted cheese and our signature sauce on a soft bun.', img:'images/burger-chicken.png',           emoji:'🍔', rating:4.9},
+    {id:11, name:'Chicken Sandwich Deluxe',  price:85, desc:'Crispy chicken patty, melted cheese, crisp coleslaw, and signature sauce.',    img:'images/burger-chicken-sandwich-deluxe.png', emoji:'🍔', rating:4.9},
   ],
   party:[
     {id:14, name:'Classic Beef Steak',   desc:'Classic sliced beef steak with rich brown sauce.',                img:'images/tray-classic-beef-steak.jpg', emoji:'🥩', rating:4.9, variants:[{label:'Barkada (8–10 pax)',price:890},{label:'Family (15–20 pax)',price:1450}]},
@@ -460,7 +448,7 @@ function renderItemCard(item) {
 }
 
 function renderMenus() {
-  ['murtabak','burgers','viands','party'].forEach(function(cat) {
+  ['murtabak','burgers','party'].forEach(function(cat) {
     document.getElementById('grid-'+cat).innerHTML = MENU[cat].map(renderItemCard).join('');
   });
 }
