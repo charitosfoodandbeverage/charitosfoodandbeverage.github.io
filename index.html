@@ -88,21 +88,6 @@ nav{position:fixed;top:0;width:100%;z-index:200;background:rgba(200,39,45,0.97);
 .section-header h2 em{font-style:italic;color:var(--red);}
 .section-header p{color:#777;margin-top:0.7rem;font-size:0.95rem;max-width:440px;margin-inline:auto;}
 
-/* Featured Dish */
-.featured-dish{max-width:1100px;margin:0 auto 55px;background:#fff;border-radius:28px;overflow:hidden;box-shadow:0 8px 40px rgba(200,39,45,0.12);display:grid;grid-template-columns:1fr 1fr;align-items:center;}
-.featured-img-wrap{position:relative;background:#FFF8F0;min-height:320px;display:flex;align-items:center;justify-content:center;overflow:hidden;}
-.featured-img-wrap img{width:100%;height:100%;object-fit:contain;position:absolute;inset:0;padding:12px;}
-.featured-fallback{font-size:7rem;position:relative;z-index:1;}
-.featured-body{padding:2.5rem 2.8rem;}
-.featured-tag{display:inline-block;background:#FFF0F0;color:var(--red);font-size:0.7rem;font-weight:800;letter-spacing:0.15em;text-transform:uppercase;padding:0.3rem 0.9rem;border-radius:50px;margin-bottom:1rem;}
-.featured-body h3{font-family:'Playfair Display',serif;font-size:clamp(1.6rem,3vw,2.2rem);line-height:1.2;margin-bottom:0.7rem;}
-.featured-body h3 em{font-style:italic;color:var(--red);}
-.featured-body p{font-size:0.95rem;color:#666;line-height:1.75;margin-bottom:1.4rem;}
-.featured-meta{display:flex;align-items:center;gap:1.2rem;margin-bottom:1.6rem;flex-wrap:wrap;}
-.featured-price{font-family:'Playfair Display',serif;font-size:2rem;font-weight:900;color:var(--red);}
-.featured-note{font-size:0.82rem;color:#999;}
-.featured-stars{color:var(--gold);font-size:0.9rem;}
-
 /* Menu grid */
 .menu-categories{display:flex;gap:0.8rem;justify-content:center;flex-wrap:wrap;margin-bottom:44px;}
 .menu-cat-btn{padding:0.55rem 1.3rem;border-radius:50px;border:2px solid var(--red);background:transparent;color:var(--red);font-weight:700;font-size:0.82rem;cursor:pointer;transition:all 0.2s;font-family:'Nunito',sans-serif;letter-spacing:0.05em;}
@@ -214,8 +199,6 @@ footer{background:var(--red-dark);padding:55px 5% 28px;}
   .about,.location-section{grid-template-columns:1fr;gap:40px;padding:70px 4%;}
   .about-badge{bottom:-14px;right:14px;}
   .careers-banner-inner{grid-template-columns:1fr;gap:36px;}
-  .featured-dish{grid-template-columns:1fr;}
-  .featured-img-wrap{min-height:240px;}
   .footer-grid{grid-template-columns:1fr 1fr;gap:36px;}
   .menu-preview,.party-trays,.testimonials,.careers-banner{padding:70px 4%;}
 }
@@ -230,8 +213,6 @@ footer{background:var(--red-dark);padding:55px 5% 28px;}
   .btn-primary,.btn-outline{width:100%;text-align:center;padding:1rem 1.5rem;}
   .menu-grid{grid-template-columns:1fr 1fr;gap:14px;}
   .menu-card-img{font-size:2.8rem;}
-  .featured-body{padding:1.6rem 1.4rem;}
-  .featured-body h3{font-size:1.5rem;}
   .trays-grid{grid-template-columns:1fr;}
   .reviews-grid{grid-template-columns:1fr;}
   .footer-grid{grid-template-columns:1fr;gap:28px;}
@@ -278,7 +259,7 @@ footer{background:var(--red-dark);padding:55px 5% 28px;}
   <div class="hero-content">
     <div class="hero-badge"><div class="hero-badge-dot"></div> Est. 2020 &middot; Zamboanga City</div>
     <h1>Charito's<br>Food &amp; Bev.</h1>
-    <p class="hero-tagline">Burgers &middot; Murtabak &middot; Roti &middot; Shawarma</p>
+    <p class="hero-tagline">Burgers &middot; Murtabak &middot; Roti &middot; Party Trays</p>
     <p class="hero-desc">Authentic flavors crafted with love. From crispy murtabak to juicy cheeseburgers &mdash; every bite feels like home.</p>
     <div class="hero-btns">
       <a href="menu.html" class="btn-primary">View Full Menu</a>
@@ -287,10 +268,10 @@ footer{background:var(--red-dark);padding:55px 5% 28px;}
   </div>
   <div class="hero-visual">
     <div class="hero-food-grid">
-      <div class="hero-food-card"><img src="images/murtabak-supercheese-beef.jpg" alt="Supercheese Beef Murtabak"></div>
-      <div class="hero-food-card"><img src="images/burger-cheeseburger-deluxe.jpg" alt="Cheeseburger Deluxe"></div>
+      <div class="hero-food-card"><img src="images/murtabak-supercheese-beef.jpg" alt="Beef Murtabak"></div>
+      <div class="hero-food-card"><img src="images/burger-classic-cheeseburger.png" alt="Classic Cheeseburger"></div>
       <div class="hero-food-card"><img src="images/roti-cheese.jpg" alt="Roti Cheese"></div>
-      <div class="hero-food-card"><img src="images/shawarma-paratha.jpg" alt="Paratha Shawarma"></div>
+      <div class="hero-food-card"><img src="images/tray-chicken-teriyaki.jpg" alt="Chicken Teriyaki Tray"></div>
     </div>
   </div>
   <div class="hero-stats">
@@ -306,7 +287,7 @@ footer{background:var(--red-dark);padding:55px 5% 28px;}
     <span class="section-label">Our Story</span>
     <h2>Where Every Meal Feels Like <em>Home</em></h2>
     <p>Founded in 2020, Charito's Food &amp; Beverage was born from a passion for serving honest, flavorful food to the people of Zamboanga City. From our humble beginnings at 234 Talon-Talon Road, we've grown into a beloved local spot.</p>
-    <p>We specialize in Murtabak &mdash; flaky, crispy roti wraps filled with seasoned meats and melted cheese &mdash; alongside juicy 100% beef burgers, hearty silogs, and everything in between.</p>
+    <p>We specialize in Murtabak &mdash; flaky, crispy roti wraps filled with seasoned meats and melted cheese &mdash; alongside juicy 100% beef burgers, party trays, and everything in between.</p>
     <div class="about-features">
       <div class="about-feature"><div class="about-feature-icon">&#x1F525;</div> Freshly Made</div>
       <div class="about-feature"><div class="about-feature-icon">&#x1F969;</div> 100% Beef</div>
@@ -334,24 +315,6 @@ footer{background:var(--red-dark);padding:55px 5% 28px;}
     <p>Handcrafted with the finest ingredients, served fresh every day.</p>
   </div>
 
-  <!-- FEATURED DISH -->
-  <div class="featured-dish">
-    <div class="featured-img-wrap">
-      <img src="images/burger-cheeseburger-deluxe.jpg" alt="Cheeseburger Deluxe Solo">
-    </div>
-    <div class="featured-body">
-      <span class="featured-tag">&#x1F49B; Kids' Choice</span>
-      <h3>Cheeseburger<br><em>Deluxe Solo</em></h3>
-      <p>A freshly baked bun stacked with a 100% beef patty, crisp lettuce, white onions, ripe tomatoes, and melted cheese &mdash; finished with our house mayo and ketchup. Served solo, no drinks, no fries. Just pure burger goodness.</p>
-      <div class="featured-meta">
-        <span class="featured-price">&#x20B1;85</span>
-        <span class="featured-note">Solo &middot; No drinks &middot; No fries</span>
-        <span class="featured-stars">&#x2605;&#x2605;&#x2605;&#x2605;&#x2605; <span style="color:#999;font-size:0.8rem">5.0</span></span>
-      </div>
-      <a href="menu.html" class="btn-red">Order Now</a>
-    </div>
-  </div>
-
   <!-- MENU HIGHLIGHTS -->
   <div class="menu-categories">
     <button class="menu-cat-btn active">All</button>
@@ -363,25 +326,25 @@ footer{background:var(--red-dark);padding:55px 5% 28px;}
 
     <div class="menu-card">
       <div class="menu-card-img">
-        <img src="images/murtabak-supercheese-beef.jpg" alt="Supercheese Beef Murtabak">
+        <img src="images/murtabak-supercheese-beef.jpg" alt="Beef Murtabak">
         <span class="menu-card-badge">Bestseller</span>
       </div>
       <div class="menu-card-body">
-        <h3>Supercheese Beef Murtabak</h3>
-        <p>Crispy roti wrap with cheesy, seasoned beef filling.</p>
-        <div class="menu-card-footer"><span class="menu-card-price">&#x20B1;89</span><span class="menu-card-rating"><span class="star">&#x2605;</span> 4.9</span></div>
+        <h3>Beef Murtabak</h3>
+        <p>Crispy roti wrap with seasoned beef filling. Available Supercheese or Regular.</p>
+        <div class="menu-card-footer"><span class="menu-card-price">From &#x20B1;79</span><span class="menu-card-rating"><span class="star">&#x2605;</span> 4.9</span></div>
       </div>
     </div>
 
     <div class="menu-card">
       <div class="menu-card-img">
-        <img src="images/burger-cheeseburger-deluxe.jpg" alt="Cheeseburger Deluxe">
+        <img src="images/burger-classic-cheeseburger.png" alt="Classic Cheeseburger">
         <span class="menu-card-badge">Kids' Choice</span>
       </div>
       <div class="menu-card-body">
-        <h3>Cheeseburger Deluxe</h3>
-        <p>Baked bun, beef patty, lettuce, onions, tomatoes, cheese, mayo &amp; ketchup.</p>
-        <div class="menu-card-footer"><span class="menu-card-price">&#x20B1;85</span><span class="menu-card-rating"><span class="star">&#x2605;</span> 5.0</span></div>
+        <h3>Classic Cheeseburger</h3>
+        <p>100% beef patty, melted cheese, and our signature sauce on a soft bun.</p>
+        <div class="menu-card-footer"><span class="menu-card-price">&#x20B1;65</span><span class="menu-card-rating"><span class="star">&#x2605;</span> 4.9</span></div>
       </div>
     </div>
 
@@ -410,49 +373,103 @@ footer{background:var(--red-dark);padding:55px 5% 28px;}
   </div>
   <div class="trays-grid">
     <div class="tray-card">
-      <div class="tray-card-img"><img src="images/tray8.jpg" alt="Chicken Fillet Ala King Tray"></div>
+      <div class="tray-card-img"><img src="images/tray-classic-beef-steak.jpg" alt="Classic Beef Steak Tray"></div>
       <div class="tray-card-body">
-        <h3>&#x1F357; Chicken Fillet Ala King</h3>
+        <h3>&#x1F969; Classic Beef Steak</h3>
         <div class="tray-sizes">
-          <div class="tray-size"><div class="tray-size-label">Barkada</div><div class="tray-size-price">&#x20B1;650</div></div>
-          <div class="tray-size"><div class="tray-size-label">Family</div><div class="tray-size-price">&#x20B1;950</div></div>
+          <div class="tray-size"><div class="tray-size-label">Barkada</div><div class="tray-size-price">&#x20B1;890</div></div>
+          <div class="tray-size"><div class="tray-size-label">Family</div><div class="tray-size-price">&#x20B1;1,450</div></div>
         </div>
       </div>
     </div>
     <div class="tray-card">
-      <div class="tray-card-body" style="padding-top:1.4rem">
-        <h3>&#x1F969; Beef Patty Steak</h3>
-        <div class="tray-sizes"><div class="tray-size"><div class="tray-size-label">Barkada</div><div class="tray-size-price">&#x20B1;790</div></div><div class="tray-size"><div class="tray-size-label">Family</div><div class="tray-size-price">&#x20B1;1,250</div></div></div>
+      <div class="tray-card-img"><img src="images/tray-beef-broccoli.jpg" alt="Beef Broccoli Steak Tray"></div>
+      <div class="tray-card-body">
+        <h3>&#x1F966; Beef Broccoli Steak</h3>
+        <div class="tray-sizes">
+          <div class="tray-size"><div class="tray-size-label">Barkada</div><div class="tray-size-price">&#x20B1;920</div></div>
+          <div class="tray-size"><div class="tray-size-label">Family</div><div class="tray-size-price">&#x20B1;1,550</div></div>
+        </div>
       </div>
     </div>
     <div class="tray-card">
-      <div class="tray-card-body" style="padding-top:1.4rem">
-        <h3>&#x1F969; Classic Beef Steak</h3>
-        <div class="tray-sizes"><div class="tray-size"><div class="tray-size-label">Barkada</div><div class="tray-size-price">&#x20B1;890</div></div><div class="tray-size"><div class="tray-size-label">Family</div><div class="tray-size-price">&#x20B1;1,450</div></div></div>
+      <div class="tray-card-img"><img src="images/tray-beef-kulma.jpg" alt="Beef Kulma Tray"></div>
+      <div class="tray-card-body">
+        <h3>&#x1F35B; Beef Kulma</h3>
+        <div class="tray-sizes">
+          <div class="tray-size"><div class="tray-size-label">Barkada</div><div class="tray-size-price">&#x20B1;890</div></div>
+          <div class="tray-size"><div class="tray-size-label">Family</div><div class="tray-size-price">&#x20B1;1,450</div></div>
+        </div>
       </div>
     </div>
     <div class="tray-card">
-      <div class="tray-card-body" style="padding-top:1.4rem">
-        <h3>&#x1F357; Fried Chicken</h3>
-        <div class="tray-sizes"><div class="tray-size"><div class="tray-size-label">Barkada</div><div class="tray-size-price">&#x20B1;650</div></div><div class="tray-size"><div class="tray-size-label">Family</div><div class="tray-size-price">&#x20B1;950</div></div></div>
+      <div class="tray-card-img"><img src="images/tray-chicken-teriyaki.jpg" alt="Chicken Teriyaki Tray"></div>
+      <div class="tray-card-body">
+        <h3>&#x1F357; Chicken Teriyaki</h3>
+        <div class="tray-sizes">
+          <div class="tray-size"><div class="tray-size-label">Barkada</div><div class="tray-size-price">&#x20B1;790</div></div>
+          <div class="tray-size"><div class="tray-size-label">Family</div><div class="tray-size-price">&#x20B1;1,250</div></div>
+        </div>
       </div>
     </div>
     <div class="tray-card">
-      <div class="tray-card-body" style="padding-top:1.4rem">
-        <h3>&#x1F35D; Spaghetti Beef Meatballs</h3>
-        <div class="tray-sizes"><div class="tray-size"><div class="tray-size-label">Barkada</div><div class="tray-size-price">&#x20B1;890</div></div><div class="tray-size"><div class="tray-size-label">Family</div><div class="tray-size-price">&#x20B1;1,450</div></div></div>
+      <div class="tray-card-img"><img src="images/tray-sweet-sour-chicken.jpg" alt="Sweet & Sour Chicken Tray"></div>
+      <div class="tray-card-body">
+        <h3>&#x1F357; Sweet &amp; Sour Chicken</h3>
+        <div class="tray-sizes">
+          <div class="tray-size"><div class="tray-size-label">Barkada</div><div class="tray-size-price">&#x20B1;850</div></div>
+          <div class="tray-size"><div class="tray-size-label">Family</div><div class="tray-size-price">&#x20B1;1,390</div></div>
+        </div>
       </div>
     </div>
     <div class="tray-card">
-      <div class="tray-card-body" style="padding-top:1.4rem">
-        <h3>&#x1F990; Buttered Prawns</h3>
-        <div class="tray-sizes"><div class="tray-size"><div class="tray-size-label">Barkada</div><div class="tray-size-price">&#x20B1;1,290</div></div><div class="tray-size"><div class="tray-size-label">Family</div><div class="tray-size-price">&#x20B1;1,890</div></div></div>
+      <div class="tray-card-img"><img src="images/tray-buttered-chicken.jpg" alt="Buttered Chicken Tray"></div>
+      <div class="tray-card-body">
+        <h3>&#x1F357; Buttered Chicken</h3>
+        <div class="tray-sizes">
+          <div class="tray-size"><div class="tray-size-label">Barkada</div><div class="tray-size-price">&#x20B1;790</div></div>
+          <div class="tray-size"><div class="tray-size-label">Family</div><div class="tray-size-price">&#x20B1;1,250</div></div>
+        </div>
       </div>
     </div>
     <div class="tray-card">
-      <div class="tray-card-body" style="padding-top:1.4rem">
+      <div class="tray-card-img"><img src="images/tray-classic-spaghetti.jpg" alt="Classic Spaghetti Tray"></div>
+      <div class="tray-card-body">
+        <h3>&#x1F35D; Classic Spaghetti</h3>
+        <div class="tray-sizes">
+          <div class="tray-size"><div class="tray-size-label">Barkada</div><div class="tray-size-price">&#x20B1;890</div></div>
+          <div class="tray-size"><div class="tray-size-label">Family</div><div class="tray-size-price">&#x20B1;1,450</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="tray-card">
+      <div class="tray-card-img"><img src="images/tray-special-carbonara.jpg" alt="Special Carbonara Tray"></div>
+      <div class="tray-card-body">
+        <h3>&#x1F35D; Special Carbonara</h3>
+        <div class="tray-sizes">
+          <div class="tray-size"><div class="tray-size-label">Barkada</div><div class="tray-size-price">&#x20B1;990</div></div>
+          <div class="tray-size"><div class="tray-size-label">Family</div><div class="tray-size-price">&#x20B1;1,650</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="tray-card">
+      <div class="tray-card-img"><img src="images/tray-baked-macaroni.jpg" alt="Baked Macaroni Tray"></div>
+      <div class="tray-card-body">
+        <h3>&#x1F35B; Baked Macaroni</h3>
+        <div class="tray-sizes">
+          <div class="tray-size"><div class="tray-size-label">Barkada</div><div class="tray-size-price">&#x20B1;890</div></div>
+          <div class="tray-size"><div class="tray-size-label">Family</div><div class="tray-size-price">&#x20B1;1,450</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="tray-card">
+      <div class="tray-card-img"><img src="images/tray-baked-lasagna.jpg" alt="Baked Lasagna Tray"></div>
+      <div class="tray-card-body">
         <h3>&#x1F35B; Baked Lasagna</h3>
-        <div class="tray-sizes"><div class="tray-size"><div class="tray-size-label">Barkada</div><div class="tray-size-price">&#x20B1;1,150</div></div><div class="tray-size"><div class="tray-size-label">Family</div><div class="tray-size-price">&#x20B1;1,690</div></div></div>
+        <div class="tray-sizes">
+          <div class="tray-size"><div class="tray-size-label">Barkada</div><div class="tray-size-price">&#x20B1;1,150</div></div>
+          <div class="tray-size"><div class="tray-size-label">Family</div><div class="tray-size-price">&#x20B1;1,690</div></div>
+        </div>
       </div>
     </div>
   </div>
@@ -530,7 +547,7 @@ footer{background:var(--red-dark);padding:55px 5% 28px;}
   <div class="footer-grid">
     <div class="footer-brand">
       <span class="brand-name">Charito's</span>
-      <p>Serving authentic, homemade Filipino food since 2020. Burgers, Murtabak, Roti, Shawarma &amp; more &mdash; crafted with love in Zamboanga City.</p>
+      <p>Serving authentic, homemade Filipino food since 2020. Burgers, Murtabak, Roti, Party Trays &amp; more &mdash; crafted with love in Zamboanga City.</p>
       <div class="footer-socials">
         <a href="https://www.facebook.com/charitosfoodandbeverages" class="social-btn" target="_blank" rel="noopener">f</a>
         <a href="https://instagram.com/ktandt.co" class="social-btn" target="_blank" rel="noopener">ig</a>
@@ -551,9 +568,7 @@ footer{background:var(--red-dark);padding:55px 5% 28px;}
       <ul>
         <li><a href="menu.html">Murtabak &amp; Roti</a></li>
         <li><a href="menu.html">Burgers</a></li>
-        <li><a href="menu.html">Shawarma</a></li>
         <li><a href="#party">Party Trays</a></li>
-        <li><a href="menu.html">Silog Meals</a></li>
       </ul>
     </div>
   </div>
