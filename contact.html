@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Contact — Charito's Food & Beverage</title>
+<link rel="icon" type="image/jpeg" href="images/charitos-logo.jpg">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Nunito:wght@300;400;600;700;800&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
 <style>
 :root{
@@ -150,6 +151,7 @@ footer{background:var(--red-dark);padding:48px 5% 26px;}
     <li><a href="index.html">Home</a></li>
     <li><a href="menu.html">Menu</a></li>
     <li><a href="index.html#party">Party Trays</a></li>
+    <li><a href="reviews.html">Reviews</a></li>
     <li><a href="careers.html">Careers</a></li>
     <li><a href="index.html#location">Find Us</a></li>
   </ul>
@@ -159,6 +161,7 @@ footer{background:var(--red-dark);padding:48px 5% 26px;}
   <a href="index.html" onclick="closeMenu()">Home</a>
   <a href="menu.html" onclick="closeMenu()">Menu</a>
   <a href="index.html#party" onclick="closeMenu()">Party Trays</a>
+  <a href="reviews.html" onclick="closeMenu()">Reviews</a>
   <a href="careers.html" onclick="closeMenu()">Careers</a>
   <a href="index.html#location" onclick="closeMenu()">Find Us</a>
 </div>
@@ -225,9 +228,10 @@ footer{background:var(--red-dark);padding:48px 5% 26px;}
             <label>Pickup Time <span class="req">*</span></label>
             <select required>
               <option value="" disabled selected>Select time…</option>
-              <option>5:30 AM – 7:00 AM (Breakfast)</option>
-              <option>10:00 AM – 12:00 PM (Lunch)</option>
-              <option>1:00 PM – 3:00 PM (Afternoon)</option>
+              <option>8:00 AM – 10:00 AM (Morning)</option>
+              <option>11:00 AM – 2:00 PM (Lunch)</option>
+              <option>3:00 PM – 6:00 PM (Afternoon)</option>
+              <option>7:00 PM – 9:00 PM (Evening)</option>
             </select>
           </div>
           <div class="form-group"><label>Approx. No. of Guests</label><input type="number" placeholder="e.g. 20" min="1"></div>
@@ -237,14 +241,16 @@ footer{background:var(--red-dark);padding:48px 5% 26px;}
           <label>Select Tray Items <span class="req">*</span></label>
           <p style="font-size:0.8rem;color:#888;margin-bottom:0.7rem">Check all that apply — we'll discuss sizes and quantities when we contact you.</p>
           <div class="tray-picker">
-            <div class="tray-option" onclick="toggleTray(this)"><input type="checkbox" id="t1"><label for="t1">🥩 Beef Patty Steak</label></div>
-            <div class="tray-option" onclick="toggleTray(this)"><input type="checkbox" id="t2"><label for="t2">🥩 Classic Beef Steak</label></div>
-            <div class="tray-option" onclick="toggleTray(this)"><input type="checkbox" id="t3"><label for="t3">🍗 Fried Chicken</label></div>
-            <div class="tray-option" onclick="toggleTray(this)"><input type="checkbox" id="t4"><label for="t4">🍝 Spaghetti Meatballs</label></div>
-            <div class="tray-option" onclick="toggleTray(this)"><input type="checkbox" id="t5"><label for="t5">🦐 Buttered Prawns</label></div>
-            <div class="tray-option" onclick="toggleTray(this)"><input type="checkbox" id="t6"><label for="t6">🍛 Baked Lasagna</label></div>
-            <div class="tray-option" onclick="toggleTray(this)"><input type="checkbox" id="t7"><label for="t7">🍗 Sweet & Sour Chicken</label></div>
-            <div class="tray-option" onclick="toggleTray(this)"><input type="checkbox" id="t8"><label for="t8">🍔 Burger Party Pack</label></div>
+            <div class="tray-option" onclick="toggleTray(this)"><input type="checkbox" id="t1"><label for="t1">🥩 Classic Beef Steak</label></div>
+            <div class="tray-option" onclick="toggleTray(this)"><input type="checkbox" id="t2"><label for="t2">🥦 Beef Broccoli Steak</label></div>
+            <div class="tray-option" onclick="toggleTray(this)"><input type="checkbox" id="t3"><label for="t3">🍛 Beef Kulma</label></div>
+            <div class="tray-option" onclick="toggleTray(this)"><input type="checkbox" id="t4"><label for="t4">🍗 Chicken Teriyaki</label></div>
+            <div class="tray-option" onclick="toggleTray(this)"><input type="checkbox" id="t5"><label for="t5">🍗 Sweet & Sour Chicken</label></div>
+            <div class="tray-option" onclick="toggleTray(this)"><input type="checkbox" id="t6"><label for="t6">🍗 Buttered Chicken</label></div>
+            <div class="tray-option" onclick="toggleTray(this)"><input type="checkbox" id="t7"><label for="t7">🍝 Classic Spaghetti</label></div>
+            <div class="tray-option" onclick="toggleTray(this)"><input type="checkbox" id="t8"><label for="t8">🍝 Special Carbonara</label></div>
+            <div class="tray-option" onclick="toggleTray(this)"><input type="checkbox" id="t9"><label for="t9">🍛 Baked Macaroni</label></div>
+            <div class="tray-option" onclick="toggleTray(this)"><input type="checkbox" id="t10"><label for="t10">🍛 Baked Lasagna</label></div>
           </div>
         </div>
 
@@ -271,13 +277,13 @@ footer{background:var(--red-dark);padding:48px 5% 26px;}
     <div class="sidebar-card">
       <h3>⏰ Business Hours</h3>
       <div class="hours-list" id="hoursList">
-        <div class="hours-row" data-day="Monday"><span>Monday</span><span>5:30 AM – 4:00 PM</span></div>
-        <div class="hours-row" data-day="Tuesday"><span>Tuesday</span><span>5:30 AM – 4:00 PM</span></div>
-        <div class="hours-row" data-day="Wednesday"><span>Wednesday</span><span>5:30 AM – 4:00 PM</span></div>
-        <div class="hours-row" data-day="Thursday"><span>Thursday</span><span>5:30 AM – 4:00 PM</span></div>
-        <div class="hours-row" data-day="Friday"><span>Friday</span><span>5:30 AM – 4:00 PM</span></div>
-        <div class="hours-row" data-day="Saturday"><span>Saturday</span><span>5:30 AM – 4:00 PM</span></div>
-        <div class="hours-row" data-day="Sunday"><span>Sunday</span><span>5:30 AM onwards</span></div>
+        <div class="hours-row" data-day="Monday"><span>Monday</span><span>8:00 AM – 10:00 PM</span></div>
+        <div class="hours-row" data-day="Tuesday"><span>Tuesday</span><span>8:00 AM – 10:00 PM</span></div>
+        <div class="hours-row" data-day="Wednesday"><span>Wednesday</span><span>8:00 AM – 10:00 PM</span></div>
+        <div class="hours-row" data-day="Thursday"><span>Thursday</span><span>8:00 AM – 10:00 PM</span></div>
+        <div class="hours-row" data-day="Friday"><span>Friday</span><span>8:00 AM – 10:00 PM</span></div>
+        <div class="hours-row" data-day="Saturday"><span>Saturday</span><span>2:00 PM – 4:10 PM</span></div>
+        <div class="hours-row" data-day="Sunday"><span>Sunday</span><span>9:00 AM – 5:00 PM</span></div>
       </div>
     </div>
 
