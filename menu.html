@@ -20,8 +20,11 @@ body{font-family:'Nunito',sans-serif;background:var(--cream);color:var(--text-da
 nav{position:sticky;top:0;width:100%;z-index:200;background:rgba(200,39,45,0.97);backdrop-filter:blur(12px);display:flex;align-items:center;justify-content:space-between;padding:0 5%;height:68px;box-shadow:0 2px 20px rgba(155,27,31,0.4);}
 .nav-logo{font-family:'Dancing Script',cursive;font-size:1.9rem;color:#fff;text-decoration:none;}
 .nav-links{display:flex;gap:1.6rem;list-style:none;align-items:center;}
-.nav-links a{color:rgba(255,255,255,0.88);text-decoration:none;font-size:0.82rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;transition:color 0.2s;}
+.nav-links a{color:rgba(255,255,255,0.88);text-decoration:none;font-size:0.82rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;transition:color 0.2s;position:relative;}
+.nav-links a::after{content:'';position:absolute;bottom:-3px;left:0;width:0;height:2px;background:var(--gold);transition:width 0.3s;}
 .nav-links a:hover{color:#fff;}
+.nav-links a:hover::after{width:100%;}
+.nav-links a.current::after{width:100%;}
 .nav-right{display:flex;align-items:center;gap:0.8rem;}
 .cart-fab{background:#fff;color:var(--red);border:none;padding:0.48rem 1.1rem;border-radius:50px;font-weight:800;font-size:0.85rem;cursor:pointer;display:flex;align-items:center;gap:0.4rem;font-family:'Nunito',sans-serif;transition:all 0.2s;white-space:nowrap;}
 .cart-fab:hover{transform:translateY(-2px);box-shadow:0 4px 15px rgba(0,0,0,0.2);}
@@ -35,6 +38,7 @@ nav{position:sticky;top:0;width:100%;z-index:200;background:rgba(200,39,45,0.97)
 .mobile-menu.open{display:block;transform:translateY(0);opacity:1;pointer-events:all;}
 .mobile-menu a{display:block;padding:0.9rem 5%;color:rgba(255,255,255,0.9);text-decoration:none;font-size:0.95rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;border-bottom:1px solid rgba(255,255,255,0.08);transition:background 0.2s;}
 .mobile-menu a:hover{background:rgba(255,255,255,0.1);}
+.mobile-menu a:last-child{border-bottom:none;color:#fff;background:rgba(255,255,255,0.15);margin:0.5rem 5%;border-radius:10px;text-align:center;}
 
 /* HERO BANNER */
 .menu-hero{background:linear-gradient(135deg,var(--red-dark),var(--red));padding:55px 5% 48px;text-align:center;position:relative;overflow:hidden;}
@@ -237,14 +241,15 @@ nav{position:sticky;top:0;width:100%;z-index:200;background:rgba(200,39,45,0.97)
 <body>
 
 <nav>
-  <a href="index.html" class="nav-logo">Charito's</a>
+  <a href="https://charitosfoodandbeverage.github.io" class="nav-logo">Charito's</a>
   <ul class="nav-links">
-    <li><a href="index.html">Home</a></li>
-    <li><a href="index.html#about">About</a></li>
-    <li><a href="index.html#party">Party Trays</a></li>
-    <li><a href="reviews.html">Reviews</a></li>
-    <li><a href="careers.html">Careers</a></li>
-    <li><a href="contact.html">Contact</a></li>
+    <li><a href="https://charitosfoodandbeverage.github.io#about">About</a></li>
+    <li><a href="https://charitosfoodandbeverage.github.io/menu" class="current">Menu</a></li>
+    <li><a href="https://charitosfoodandbeverage.github.io#party">Party Trays</a></li>
+    <li><a href="https://charitosfoodandbeverage.github.io/reviews">Reviews</a></li>
+    <li><a href="https://charitosfoodandbeverage.github.io/newsletter">Newsletter</a></li>
+    <li><a href="https://charitosfoodandbeverage.github.io/careers">Careers</a></li>
+    <li><a href="https://charitosfoodandbeverage.github.io/contact">Contact</a></li>
   </ul>
   <div class="nav-right">
     <button class="cart-fab" onclick="openCartDrawer()">
@@ -255,10 +260,13 @@ nav{position:sticky;top:0;width:100%;z-index:200;background:rgba(200,39,45,0.97)
 </nav>
 
 <div class="mobile-menu" id="mobileMenu">
-  <a href="index.html" onclick="closeMenu()">Home</a>
-  <a href="index.html#party" onclick="closeMenu()">Party Trays</a>
-  <a href="careers.html" onclick="closeMenu()">Careers</a>
-  <a href="contact.html" onclick="closeMenu()">Contact</a>
+  <a href="https://charitosfoodandbeverage.github.io#about" onclick="closeMenu()">About</a>
+  <a href="https://charitosfoodandbeverage.github.io/menu" onclick="closeMenu()">Menu</a>
+  <a href="https://charitosfoodandbeverage.github.io#party" onclick="closeMenu()">Party Trays</a>
+  <a href="https://charitosfoodandbeverage.github.io/reviews" onclick="closeMenu()">Reviews</a>
+  <a href="https://charitosfoodandbeverage.github.io/newsletter" onclick="closeMenu()">Newsletter</a>
+  <a href="https://charitosfoodandbeverage.github.io/careers" onclick="closeMenu()">Careers</a>
+  <a href="https://charitosfoodandbeverage.github.io/contact" onclick="closeMenu()">Contact</a>
 </div>
 
 <div class="menu-hero">
@@ -367,20 +375,20 @@ const MENU = {
     {id:5, name:'Roti with Curry Sauce', price:69, desc:'Crispy roti served with aromatic curry sauce.', img:'images/roti-plain.jpg', emoji:'🫓', rating:4.9},
   ],
   burgers:[
-    {id:6,  name:'Regular Burger',           price:55, desc:'100% beef patty with melted cheese and our signature sauce on a soft bun.', img:'images/burger-regular.png',              emoji:'🍔', rating:4.8},
-    {id:7,  name:'Classic Cheeseburger',     price:65, desc:'Freshly baked bun, 100% beef patty, melted cheese, and signature sauce.',  img:'images/burger-classic-cheeseburger.png', emoji:'🍔', rating:4.9},
-    {id:8,  name:'Cheeseburger Deluxe',      price:85, desc:'Baked bun, beef patty, melted cheese, crisp coleslaw, and signature sauce.', img:'images/burger-cheeseburger-deluxe.png',  emoji:'🍔', badge:'★ 5.0', rating:5.0,
+    {id:6,  name:'Classic Burger',        price:65, desc:'Beef patty with our signature sauce.', img:'images/burger-regular.png',              emoji:'🍔', rating:4.8},
+    {id:7,  name:'Cheeseburger',          price:75, desc:'Beef patty, sauce, and cheese.',  img:'images/burger-classic-cheeseburger.png', emoji:'🍔', rating:4.9},
+    {id:8,  name:'Cheeseburger Deluxe',   price:85, desc:'Beef patty, coleslaw, onion, cheese.', img:'images/burger-cheeseburger-deluxe.png',  emoji:'🍔', badge:'★ 5.0', rating:5.0,
      review:{text:"Cheeseburger Deluxe is the first item on their menu when Charito's first launched. I was one of the lucky few who got to experience the homemade patties. It was extravagantly tasty — tastes like my mom's hugs.", author:'Kuya Renz'}},
-    {id:10, name:'Classic Chicken Sandwich', price:75, desc:'Crispy chicken patty with melted cheese and our signature sauce on a soft bun.', img:'images/burger-chicken.png',           emoji:'🍔', rating:4.9},
-    {id:11, name:'Chicken Sandwich Deluxe',  price:85, desc:'Crispy chicken patty, melted cheese, crisp coleslaw, and signature sauce.',    img:'images/burger-chicken-sandwich-deluxe.png', emoji:'🍔', rating:4.9},
+    {id:10, name:'Chicken Burger',        price:75, desc:'Crispy chicken patty, coleslaw, mayo.', img:'images/burger-chicken.png',           emoji:'🍔', rating:4.9},
+    {id:11, name:'Chicken Cheeseburger',  price:85, desc:'Crispy chicken patty, coleslaw, mayo, and cheese.',    img:'images/burger-chicken-sandwich-deluxe.png', emoji:'🍔', rating:4.9},
   ],
   party:[
     {id:14, name:'Classic Beef Steak',   desc:'Classic sliced beef steak with rich brown sauce.',                img:'images/tray-classic-beef-steak.jpg', emoji:'🥩', rating:4.9, variants:[{label:'Barkada (8–10 pax)',price:890},{label:'Family (15–20 pax)',price:1450}]},
     {id:15, name:'Beef Broccoli Steak',  desc:'Beef and broccoli in savory oyster sauce.',                       img:'images/tray-beef-broccoli.jpg',      emoji:'🥩', rating:4.9, variants:[{label:'Barkada (8–10 pax)',price:920},{label:'Family (15–20 pax)',price:1550}]},
-    {id:16, name:'Beef Kulma',           desc:'Tausug-style beef curry simmered in coconut milk & spices.',      img:'images/tray-beef-kulma.jpg',         emoji:'🍛', rating:4.9, variants:[{label:'Barkada (8–10 pax)',price:890},{label:'Family (15–20 pax)',price:1450}]},
-    {id:17, name:'Chicken Teriyaki',     desc:'Glazed chicken teriyaki with steamed rice.',                      img:'images/tray-chicken-teriyaki.jpg',   emoji:'🍗', rating:4.9, variants:[{label:'Barkada (8–10 pax)',price:790},{label:'Family (15–20 pax)',price:1250}]},
-    {id:18, name:'Sweet & Sour Chicken', desc:'Crispy chicken in sweet and tangy sauce.',                        img:'images/tray-sweet-sour-chicken.jpg', emoji:'🍗', rating:4.8, variants:[{label:'Barkada (8–10 pax)',price:850},{label:'Family (15–20 pax)',price:1390}]},
-    {id:19, name:'Buttered Chicken',     desc:'Crispy chicken pieces tossed in rich garlic butter sauce.',       img:'images/tray-buttered-chicken.jpg',   emoji:'🍗', rating:4.9, variants:[{label:'Barkada (8–10 pax)',price:790},{label:'Family (15–20 pax)',price:1250}]},
+    {id:16, name:'Beef Kulma',           desc:'Tausug-style beef curry simmered in coconut milk & spices.',      img:'images/tray-beef-kulma.jpg',         emoji:'🍛', rating:4.9, variants:[{label:'Barkada (8–10 pax)',price:980},{label:'Family (15–20 pax)',price:1610}]},
+    {id:17, name:'Chicken Teriyaki',     desc:'Glazed chicken teriyaki with steamed rice.',                      img:'images/tray-chicken-teriyaki.jpg',   emoji:'🍗', rating:4.9, variants:[{label:'Barkada (8–10 pax)',price:860},{label:'Family (15–20 pax)',price:1390}]},
+    {id:18, name:'Sweet & Sour Chicken', desc:'Crispy chicken in sweet and tangy sauce.',                        img:'images/tray-sweet-sour-chicken.jpg', emoji:'🍗', rating:4.8, variants:[{label:'Barkada (8–10 pax)',price:890},{label:'Family (15–20 pax)',price:1420}]},
+    {id:19, name:'Buttered Chicken',     desc:'Crispy chicken pieces tossed in rich garlic butter sauce.',       img:'images/tray-buttered-chicken.jpg',   emoji:'🍗', rating:4.9, variants:[{label:'Barkada (8–10 pax)',price:920},{label:'Family (15–20 pax)',price:1250}]},
     {id:20, name:'Classic Spaghetti',    desc:'Filipino-style spaghetti with savory beef sauce.',                img:'images/tray-classic-spaghetti.jpg',  emoji:'🍝', rating:4.9, variants:[{label:'Barkada (8–10 pax)',price:890},{label:'Family (15–20 pax)',price:1450}]},
     {id:21, name:'Special Carbonara',    desc:'Creamy carbonara with chicken ham & beef bacon.',                 img:'images/tray-special-carbonara.jpg',  emoji:'🍝', rating:4.9, variants:[{label:'Barkada (8–10 pax)',price:990},{label:'Family (15–20 pax)',price:1650}]},
     {id:22, name:'Baked Macaroni',       desc:'Cheesy baked macaroni with meaty tomato sauce.',                  img:'images/tray-baked-macaroni.jpg',     emoji:'🍛', rating:4.9, variants:[{label:'Barkada (8–10 pax)',price:890},{label:'Family (15–20 pax)',price:1450}]},
