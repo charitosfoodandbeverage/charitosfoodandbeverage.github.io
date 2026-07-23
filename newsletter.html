@@ -47,6 +47,9 @@ nav{position:fixed;top:0;width:100%;z-index:200;background:rgba(200,39,45,0.97);
 .hero-badge-dot{width:6px;height:6px;background:var(--gold);border-radius:50%;}
 .page-hero h1{font-family:'Dancing Script',cursive;font-size:clamp(2.6rem,7vw,4.6rem);color:#fff;line-height:1.1;margin-bottom:0.7rem;}
 .page-hero p{color:rgba(255,255,255,0.82);font-size:clamp(0.9rem,2vw,1.05rem);line-height:1.75;max-width:520px;margin:0 auto;}
+.views-badge{display:inline-flex;align-items:center;gap:0.55rem;background:rgba(255,255,255,0.14);border:1px solid rgba(255,255,255,0.28);padding:0.5rem 1.2rem;border-radius:50px;color:#fff;font-size:0.82rem;font-weight:700;letter-spacing:0.03em;margin-top:1.6rem;}
+.views-badge .views-eye{font-size:0.95rem;}
+.views-badge .views-num{font-family:'Playfair Display',serif;font-weight:900;color:var(--gold);}
 
 /* SHARED SECTION HEADER */
 .section-label{display:inline-block;font-size:0.72rem;font-weight:800;letter-spacing:0.2em;text-transform:uppercase;color:var(--red);margin-bottom:0.8rem;}
@@ -152,12 +155,12 @@ footer{background:var(--red-dark);padding:55px 5% 28px;}
 
 <!-- NAV -->
 <nav>
-  <a href="index.html" class="nav-logo">Charito's</a>
+  <a href="https://charitosfoodandbeverage.github.io/" class="nav-logo">Charito's</a>
   <ul class="nav-links">
-    <li><a href="index.html#about">About</a></li>
+    <li><a href="https://charitosfoodandbeverage.github.io#about">About</a></li>
     <li><a href="https://charitosfoodandbeverage.github.io/menu">Menu</a></li>
     <li><a href=https://charitosfoodandbeverage.github.io#party">Party Trays</a></li>
-    <li><a href="reviews.html">Reviews</a></li>
+    <li><a href="https://charitosfoodandbeverage.github.io/reviews">Reviews</a></li>
     <li><a href="https://charitosfoodandbeverage.github.io/newsletter" class="current">Newsletter</a></li>
     <li><a href="https://charitosfoodandbeverage.github.io/careers">Careers</a></li>
     <li><a href="https://charitosfoodandbeverage.github.io/contact" class="nav-cta">Contact</a></li>
@@ -184,6 +187,7 @@ footer{background:var(--red-dark);padding:55px 5% 28px;}
     <div class="hero-badge"><div class="hero-badge-dot"></div> Community Newsletter</div>
     <h1>Giving Back,<br>One Tray at a Time</h1>
     <p>A look back at the events Charito's has helped arrange with our donors over the years.</p>
+    <div class="views-badge"><span class="views-eye">&#x1F465;</span> <span class="views-num" id="viewsCount">1,081</span> Visitors</div>
   </div>
 </section>
 
@@ -352,6 +356,65 @@ function closeMenu() {
   document.getElementById('hamburger').classList.remove('open');
   document.getElementById('mobileMenu').classList.remove('open');
 }
+
+/* VISITOR COUNTER — powered by CounterAPI (api.counterapi.dev), no backend needed.
+   IMPORTANT ONE-TIME SETUP: before publishing, visit this URL once in your
+   browser to seed the counter at a random starting number (e.g. 1,081):
+   https://api.counterapi.dev/v1/charitosfoodandbeverage/newsletter-visitors/set?count=1081
+
+   This counts UNIQUE visitors, not every page load: a flag is saved in the
+   visitor's browser (localStorage) the first time they land on this page, so
+   refreshing or returning later from the same browser won't count again.
+   Note: this is per-browser/device, not per-person — clearing browser data
+   or visiting from a different device will count as a new visitor, since a
+   static site has no login system to identify people more precisely. */
+(function () {
+  var namespace = 'charitosfoodandbeverage';
+  var counterName = 'newsletter-visitors';
+  var el = document.getElementById('viewsCount');
+  var visitedKey = 'charitos_newsletter_visited';
+  var countKey = 'charitos_newsletter_last_count';
+  var alreadyVisited = false;
+  var cachedCount = null;
+  try {
+    alreadyVisited = localStorage.getItem(visitedKey) === '1';
+    cachedCount = localStorage.getItem(countKey);
+  } catch (e) {}
+
+  /* Show the last known count immediately (if we have one) so a refresh
+     never flashes back down to the static placeholder while the API call
+     is in flight. */
+  if (el && cachedCount) {
+    el.textContent = Number(cachedCount).toLocaleString();
+  }
+
+  function extractCount(data) {
+    return data && (data.count !== undefined ? data.count : (data.data && (data.data.count !== undefined ? data.data.count : data.data.up_count)));
+  }
+
+  function showCount(count) {
+    if (count === undefined || count === null) return;
+    if (el) el.textContent = Number(count).toLocaleString();
+    try { localStorage.setItem(countKey, String(count)); } catch (e) {}
+  }
+
+  if (alreadyVisited) {
+    /* returning visitor: refresh the displayed number but don't increment */
+    fetch('https://api.counterapi.dev/v1/' + namespace + '/' + counterName + '/')
+      .then(function (res) { return res.json(); })
+      .then(function (data) { showCount(extractCount(data)); })
+      .catch(function () { /* keep showing the cached count on failure */ });
+  } else {
+    /* first time this browser has loaded the page: increment once */
+    fetch('https://api.counterapi.dev/v1/' + namespace + '/' + counterName + '/up')
+      .then(function (res) { return res.json(); })
+      .then(function (data) {
+        showCount(extractCount(data));
+        try { localStorage.setItem(visitedKey, '1'); } catch (e) {}
+      })
+      .catch(function () { /* keep showing the static placeholder on failure */ });
+  }
+})();
 </script>
 </body>
 </html>
