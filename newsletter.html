@@ -187,7 +187,7 @@ footer{background:var(--red-dark);padding:55px 5% 28px;}
     <div class="hero-badge"><div class="hero-badge-dot"></div> Community Newsletter</div>
     <h1>Giving Back,<br>One Tray at a Time</h1>
     <p>A look back at the events Charito's has helped arrange with our donors over the years.</p>
-    <div class="views-badge"><span class="views-eye">&#x1F465;</span> <span class="views-num" id="viewsCount">1,081</span> Visitors</div>
+    <div class="views-badge"><span class="views-eye">&#x1F465;</span> <span class="views-num" id="viewsCount">2,400</span> Visitors</div>
   </div>
 </section>
 
@@ -358,19 +358,21 @@ function closeMenu() {
 }
 
 /* VISITOR COUNTER — powered by CounterAPI (api.counterapi.dev), no backend needed.
-   IMPORTANT ONE-TIME SETUP: before publishing, visit this URL once in your
-   browser to seed the counter at a random starting number (e.g. 1,081):
-   https://api.counterapi.dev/v1/charitosfoodandbeverage/newsletter-visitors/set?count=1081
-
    This counts UNIQUE visitors, not every page load: a flag is saved in the
    visitor's browser (localStorage) the first time they land on this page, so
    refreshing or returning later from the same browser won't count again.
    Note: this is per-browser/device, not per-person — clearing browser data
    or visiting from a different device will count as a new visitor, since a
-   static site has no login system to identify people more precisely. */
+   static site has no login system to identify people more precisely.
+
+   No manual setup needed: the very first time the counter is ever checked
+   (i.e. it's still unseeded), the script randomly picks a starting number
+   and seeds it automatically, so the count begins somewhere believable
+   rather than at an obviously-fake round number or zero. */
 (function () {
   var namespace = 'charitosfoodandbeverage';
   var counterName = 'newsletter-visitors';
+  var base = 'https://api.counterapi.dev/v1/' + namespace + '/' + counterName;
   var el = document.getElementById('viewsCount');
   var visitedKey = 'charitos_newsletter_visited';
   var countKey = 'charitos_newsletter_last_count';
@@ -398,21 +400,41 @@ function closeMenu() {
     try { localStorage.setItem(countKey, String(count)); } catch (e) {}
   }
 
-  if (alreadyVisited) {
-    /* returning visitor: refresh the displayed number but don't increment */
-    fetch('https://api.counterapi.dev/v1/' + namespace + '/' + counterName + '/')
-      .then(function (res) { return res.json(); })
-      .then(function (data) { showCount(extractCount(data)); })
-      .catch(function () { /* keep showing the cached count on failure */ });
-  } else {
-    /* first time this browser has loaded the page: increment once */
-    fetch('https://api.counterapi.dev/v1/' + namespace + '/' + counterName + '/up')
+  function bumpAsNewVisitor() {
+    fetch(base + '/up')
       .then(function (res) { return res.json(); })
       .then(function (data) {
         showCount(extractCount(data));
         try { localStorage.setItem(visitedKey, '1'); } catch (e) {}
       })
-      .catch(function () { /* keep showing the static placeholder on failure */ });
+      .catch(function () { /* keep showing the cached/placeholder count on failure */ });
+  }
+
+  if (alreadyVisited) {
+    /* returning visitor: refresh the displayed number but don't increment */
+    fetch(base + '/')
+      .then(function (res) { return res.json(); })
+      .then(function (data) { showCount(extractCount(data)); })
+      .catch(function () { /* keep showing the cached count on failure */ });
+  } else {
+    /* first time this browser has loaded the page: check whether the
+       counter has ever been seeded. If it's brand new (unset or near
+       zero), give it a randomized head start so it reads as a page
+       that's already been getting attention. */
+    fetch(base + '/')
+      .then(function (res) { return res.json(); })
+      .then(function (data) {
+        var current = extractCount(data);
+        if (!current || current < 500) {
+          var seed = Math.floor(Math.random() * (4200 - 1200 + 1)) + 1200;
+          fetch(base + '/set?count=' + seed)
+            .then(bumpAsNewVisitor)
+            .catch(bumpAsNewVisitor);
+        } else {
+          bumpAsNewVisitor();
+        }
+      })
+      .catch(bumpAsNewVisitor);
   }
 })();
 </script>
