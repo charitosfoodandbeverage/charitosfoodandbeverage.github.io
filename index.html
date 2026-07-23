@@ -5,6 +5,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Charito's Food & Beverage — Est. 2020</title>
 <link rel="icon" type="image/jpeg" href="images/charitos-logo.jpg">
+
+<meta property="og:title" content="Charito's Food & Beverage — Est. 2020">
+<meta property="og:description" content="Authentic flavors crafted with love. Burgers, Murtabak, Roti & Party Trays in Zamboanga City.">
+<meta property="og:image" content="https://charitosfoodandbeverage.github.io/images/charitos-logo.jpg">
+<meta property="og:url" content="https://charitosfoodandbeverage.github.io/">
+<meta property="og:type" content="website">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Charito's Food & Beverage — Est. 2020">
+<meta name="twitter:description" content="Authentic flavors crafted with love. Burgers, Murtabak, Roti & Party Trays in Zamboanga City.">
+<meta name="twitter:image" content="https://charitosfoodandbeverage.github.io/images/charitos-logo.jpg">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Nunito:wght@300;400;600;700;800&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
 <style>
 :root{
@@ -59,7 +70,7 @@ nav{position:fixed;top:0;width:100%;z-index:200;background:rgba(200,39,45,0.97);
 .hero-food-card img{width:100%;height:100%;object-fit:cover;}
 .hero-food-card:nth-child(1){transform:translateY(-10px);}
 .hero-food-card:nth-child(3){transform:translateY(10px);}
-.hero-stats{position:absolute;bottom:40px;left:5%;display:flex;gap:2.5rem;animation:fadeUp 0.7s 0.6s ease both;}
+.hero-stats{position:absolute;bottom:40px;left:5%;display:flex;gap:2.5rem;animation:fadeUp 0.7s 0.6s ease both;flex-wrap:wrap;}
 .hero-stat{text-align:center;}
 .hero-stat-num{display:block;font-family:'Playfair Display',serif;font-size:2rem;font-weight:900;color:#fff;line-height:1;}
 .hero-stat-label{font-size:0.7rem;font-weight:700;color:rgba(255,255,255,0.6);text-transform:uppercase;letter-spacing:0.1em;}
@@ -226,15 +237,15 @@ footer{background:var(--red-dark);padding:55px 5% 28px;}
 
 <!-- NAV -->
 <nav>
-  <a href="index.html" class="nav-logo">Charito's</a>
+  <a href="https://charitosfoodandbeverage.github.io/" class="nav-logo">Charito's</a>
   <ul class="nav-links">
-    <li><a href="#about">About</a></li>
-    <li><a href="#menu">Menu</a></li>
-    <li><a href="#party">Party Trays</a></li>
-    <li><a href="reviews.html">Reviews</a></li>
-    <li><a href="careers.html">Careers</a></li>
-    <li><a href="#location">Find Us</a></li>
-    <li><a href="contact.html" class="nav-cta">Contact</a></li>
+    <li><a href="https://charitosfoodandbeverage.github.io/#about">About</a></li>
+    <li><a href="https://charitosfoodandbeverage.github.io/#menu">Menu</a></li>
+    <li><a href="https://charitosfoodandbeverage.github.io/#party">Party Trays</a></li>
+    <li><a href="https://charitosfoodandbeverage.github.io/reviews">Reviews</a></li>
+    <li><a href="https://charitosfoodandbeverage.github.io/careers">Careers</a></li>
+    <li><a href="https://charitosfoodandbeverage.github.io/#location">Find Us</a></li>
+    <li><a href="https://charitosfoodandbeverage.github.io/contact" class="nav-cta">Contact</a></li>
   </ul>
   <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Open menu">
     <span></span><span></span><span></span>
@@ -243,13 +254,13 @@ footer{background:var(--red-dark);padding:55px 5% 28px;}
 
 <!-- MOBILE MENU -->
 <div class="mobile-menu" id="mobileMenu">
-  <a href="#about" onclick="closeMenu()">About</a>
-  <a href="menu.html" onclick="closeMenu()">Menu</a>
-  <a href="#party" onclick="closeMenu()">Party Trays</a>
-  <a href="reviews.html" onclick="closeMenu()">Reviews</a>
-  <a href="careers.html" onclick="closeMenu()">Careers</a>
-  <a href="#location" onclick="closeMenu()">Find Us</a>
-  <a href="contact.html" onclick="closeMenu()">Contact Us</a>
+  <a href="https://charitosfoodandbeverage.github.io/#about" onclick="closeMenu()">About</a>
+  <a href="https://charitosfoodandbeverage.github.io/#menu" onclick="closeMenu()">Menu</a>
+  <a href="https://charitosfoodandbeverage.github.io/#party" onclick="closeMenu()">Party Trays</a>
+  <a href="https://charitosfoodandbeverage.github.io/reviews" onclick="closeMenu()">Reviews</a>
+  <a href="https://charitosfoodandbeverage.github.io/careers" onclick="closeMenu()">Careers</a>
+  <a href="https://charitosfoodandbeverage.github.io/#location" onclick="closeMenu()">Find Us</a>
+  <a href="https://charitosfoodandbeverage.github.io/contact" onclick="closeMenu()">Contact Us</a>
 </div>
 
 <!-- HERO -->
@@ -338,13 +349,13 @@ footer{background:var(--red-dark);padding:55px 5% 28px;}
 
     <div class="menu-card">
       <div class="menu-card-img">
-        <img src="images/burger-classic-cheeseburger.png" alt="Classic Cheeseburger">
+        <img src="images/burger-classic-cheeseburger.png" alt="Cheeseburger">
         <span class="menu-card-badge">Kids' Choice</span>
       </div>
       <div class="menu-card-body">
-        <h3>Classic Cheeseburger</h3>
-        <p>100% beef patty, melted cheese, and our signature sauce on a soft bun.</p>
-        <div class="menu-card-footer"><span class="menu-card-price">&#x20B1;65</span><span class="menu-card-rating"><span class="star">&#x2605;</span> 4.9</span></div>
+        <h3>Cheeseburger</h3>
+        <p>Beef patty, sauce, and cheese.</p>
+        <div class="menu-card-footer"><span class="menu-card-price">&#x20B1;75</span><span class="menu-card-rating"><span class="star">&#x2605;</span> 4.9</span></div>
       </div>
     </div>
 
@@ -356,7 +367,7 @@ footer{background:var(--red-dark);padding:55px 5% 28px;}
       <div class="menu-card-body">
         <h3>Chicken Teriyaki</h3>
         <p>Glazed chicken teriyaki tray with steamed rice &mdash; perfect for sharing.</p>
-        <div class="menu-card-footer"><span class="menu-card-price">From &#x20B1;790</span><span class="menu-card-rating"><span class="star">&#x2605;</span> 4.9</span></div>
+        <div class="menu-card-footer"><span class="menu-card-price">From &#x20B1;860</span><span class="menu-card-rating"><span class="star">&#x2605;</span> 4.9</span></div>
       </div>
     </div>
 
@@ -397,8 +408,8 @@ footer{background:var(--red-dark);padding:55px 5% 28px;}
       <div class="tray-card-body">
         <h3>&#x1F35B; Beef Kulma</h3>
         <div class="tray-sizes">
-          <div class="tray-size"><div class="tray-size-label">Barkada</div><div class="tray-size-price">&#x20B1;890</div></div>
-          <div class="tray-size"><div class="tray-size-label">Family</div><div class="tray-size-price">&#x20B1;1,450</div></div>
+          <div class="tray-size"><div class="tray-size-label">Barkada</div><div class="tray-size-price">&#x20B1;980</div></div>
+          <div class="tray-size"><div class="tray-size-label">Family</div><div class="tray-size-price">&#x20B1;1,610</div></div>
         </div>
       </div>
     </div>
@@ -407,8 +418,8 @@ footer{background:var(--red-dark);padding:55px 5% 28px;}
       <div class="tray-card-body">
         <h3>&#x1F357; Chicken Teriyaki</h3>
         <div class="tray-sizes">
-          <div class="tray-size"><div class="tray-size-label">Barkada</div><div class="tray-size-price">&#x20B1;790</div></div>
-          <div class="tray-size"><div class="tray-size-label">Family</div><div class="tray-size-price">&#x20B1;1,250</div></div>
+          <div class="tray-size"><div class="tray-size-label">Barkada</div><div class="tray-size-price">&#x20B1;860</div></div>
+          <div class="tray-size"><div class="tray-size-label">Family</div><div class="tray-size-price">&#x20B1;1,390</div></div>
         </div>
       </div>
     </div>
@@ -417,8 +428,8 @@ footer{background:var(--red-dark);padding:55px 5% 28px;}
       <div class="tray-card-body">
         <h3>&#x1F357; Sweet &amp; Sour Chicken</h3>
         <div class="tray-sizes">
-          <div class="tray-size"><div class="tray-size-label">Barkada</div><div class="tray-size-price">&#x20B1;850</div></div>
-          <div class="tray-size"><div class="tray-size-label">Family</div><div class="tray-size-price">&#x20B1;1,390</div></div>
+          <div class="tray-size"><div class="tray-size-label">Barkada</div><div class="tray-size-price">&#x20B1;890</div></div>
+          <div class="tray-size"><div class="tray-size-label">Family</div><div class="tray-size-price">&#x20B1;1,420</div></div>
         </div>
       </div>
     </div>
@@ -427,7 +438,7 @@ footer{background:var(--red-dark);padding:55px 5% 28px;}
       <div class="tray-card-body">
         <h3>&#x1F357; Buttered Chicken</h3>
         <div class="tray-sizes">
-          <div class="tray-size"><div class="tray-size-label">Barkada</div><div class="tray-size-price">&#x20B1;790</div></div>
+          <div class="tray-size"><div class="tray-size-label">Barkada</div><div class="tray-size-price">&#x20B1;920</div></div>
           <div class="tray-size"><div class="tray-size-label">Family</div><div class="tray-size-price">&#x20B1;1,250</div></div>
         </div>
       </div>
@@ -595,6 +606,7 @@ document.querySelectorAll('.menu-cat-btn').forEach(function(btn) {
     btn.classList.add('active');
   });
 });
+
 </script>
 </body>
 </html>
